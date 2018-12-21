@@ -1,0 +1,20 @@
+{% extends "kilvin::cp._simple" %}
+
+{% set page_name = title %}
+
+{% block mainContent %}
+
+	<h1 class="alert-heading center-text">{{title}}</h1>
+
+	<div class="box alertBox">
+		{% for error in errors %}
+			<p>{{ error }}</p>
+		{% endfor %}
+
+		{% if link is defined %}
+			<a href="{{link.url}}"><b>{{link.name}}</b></a>
+		{% endif %}
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+
+
+{% extends "kilvin::cp._simple" %}
+
+{% set page_name = 'Login Form' %}
+
+{% block mainContent %}
+
+	<div class="loginBox">
+		<div class="leftPad">
+
+			<form action="{{ kilvinCpUrl('login') }}" method="post" class="cp-form">
+
+				<div class="cp-form-message cp-form-error">
+					{% if errors.any %}
+					    {% for error in errors.all %}
+					        <p>{{ error }}</p>
+					    {% endfor %}
+					{% endif %}
+				</div>
+
+				{{ csrfField() }}
+				<input type="hidden" name="return_path" value="admin.php">
+
+				<div class="default"><label for="email">Email Address</label></div>
+
+				<div class="littlePadding">
+					<input style="width:200px" type="email" name="email" id="email" value="" required autofocus>
+				</div>
+
+				<div class="default"><label for="password">Password</label></div>
+
+				<div class="littlePadding">
+					<input style="width:200px" type="password" name="password" id="password" value="" required>
+				</div>
+
+				<div class="littlePadding">
+					<div class="default">
+						<input class="checkbox" type="checkbox" name="remember" value="1" id="remember">
+						<label for="remember" class="no-bold">Remember Me</label>
+					</div>
+				</div>
+
+				<div class="littlePadding">
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+
+			<div class="default">
+				<a href="{{ kilvinCpUrl('forgot_password_form') }}">Forgot your password?</a>
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

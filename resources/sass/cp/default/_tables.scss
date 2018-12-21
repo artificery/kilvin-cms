@@ -1,0 +1,159 @@
+
+.tablePad {
+	padding: 1px 1px 1px 1px;
+	background-color: #fff;
+}
+
+table {
+	font-size: $font-size-base;
+	width: 100%;
+
+	tr td {
+		font-size: $font-size-base;
+		padding: 5px;
+	}
+}
+
+.tableBorder {
+	border: 1px solid $table-border-color;
+	margin: 0 0 3px 0;
+	padding: 0;
+}
+
+.tableBorderNoTop {
+	border-bottom: 1px solid $table-border-color;
+	border-right: 1px solid $table-border-color;
+	border-left: 1px solid $table-border-color;
+}
+.tableBorderNoBottom {
+	border-top: 1px solid $table-border-color;
+	border-right: 1px solid $table-border-color;
+	border-left: 1px solid $table-border-color;
+}
+.tableBorderSides {
+	border-right: 1px solid $table-border-color;
+	border-left: 1px solid $table-border-color;
+}
+
+.tableHeading {
+	font-weight: normal;
+	color: $table-heading-color !important; /* Need to fix everything and make it a <th> but that is LOTS of work */
+	padding: 6px 5px;
+	background: $table-heading-background-color-bottom;
+	background: linear-gradient(to bottom, $table-heading-background-color-top, $table-heading-background-color-bottom);
+
+	a {
+		color: $table-heading-link-color;
+
+		&:hover {
+			color: $table-heading-link-color;
+		}
+	}
+}
+
+.tableHeadingAlt {
+	font-weight: normal;
+	white-space: nowrap;
+	color: $table-alt-heading-color !important;
+	padding: 6px 5px;
+	background: $table-alt-heading-background-color-bottom;
+	background: linear-gradient(to bottom, $table-alt-heading-background-color-top, $table-alt-heading-background-color-bottom);
+
+	a {
+		color: $table-alt-heading-link-color;
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover {
+			color: $table-alt-heading-link-color;
+			text-decoration: none;
+		}
+	}
+}
+
+.tableHeadingSmall {
+	font-size: 11px;
+	font-weight: bold;
+	white-space: nowrap;
+	color: #0C1216;
+	padding: 5px 6px 5px 6px;
+	background: #a9b9c2;
+	background: linear-gradient(to bottom, #a9b9c2, #859aa6);
+}
+
+.tableBorder, .tableBorderNoTop, .tableBorderSides, .templateAreaBox
+{
+	tr {
+
+		th {
+			font-weight: normal;
+			white-space: nowrap;
+			text-align:left;
+			color: $table-heading-color !important; /* Need to fix everything and make it a <th> but that is LOTS of work */
+			padding: 6px 5px;
+			background: $table-heading-background-color-top;
+			background: linear-gradient(to bottom, $table-heading-background-color-top, $table-heading-background-color-bottom);
+
+			&.tableHeadingAlt {
+				color: $table-alt-heading-color !important;
+				background: $table-alt-heading-background-color-top;
+				background: linear-gradient(to bottom, $table-alt-heading-background-color-top, $table-alt-heading-background-color-bottom);
+				cursor: pointer;
+			}
+		}
+
+		td {
+			font-size: 1em;
+			line-height: 1.2em;
+			color: $table-row-color;
+			padding: 6px 5px;
+		 	border-bottom: 1px solid $table-row-border-color;
+		 }
+
+		 &.has-form td {
+	 		line-height: 2.5em;
+	 	}
+	}
+
+	tr:last-child {
+		td {
+			border-bottom: none;
+		}
+	}
+
+	tr:nth-child(even) {
+		background-color: $table-row-even-background-color;
+	}
+
+	tr:nth-child(odd) {
+		background-color: $table-row-odd-background-color;
+	}
+
+	tr.no-background {
+		background-color: transparent;
+	}
+
+	&.row-hover {
+
+		tr:nth-child(even) {
+			&:hover {
+				background-color: $table-row-even-hover-background-color;
+		 	}
+		}
+
+		tr:nth-child(odd) {
+			&:hover {
+				background-color: $table-row-odd-hover-background-color;
+		 	}
+		}
+
+	}
+}
+
+.tableCellChecked {
+	background-color: #E1FAD8;
+	font-size: 11px;
+	color: #333;
+	padding: 6px 10px 6px 6px;
+	border-bottom: 1px solid #fff;
+}

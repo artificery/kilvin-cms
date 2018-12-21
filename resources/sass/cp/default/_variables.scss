@@ -1,0 +1,166 @@
+
+/*
+Color Scheme based on Jupiter photos from Juno mission
+https://en.wikipedia.org/wiki/Juno_(spacecraft)#Gallery_of_Jupiter_images
+*/
+
+
+// Body
+$body-bg: #fff;
+
+// Typography
+$font-family: Lucida Grande, Arial, Verdana, Geneva, Sans-serif;
+$font-size-base: 12px;
+$line-height-base: 1.2;
+$text-color: #636b6f;
+
+$header1-color: #453e3c;
+$header2-color: #3b4d58;
+$header3-color: #6b6b6b;
+$header4-color: #333;
+$header5-color: #333;
+
+
+// Links
+$primary-link-color: #1D7FC6;
+$primary-link-hover-color: #1D7FC6;
+$primary-link-active-color: #1D7FC6;
+
+// Buttons
+$btn-box-border-color: #000;
+$btn-box-background-color-top: #4f5c63;
+$btn-box-background-color-bottom: #374045;
+
+$btn-default-color: #fff;
+$btn-default-background-color: #0879da;
+$btn-default-hover-background-color: #0660ae;
+$btn-default-border-color: #52a1e5;
+
+$btn-option-color: #fff;
+$btn-option-background-color: #4caf50;
+$btn-option-hover-background-color: #3c8c40;
+$btn-option-border-color: #6fbf72;
+
+$btn-cancel-color: #474747;
+$btn-cancel-background-color: #d9fafa;
+$btn-cancel-hover-background-color: #adc8c8;
+$btn-cancel-border-color: #00201c;
+
+$btn-upload-color: #fff;
+$btn-upload-background-color: #DA0879;
+$btn-upload-hover-background-color: #ae0660;
+$btn-upload-border-color: #e13993;
+
+$btn-delete-color: #fff;
+$btn-delete-background-color: #ff0000;
+$btn-delete-hover-background-color: #cc0000;
+$btn-delete-border-color: darkred;
+
+
+// Navbar - Background
+$navbar-color: #fff;
+$navbar-background-color-top: #2D445E;
+$navbar-background-color-bottom: #0B2037;
+
+// Navbar - Quick Links
+$navbar-quicklinks-link-color: #F4E3C3;
+$navbar-quicklinks-link-hover-color: #c3b59c;
+$navbar-quicklinks-spacer-color: #666;
+
+
+// Navbar - Tab - Active
+$navbar-tab-active-link-color: #666;
+$navbar-tab-active-background-color-top: #fff;
+$navbar-tab-active-background-color-bottom: #fff;
+$navbar-tab-active-border: #27343C;
+
+// Navbar - Tab - Inactive
+$navbar-tab-inactive-link-color: #F4E3C3;
+$navbar-tab-inactive-background-color-top: #2E3034;
+$navbar-tab-inactive-background-color-bottom: #142129;
+$navbar-tab-inactive-border: #615a4e;
+
+
+// Navbar - Tab - Hover
+$navbar-tab-hover-link-color: #fff;
+$navbar-tab-hover-background-color-top: $navbar-tab-inactive-border;
+$navbar-tab-hover-background-color-bottom: $navbar-tab-inactive-border;
+$navbar-tab-hover-border: $navbar-tab-inactive-border;
+
+// Navbar - Tab - Dropdown
+$navbar-dropdown-border-color: rgba(0, 0, 0, 0);
+$navbar-dropdown-option-color: #F4E3C3;
+$navbar-dropdown-option-background-color: rgba(0, 0, 0, 0.85);
+$navbar-dropdown-option-hover-color: #f6e8cf;
+$navbar-dropdown-option-hover-background-color: rgba(0, 0, 0, 1);
+$navbar-dropdown-option-border-color: rgba(0, 0, 0, 1);
+
+// Breadcrumb - Big Button
+$breadcrumb-big-button-color: #fff;
+$breadcrumb-big-button-background-color-top: #96c251;
+$breadcrumb-big-button-background-color-bottom: #789b40;
+$breadcrumb-big-button-focus-color: #fff;
+$breadcrumb-big-button-focus-background-color-top: #87ae48;
+$breadcrumb-big-button-focus-background-color-bottom: #698738;
+
+// Table
+$table-border-color: rgba(124, 113, 108, 0.25);
+
+
+// Table - Heading
+$table-heading-color: #fff;
+$table-heading-background-color-top: #7C716C;
+$table-heading-background-color-bottom: #635a56;
+$table-heading-link-color: #ffffff;
+
+// Table Alt - Heading
+$table-alt-heading-color: #ffffff;
+$table-alt-heading-background-color-top: #6c8494;
+$table-alt-heading-background-color-bottom: #556e7f;
+$table-alt-heading-link-color: #ffffff;
+
+// Table Cells - Odd/Even BG Colors
+$table-row-color: #333;
+$table-row-odd-background-color: #F2F1F0;
+$table-row-even-background-color: #fff;
+$table-row-odd-hover-background-color: #ececec;
+$table-row-even-hover-background-color: #ececec;
+$table-row-border-color: transparent;
+
+
+// Simple Content Box
+$simple-box-color: #222;
+$simple-box-background-color-top: #f7f1ea;
+$simple-box-background-color-bottom: #faf6f2;
+$simple-box-border-color: #bac6b5;
+
+// successMessage
+$success-box-color: #404040;
+$success-box-background-color-top: #fafab5;
+$success-box-background-color-bottom: #fcfcda;
+$success-box-border-color: #dbdb83;
+
+// Publish Form
+$publish-form-background-color: #f3f6f1;
+$publish-form-border-color: #cfdcca;
+$publish-form-rows-border-color: #ddd;
+$publish-form-tabs-color: #17659e;
+$publish-form-tabs-background-color-top: #fff;
+$publish-form-tabs-background-color-bottom: #f7f9f6;
+$publish-form-tabs-border-color: #cfdcca;
+
+$publish-form-tabs-hover-color: #0e3f63;
+$publish-form-tabs-hover-background-color-top: #fff;
+$publish-form-tabs-hover-background-color-bottom: #f0f4ee;
+$publish-form-tabs-hover-border-color: #cfdcca;
+
+
+// Forms
+$forms-error-color: #983030;
+
+
+
+
+
+
+

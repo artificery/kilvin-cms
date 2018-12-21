@@ -1,0 +1,454 @@
+/*!
+Based off of Pure v0.6.2
+Copyright 2013 Yahoo!
+*/
+
+input {
+    margin: 0;
+}
+
+input, textarea, select
+{
+    font-size: $font-size-base;
+}
+
+/* We hates this precccciiiious */
+select:focus,
+textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+.cp-form {
+    margin-bottom: 0.5em;
+}
+
+.cp-form.top-margin {
+    margin-top: 1em;
+}
+
+
+.cp-form input[type="text"],
+.cp-form input[type="password"],
+.cp-form input[type="email"],
+.cp-form input[type="url"],
+.cp-form input[type="date"],
+.cp-form input[type="month"],
+.cp-form input[type="time"],
+.cp-form input[type="datetime"],
+.cp-form input[type="datetime-local"],
+.cp-form input[type="week"],
+.cp-form input[type="number"],
+.cp-form input[type="search"],
+.cp-form input[type="tel"],
+.cp-form input[type="color"],
+.cp-form select,
+.cp-form textarea {
+    padding: 0.3em 0.5em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    font-size: 1.1em;
+}
+
+.cp-form select {
+    font-size: 1em;
+}
+
+.cp-form input[type="submit"], .cp-form button[type="submit"], a.button {
+    cursor:pointer;
+    font-family: inherit;
+    font-size: 100%;
+    padding: .5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    color: $btn-default-color;
+    background-color: $btn-default-background-color;
+    border: 1px solid $btn-default-border-color;
+
+    &:hover {
+        background-color: $btn-default-hover-background-color;
+    }
+}
+
+.cp-form input[type="submit"].cancel, .cp-form button[type="submit"].cancel, a.button.cancel {
+    color: $btn-cancel-color;
+    background-color: $btn-cancel-background-color;
+    border: 1px solid $btn-cancel-border-color;
+
+    &:hover {
+        background-color: $btn-cancel-hover-background-color;
+    }
+}
+
+.cp-form input[type="submit"].option, .cp-form button[type="submit"].option, a.button.option {
+    color: $btn-option-color;
+    background-color: $btn-option-background-color;
+    border: 1px solid $btn-option-border-color;
+
+    &:hover {
+        background-color: $btn-option-hover-background-color;
+    }
+}
+
+.cp-form input[type="submit"].upload, .cp-form button[type="submit"].upload, a.button.upload {
+    color: $btn-upload-color;
+    background-color: $btn-upload-background-color;
+    border: 1px solid $btn-upload-border-color;
+
+    &:hover {
+        background-color: $btn-upload-hover-background-color;
+    }
+}
+
+.cp-form input[type="submit"].delete, .cp-form button[type="submit"].delete, a.button.delete {
+    color: $btn-delete-color;
+    background-color: $btn-delete-background-color;
+    border: 1px solid $btn-delete-border-color;
+
+    &:hover {
+        background-color: $btn-delete-hover-background-color;
+    }
+}
+
+.cp-form input[type="submit"].smaller, .cp-form button[type="submit"].smaller, a.button.smaller {
+    font-size: 90%;
+    padding: .5em .7em;
+    border-radius: 4px;
+}
+
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.cp-form input:not([type]) {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+.cp-form input[type="color"] {
+    padding: 0.2em 0.5em;
+}
+
+
+.cp-form input[type="text"]:focus,
+.cp-form input[type="password"]:focus,
+.cp-form input[type="email"]:focus,
+.cp-form input[type="url"]:focus,
+.cp-form input[type="date"]:focus,
+.cp-form input[type="month"]:focus,
+.cp-form input[type="time"]:focus,
+.cp-form input[type="datetime"]:focus,
+.cp-form input[type="datetime-local"]:focus,
+.cp-form input[type="week"]:focus,
+.cp-form input[type="number"]:focus,
+.cp-form input[type="search"]:focus,
+.cp-form input[type="tel"]:focus,
+.cp-form input[type="color"]:focus,
+.cp-form select:focus,
+.cp-form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.cp-form input:not([type]):focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+.cp-form input[type="file"]:focus,
+.cp-form input[type="radio"]:focus,
+.cp-form input[type="checkbox"]:focus {
+    outline: thin solid #129FEA;
+    outline: 1px auto #129FEA;
+}
+.cp-form .pure-checkbox,
+.cp-form .pure-radio {
+    margin: 0.5em 0;
+    display: block;
+}
+
+.cp-form input[type="text"][disabled],
+.cp-form input[type="password"][disabled],
+.cp-form input[type="email"][disabled],
+.cp-form input[type="url"][disabled],
+.cp-form input[type="date"][disabled],
+.cp-form input[type="month"][disabled],
+.cp-form input[type="time"][disabled],
+.cp-form input[type="datetime"][disabled],
+.cp-form input[type="datetime-local"][disabled],
+.cp-form input[type="week"][disabled],
+.cp-form input[type="number"][disabled],
+.cp-form input[type="search"][disabled],
+.cp-form input[type="tel"][disabled],
+.cp-form input[type="color"][disabled],
+.cp-form select[disabled],
+.cp-form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.cp-form input:not([type])[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+.cp-form input[readonly],
+.cp-form select[readonly],
+.cp-form textarea[readonly] {
+    background-color: #eee; /* menu hover bg color */
+    color: #777; /* menu text color */
+    border-color: #ccc;
+}
+
+.cp-form input:focus:invalid,
+.cp-form textarea:focus:invalid,
+.cp-form select:focus:invalid {
+    color: #b94a48;
+    border-color: #e9322d;
+}
+.cp-form input[type="file"]:focus:invalid:focus,
+.cp-form input[type="radio"]:focus:invalid:focus,
+.cp-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.cp-form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.cp-form select[multiple] {
+    height: auto;
+}
+.cp-form label {
+    font-weight: bold;
+    margin: 0.5em 0 0.2em;
+}
+
+.cp-form label.no-bold {
+    font-weight: normal;
+}
+
+.cp-form fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+.cp-form legend {
+    display: block;
+    width: 100%;
+    padding: 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.cp-form-stacked input[type="text"],
+.cp-form-stacked input[type="password"],
+.cp-form-stacked input[type="email"],
+.cp-form-stacked input[type="url"],
+.cp-form-stacked input[type="date"],
+.cp-form-stacked input[type="month"],
+.cp-form-stacked input[type="time"],
+.cp-form-stacked input[type="datetime"],
+.cp-form-stacked input[type="datetime-local"],
+.cp-form-stacked input[type="week"],
+.cp-form-stacked input[type="number"],
+.cp-form-stacked input[type="search"],
+.cp-form-stacked input[type="tel"],
+.cp-form-stacked input[type="color"],
+.cp-form-stacked input[type="file"],
+.cp-form-stacked select,
+.cp-form-stacked label,
+.cp-form-stacked textarea {
+    display: block;
+    margin: 0.25em 0;
+}
+
+
+.cp-form-aligned input,
+.cp-form-aligned textarea,
+.cp-form-aligned select,
+.cp-form-message-inline {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+}
+.cp-form-aligned textarea {
+    vertical-align: top;
+}
+
+/* Aligned Forms */
+.cp-form-aligned .pure-control-group {
+    margin-bottom: 0.5em;
+}
+.cp-form-aligned .pure-control-group label {
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10em;
+    margin: 0 1em 0 0;
+}
+.cp-form-aligned .pure-controls {
+    margin: 1.5em 0 0 11em;
+}
+
+/* Rounded Inputs */
+.cp-form input.pure-input-rounded,
+.cp-form .pure-input-rounded {
+    border-radius: 2em;
+    padding: 0.5em 1em;
+}
+
+/* Grouped Inputs */
+.cp-form .form-group fieldset {
+    margin-bottom: 10px;
+}
+.cp-form .form-group input,
+.cp-form .form-group textarea {
+    display: block;
+    padding: 10px;
+    margin: 0 0 -1px;
+    border-radius: 0;
+    position: relative;
+    top: -1px;
+}
+.cp-form .form-group input:focus,
+.cp-form .form-group textarea:focus {
+    z-index: 3;
+}
+.cp-form .form-group input:first-child,
+.cp-form .form-group textarea:first-child {
+    top: 1px;
+    border-radius: 4px 4px 0 0;
+    margin: 0;
+}
+.cp-form .form-group input:first-child:last-child,
+.cp-form .form-group textarea:first-child:last-child {
+    top: 1px;
+    border-radius: 4px;
+    margin: 0;
+}
+.cp-form .form-group input:last-child,
+.cp-form .form-group textarea:last-child {
+    top: -2px;
+    border-radius: 0 0 4px 4px;
+    margin: 0;
+}
+.cp-form .form-group button {
+    margin: 0.35em 0;
+}
+
+
+.cp-form-message-inline {
+    display: block;
+    padding-left: 0.3em;
+    color: #666;
+    vertical-align: middle;
+    margin-bottom: 1.2em;
+}
+
+/* Block help for forms */
+.cp-form-message {
+    display: block;
+    color: #666;
+    margin: 1.5em 0;
+}
+
+@media only screen and (max-width : 480px) {
+    .cp-form button[type="submit"] {
+        margin: 0.7em 0 0;
+    }
+
+    .cp-form input:not([type]),
+    .cp-form input[type="text"],
+    .cp-form input[type="password"],
+    .cp-form input[type="email"],
+    .cp-form input[type="url"],
+    .cp-form input[type="date"],
+    .cp-form input[type="month"],
+    .cp-form input[type="time"],
+    .cp-form input[type="datetime"],
+    .cp-form input[type="datetime-local"],
+    .cp-form input[type="week"],
+    .cp-form input[type="number"],
+    .cp-form input[type="search"],
+    .cp-form input[type="tel"],
+    .cp-form input[type="color"],
+    .cp-form label {
+        margin-bottom: 0.3em;
+        display: block;
+    }
+
+    .form-group input:not([type]),
+    .form-group input[type="text"],
+    .form-group input[type="password"],
+    .form-group input[type="email"],
+    .form-group input[type="url"],
+    .form-group input[type="date"],
+    .form-group input[type="month"],
+    .form-group input[type="time"],
+    .form-group input[type="datetime"],
+    .form-group input[type="datetime-local"],
+    .form-group input[type="week"],
+    .form-group input[type="number"],
+    .form-group input[type="search"],
+    .form-group input[type="tel"],
+    .form-group input[type="color"] {
+        margin-bottom: 0;
+    }
+
+    /* NOTE: pure-help-inline is deprecated. Use .cp-form-message-inline instead. */
+    .cp-form-message-inline,
+    .cp-form-message {
+        display: block;
+        /* Increased bottom padding to make it group with its related input element. */
+        padding: 0.2em 0 0.8em;
+    }
+}
+
+
+
+.loginBox {
+    background-color: #fff;
+    color: #333;
+    border-bottom: #ccc 1px solid;
+    padding: 0 0 40px 60px;
+    text-align: left;
+    margin-top: 1px;
+}
+.loginLogo {
+    text-align: left;
+    padding: 5px 0 0 60px;
+    color:#fff;
+}
+.loginInnerBox {
+    margin: 20px 50px 4px 0;
+}
+
+.cp-form-error {
+    color: $forms-error-color;
+}
+

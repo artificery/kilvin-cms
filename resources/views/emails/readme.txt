@@ -1,0 +1,7 @@
+Hi!
+
+You might be wondering where the email templates are for the CMS! Well, emails are actually via Laravel Notifications and are located in the app/Notifications directory. Each file in that directory handles a single kind of notification for the CMS. Inside those files you will find the content abstracted out into things like email subject line, greeting, intro lines, action url and text, and then closing "outro" lines.
+
+The Twig templates in this very directory take the variables and information contained in the Notification files and convert them into an HTML email that is then sent off. This allows us to have an abstraction between the content of the email and the email design, which also gives us the ability to translate text and localize it for the user who is receiving it. Very nice! The Kilvin CMS version is slightly different than the default MailMessage class used in Laravel, but if you're this far down the rabbit hole, I hope you can figure out what I have done.
+
+Now! What if you want to create unique email designs for each notification in Twig and ignore the abstraction layer that Kilvin CMS provides? Ah, well, we have not written that ability into the application yet. It's on our to do list but is not yet a high priority. Contact us if you want this to be a higher priority. Your feedback is important in deciding what goes into every release. Cheers!

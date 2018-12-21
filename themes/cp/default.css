@@ -1,0 +1,1699 @@
+@charset "UTF-8";
+
+/*
+Color Scheme based on Jupiter photos from Juno mission
+https://en.wikipedia.org/wiki/Juno_(spacecraft)#Gallery_of_Jupiter_images
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lucida Grande, Arial, Verdana, Geneva, Sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #636b6f;
+  background-color: #fff;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.main-content {
+  left: 0px;
+  right: 10px;
+  margin: 0 15px 30px 15px;
+  padding: 14px 13px 0 13px;
+  width: auto;
+}
+
+.main-content ul li {
+  padding-bottom: 5px;
+}
+
+.main-content.no-breadcrumb {
+  left: 0px;
+  right: 10px;
+  margin: 0 0px 20px 5px;
+  padding: 0 18px 20px 13px;
+  width: auto;
+}
+
+a {
+  color: #1D7FC6;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1D7FC6;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1D7FC6;
+  text-decoration: none;
+}
+
+a.delete-link {
+  color: red !important;
+  font-weight: bold !important;
+}
+
+a.delete-link:hover {
+  color: #B20000 !important;
+}
+
+.default,
+.defaultPad,
+.defaultRight,
+.defaultPadBold,
+.defaultBold,
+.defaultSmall,
+.defaultCenter,
+.defaultLight {
+  padding: 1px 0 1px 0;
+}
+
+.defaultLight {
+  color: #999;
+}
+
+.defaultRight {
+  text-align: right;
+}
+
+.defaultRightBold {
+  text-align: right;
+  font-weight: bold;
+}
+
+.defaultCenter,
+.center-text {
+  text-align: center;
+}
+
+.defaultBold {
+  font-weight: bold;
+}
+
+.defaultBold a:link {
+  text-decoration: none;
+}
+
+.defaultBold a:visited {
+  text-decoration: none;
+}
+
+.defaultBold a:active {
+  text-decoration: none;
+}
+
+.defaultBold a:hover {
+  text-decoration: underline;
+}
+
+.defaultPad {
+  padding: 3px 0 3px 5px;
+}
+
+.defaultPadBold {
+  padding: 3px 0 3px 5px;
+  font-weight: bold;
+}
+
+.defaultSmall {
+  color: #333;
+  font-size: 10px;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+blockquote {
+  background: #EFEFF4;
+  border-left: 4px solid #6363A0;
+  border-top: 1px solid #B2B3CE;
+  border-bottom: 1px solid #B2B3CE;
+  border-right: 1px solid #B2B3CE;
+  font-size: 11px;
+  color: #38394B;
+  margin: 8px 2px 10px 6px;
+  padding: 10px 10px 10px 6px;
+}
+
+h1 {
+  font-size: 1.5em;
+  color: #453e3c;
+  margin: 0 0 8px 0;
+}
+
+h2 {
+  font-size: 1.4em;
+  color: #3b4d58;
+  margin: 0 0 6px 3px;
+}
+
+h3 {
+  font-size: 1.3em;
+  color: #6b6b6b;
+  margin: 0 0 5px 6px;
+}
+
+h4 {
+  font-size: 1.2em;
+  color: #333;
+  background: transparent;
+  margin: 0 0 4px 0;
+}
+
+h5 {
+  font-size: 1.1em;
+  color: #333;
+  background: transparent;
+  margin: 0 0 3px 0;
+}
+
+pre {
+  font-size: 11px;
+  color: #009933;
+  background: transparent;
+  margin: 6px 0 6px 19px;
+}
+
+p {
+  margin: 4px 0 4px 0;
+}
+
+.menu-spacer:after {
+  content: "|";
+  width: 1ex;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.highlight {
+  color: #990000;
+}
+
+.highlight_bold {
+  color: #990000;
+  font-weight: bold;
+}
+
+.highlight_alt {
+  color: #009933;
+}
+
+.highlight_alt2 {
+  color: #333399;
+}
+
+.highlight_alt_bold {
+  color: #009933;
+  font-weight: bold;
+}
+
+.alert {
+  color: #990000;
+  font-weight: bold;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.simpleLine {
+  margin: 3px 0 3px 0;
+  padding: 0;
+  border-bottom: #B1B6D2 1px solid;
+  background-color: transparent;
+}
+
+.alertHeading,
+.alert-heading {
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #6E0001;
+  border-bottom: 1px solid #6E0001;
+  background: #9E0100;
+  background: linear-gradient(to bottom, #9E0100, #6E0001);
+  margin: 0;
+}
+
+.paddedWrapper {
+  padding: 3px 0 10px 0;
+  background-color: transparent;
+}
+
+.bigPad {
+  padding: 6px 0 3px 6px;
+  background-color: transparent;
+}
+
+.paddedTop {
+  padding: 8px 0 2px 0;
+  background-color: transparent;
+}
+
+.paddedBorder {
+  padding: 10px 12px 10px 12px;
+  border-bottom: #7B81A9 1px solid;
+  background-color: transparent;
+}
+
+.leftPad {
+  padding-left: 5px;
+}
+
+.rightPad {
+  padding-right: 10px;
+}
+
+.bottomPad {
+  padding-bottom: 5px;
+}
+
+.leftColumn {
+  padding: 0 14px 0 0;
+}
+
+.rightColumn {
+  padding: 0 0 0 0;
+}
+
+.itemPad {
+  padding: 0 0 20px 0;
+}
+
+.templateprefpad {
+  padding: 3px 0 0 6px;
+  background-color: transparent;
+}
+
+.templatebox {
+  background: #fff;
+  border-right: #9298BF 1px solid;
+  border-left: #9298BF 1px solid;
+  border-top: #BABEDA 1px solid;
+  border-bottom: #9298BF 1px solid;
+  padding: 4px 6px 6px 10px;
+  margin: 1px 0 1px 0;
+}
+
+.templatepad {
+  margin: 1px 0 1px 0;
+}
+
+.profileMenuInner {
+  padding: 4px 6px 4px 10px;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.profileHead {
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  padding: 4px 4px 4px 10px;
+  background: #7E7EB3 url({path:image_url}bg_profile_heading.jpg) repeat-x left top;
+  border-top: 1px solid #D9DBE7;
+  border-bottom: 1px solid #636A96;
+  margin: 0 0 0 0;
+}
+
+.navPad {
+  padding: 2px 0 3px 0;
+}
+
+.navPad a {
+  outline: none;
+}
+
+.buttonWrapper {
+  background-color: transparent;
+  padding: 10px 0 10px 10px;
+}
+
+.leftCel {
+  border-right: #7B81A9 1px solid;
+  padding: 0 40px 0 0;
+  white-space: nowrap;
+}
+
+.rightCel {
+  padding: 0 0 0 25px;
+  white-space: nowrap;
+}
+
+.menuHeading {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  margin: 3px 0 3px 5px;
+  background: transparent;
+}
+
+.menuItem {
+  font-size: 11px;
+  color: #333;
+  background-color: transparent;
+  padding: 3px 0 3px 6px;
+}
+
+.menuWrapper {
+  margin: 0 0 14px 0;
+}
+
+.successMessage,
+.success-message {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  padding: 10px 10px;
+  color: #404040;
+  background-color: #fafab5;
+  background: linear-gradient(to bottom, #fafab5 0%, #fcfcda 100%);
+  border: 1px solid #dbdb83;
+}
+
+.littlePadding {
+  padding: 5px 0;
+}
+
+.littleMorePadding {
+  padding: 7px 0;
+}
+
+.littleTopPadding {
+  padding: 5px 0 0 0;
+}
+
+.paddingTop {
+  padding: 12px 0 4px 0;
+}
+
+.itemTitle {
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  padding: 4px 0 3px 0;
+}
+
+.box {
+  color: #222;
+  background-color: #f7f1ea;
+  background: linear-gradient(to bottom, #f7f1ea 0%, #faf6f2 100%);
+  border: #bac6b5 1px solid;
+  padding: 8px 10px 8px 10px;
+  margin: 0px 0 10px 0;
+}
+
+.box table tr td {
+  color: #222;
+}
+
+.alertBox {
+  font-weight: bold;
+  text-align: center;
+}
+
+.box320 {
+  width: 320px;
+}
+
+.subNavWrapper {
+  margin: 0 28px 0 28px;
+  padding: 0;
+}
+
+.dotBorderLine {
+  border-bottom: #7B81A9 1px dashed;
+  margin: 4px 0 4px 0;
+}
+
+.category {
+  font-size: 0.9em;
+  color: #666;
+  letter-spacing: 0.09em;
+  /* makes it look special */
+}
+
+.subtext {
+  font-size: 11px;
+  font-weight: normal;
+  color: #333;
+  padding: 6px 0 3px 0;
+}
+
+.border {
+  border: 1px solid #B1B6D2;
+  margin-top: 1px;
+}
+
+.thumb {
+  font-size: 11px;
+  color: #000;
+  width: 240px;
+  border: 1px solid #990000;
+}
+
+.thumbPad {
+  padding: 8px;
+}
+
+.copyright {
+  clear: both;
+  vertical-align: bottom;
+  text-align: center;
+  line-height: 15px;
+  margin: 1px 0 1px 0;
+  padding: 14px 0 14px 0;
+}
+
+.reduce-opacity {
+  opacity: 90%;
+}
+
+.pageHeader {
+  background: #2D445E;
+  background: linear-gradient(to bottom, #2D445E, #0B2037);
+  color: #fff;
+}
+
+.pageHeader .simpleHeader {
+  color: #fff;
+  font-size: 1.3em;
+  margin-left: 5px;
+}
+
+.quickLinks {
+  font-size: 1em;
+  padding: 20px 20px 20px 20px;
+}
+
+.quickLinks a {
+  color: #F4E3C3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quickLinks a .account-image {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: top;
+  margin-top: -1px;
+}
+
+.quickLinks a .account-image svg path {
+  fill: #F4E3C3;
+}
+
+.quickLinks a:hover {
+  color: #c3b59c;
+  text-decoration: none;
+}
+
+.quickLinks a:hover .account-image svg path {
+  fill: #c3b59c;
+}
+
+.quickLinksLeft {
+  text-align: left;
+  width: 50%;
+  float: left;
+}
+
+.quickLinksRight {
+  text-align: right;
+  margin-left: 50%;
+  width: 50%;
+}
+
+.quickLinks .spacer {
+  color: #666;
+}
+
+a.tabInactive {
+  display: block;
+  text-align: center;
+  padding: 6px 4px 6px 4px;
+  margin: 0 2px 0 2px;
+  white-space: nowrap;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  color: #F4E3C3;
+  background-color: #2E3034;
+  background: linear-gradient(to bottom, #2E3034 0%, #142129 100%);
+  border: #615a4e 1px solid;
+  border-bottom: none;
+}
+
+a.tabInactive:hover {
+  padding: 6px 4px 6px 4px;
+  margin: 0 2px 0 2px;
+  white-space: nowrap;
+  color: #fff;
+  background-color: #615a4e;
+  background: linear-gradient(to bottom, #615a4e 0%, #615a4e 100%);
+  border: #615a4e 1px solid;
+  border-bottom: none;
+}
+
+.mainMenuTab {
+  padding: 5px 5px 0 5px;
+}
+
+a.tabActive {
+  display: block;
+  padding: 7px 4px 5px 4px;
+  margin: 0 2px 0 2px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #666;
+  background-color: #fff;
+  background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  border: #27343C 1px solid;
+  border-bottom: none;
+}
+
+a.tabActive a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.breadcrumb {
+  margin: 12px 25px 0 25px;
+  padding: 0 5px 7px 5px;
+  border-bottom: #e3e3e3 1px solid;
+  width: auto;
+}
+
+.breadcrumbLeft {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.3em;
+  color: #666;
+}
+
+.tabDropMenu,
+.tab-drop-menu {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 0 0 3px 3px;
+  z-index: 10;
+  list-style: none;
+  width: 200px;
+}
+
+.tabDropMenu li,
+.tab-drop-menu li {
+  position: relative;
+  padding-bottom: 0 !important;
+}
+
+.tabDropMenu li:last-child,
+.tab-drop-menu li:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.tabDropMenu li:last-child a,
+.tab-drop-menu li:last-child a {
+  border-radius: 0 0 3px 3px;
+}
+
+.tabDropMenuInner {
+  border-bottom: 1px solid black;
+}
+
+.tabDropMenuInner a {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 2.25em;
+  text-indent: 4px;
+  margin: 0;
+  padding-left: 5px;
+  width: 195px;
+  text-decoration: none;
+  color: #F4E3C3;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.tabDropMenuInner a:hover {
+  color: #f6e8cf;
+  background-color: black;
+}
+
+.sitePulldown .currentSite {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.siteDropMenu,
+.site-drop-menu {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  margin: 4px 0 0 0;
+  padding: 0;
+  z-index: 10;
+  list-style: none;
+  width: 300px;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-style: solid;
+  border-width: 1px;
+}
+
+.siteDropMenu > li,
+.site-drop-menu > li {
+  position: relative;
+  padding: 4px 4px 4px 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 292px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.siteDropMenu > li ul,
+.site-drop-menu > li ul {
+  padding-left: 4px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.siteDropMenu > li ul > li,
+.site-drop-menu > li ul > li {
+  display: block;
+  line-height: 1.5em;
+  text-indent: 4px;
+  margin: 0;
+  padding: 1px 2px 1px 0;
+  text-decoration: none;
+  color: #F4E3C3;
+}
+
+.siteDropMenu > li ul > li:before,
+.site-drop-menu > li ul > li:before {
+  content: "\2022";
+}
+
+.siteDropMenu > li:last-child,
+.site-drop-menu > li:last-child {
+  padding-bottom: 5px;
+}
+
+.siteDropMenu > li:last-child a,
+.site-drop-menu > li:last-child a {
+  border-bottom: none;
+}
+
+.siteDropMenu > li a:hover,
+.site-drop-menu > li a:hover {
+  color: #c3b59c;
+}
+
+/*!
+Based off of Pure v0.6.2
+Copyright 2013 Yahoo!
+*/
+
+input {
+  margin: 0;
+}
+
+input,
+textarea,
+select {
+  font-size: 12px;
+}
+
+/* We hates this precccciiiious */
+
+select:focus,
+textarea:focus {
+  outline: 0;
+  border-color: #129FEA;
+}
+
+.cp-form {
+  margin-bottom: 0.5em;
+}
+
+.cp-form.top-margin {
+  margin-top: 1em;
+}
+
+.cp-form input[type=text],
+.cp-form input[type=password],
+.cp-form input[type=email],
+.cp-form input[type=url],
+.cp-form input[type=date],
+.cp-form input[type=month],
+.cp-form input[type=time],
+.cp-form input[type=datetime],
+.cp-form input[type=datetime-local],
+.cp-form input[type=week],
+.cp-form input[type=number],
+.cp-form input[type=search],
+.cp-form input[type=tel],
+.cp-form input[type=color],
+.cp-form select,
+.cp-form textarea {
+  padding: 0.3em 0.5em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: 1.1em;
+}
+
+.cp-form select {
+  font-size: 1em;
+}
+
+.cp-form input[type=submit],
+.cp-form button[type=submit],
+a.button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #0879da;
+  border: 1px solid #52a1e5;
+}
+
+.cp-form input[type=submit]:hover,
+.cp-form button[type=submit]:hover,
+a.button:hover {
+  background-color: #0660ae;
+}
+
+.cp-form input[type=submit].cancel,
+.cp-form button[type=submit].cancel,
+a.button.cancel {
+  color: #474747;
+  background-color: #d9fafa;
+  border: 1px solid #00201c;
+}
+
+.cp-form input[type=submit].cancel:hover,
+.cp-form button[type=submit].cancel:hover,
+a.button.cancel:hover {
+  background-color: #adc8c8;
+}
+
+.cp-form input[type=submit].option,
+.cp-form button[type=submit].option,
+a.button.option {
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #6fbf72;
+}
+
+.cp-form input[type=submit].option:hover,
+.cp-form button[type=submit].option:hover,
+a.button.option:hover {
+  background-color: #3c8c40;
+}
+
+.cp-form input[type=submit].upload,
+.cp-form button[type=submit].upload,
+a.button.upload {
+  color: #fff;
+  background-color: #DA0879;
+  border: 1px solid #e13993;
+}
+
+.cp-form input[type=submit].upload:hover,
+.cp-form button[type=submit].upload:hover,
+a.button.upload:hover {
+  background-color: #ae0660;
+}
+
+.cp-form input[type=submit].delete,
+.cp-form button[type=submit].delete,
+a.button.delete {
+  color: #fff;
+  background-color: #ff0000;
+  border: 1px solid darkred;
+}
+
+.cp-form input[type=submit].delete:hover,
+.cp-form button[type=submit].delete:hover,
+a.button.delete:hover {
+  background-color: #cc0000;
+}
+
+.cp-form input[type=submit].smaller,
+.cp-form button[type=submit].smaller,
+a.button.smaller {
+  font-size: 90%;
+  padding: 0.5em 0.7em;
+  border-radius: 4px;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.cp-form input:not([type]) {
+  padding: 0.5em 0.6em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+
+.cp-form input[type=color] {
+  padding: 0.2em 0.5em;
+}
+
+.cp-form input[type=text]:focus,
+.cp-form input[type=password]:focus,
+.cp-form input[type=email]:focus,
+.cp-form input[type=url]:focus,
+.cp-form input[type=date]:focus,
+.cp-form input[type=month]:focus,
+.cp-form input[type=time]:focus,
+.cp-form input[type=datetime]:focus,
+.cp-form input[type=datetime-local]:focus,
+.cp-form input[type=week]:focus,
+.cp-form input[type=number]:focus,
+.cp-form input[type=search]:focus,
+.cp-form input[type=tel]:focus,
+.cp-form input[type=color]:focus,
+.cp-form select:focus,
+.cp-form textarea:focus {
+  outline: 0;
+  border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.cp-form input:not([type]):focus {
+  outline: 0;
+  border-color: #129FEA;
+}
+
+.cp-form input[type=file]:focus,
+.cp-form input[type=radio]:focus,
+.cp-form input[type=checkbox]:focus {
+  outline: thin solid #129FEA;
+  outline: 1px auto #129FEA;
+}
+
+.cp-form .pure-checkbox,
+.cp-form .pure-radio {
+  margin: 0.5em 0;
+  display: block;
+}
+
+.cp-form input[type=text][disabled],
+.cp-form input[type=password][disabled],
+.cp-form input[type=email][disabled],
+.cp-form input[type=url][disabled],
+.cp-form input[type=date][disabled],
+.cp-form input[type=month][disabled],
+.cp-form input[type=time][disabled],
+.cp-form input[type=datetime][disabled],
+.cp-form input[type=datetime-local][disabled],
+.cp-form input[type=week][disabled],
+.cp-form input[type=number][disabled],
+.cp-form input[type=search][disabled],
+.cp-form input[type=tel][disabled],
+.cp-form input[type=color][disabled],
+.cp-form select[disabled],
+.cp-form textarea[disabled] {
+  cursor: not-allowed;
+  background-color: #eaeded;
+  color: #cad2d3;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.cp-form input:not([type])[disabled] {
+  cursor: not-allowed;
+  background-color: #eaeded;
+  color: #cad2d3;
+}
+
+.cp-form input[readonly],
+.cp-form select[readonly],
+.cp-form textarea[readonly] {
+  background-color: #eee;
+  /* menu hover bg color */
+  color: #777;
+  /* menu text color */
+  border-color: #ccc;
+}
+
+.cp-form input:focus:invalid,
+.cp-form textarea:focus:invalid,
+.cp-form select:focus:invalid {
+  color: #b94a48;
+  border-color: #e9322d;
+}
+
+.cp-form input[type=file]:focus:invalid:focus,
+.cp-form input[type=radio]:focus:invalid:focus,
+.cp-form input[type=checkbox]:focus:invalid:focus {
+  outline-color: #e9322d;
+}
+
+.cp-form select {
+  /* Normalizes the height; padding is not sufficient. */
+  height: 2.25em;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.cp-form select[multiple] {
+  height: auto;
+}
+
+.cp-form label {
+  font-weight: bold;
+  margin: 0.5em 0 0.2em;
+}
+
+.cp-form label.no-bold {
+  font-weight: normal;
+}
+
+.cp-form fieldset {
+  margin: 0;
+  padding: 0.35em 0 0.75em;
+  border: 0;
+}
+
+.cp-form legend {
+  display: block;
+  width: 100%;
+  padding: 0.3em 0;
+  margin-bottom: 0.3em;
+  color: #333;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cp-form-stacked input[type=text],
+.cp-form-stacked input[type=password],
+.cp-form-stacked input[type=email],
+.cp-form-stacked input[type=url],
+.cp-form-stacked input[type=date],
+.cp-form-stacked input[type=month],
+.cp-form-stacked input[type=time],
+.cp-form-stacked input[type=datetime],
+.cp-form-stacked input[type=datetime-local],
+.cp-form-stacked input[type=week],
+.cp-form-stacked input[type=number],
+.cp-form-stacked input[type=search],
+.cp-form-stacked input[type=tel],
+.cp-form-stacked input[type=color],
+.cp-form-stacked input[type=file],
+.cp-form-stacked select,
+.cp-form-stacked label,
+.cp-form-stacked textarea {
+  display: block;
+  margin: 0.25em 0;
+}
+
+.cp-form-aligned input,
+.cp-form-aligned textarea,
+.cp-form-aligned select,
+.cp-form-message-inline {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
+}
+
+.cp-form-aligned textarea {
+  vertical-align: top;
+}
+
+/* Aligned Forms */
+
+.cp-form-aligned .pure-control-group {
+  margin-bottom: 0.5em;
+}
+
+.cp-form-aligned .pure-control-group label {
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  width: 10em;
+  margin: 0 1em 0 0;
+}
+
+.cp-form-aligned .pure-controls {
+  margin: 1.5em 0 0 11em;
+}
+
+/* Rounded Inputs */
+
+.cp-form input.pure-input-rounded,
+.cp-form .pure-input-rounded {
+  border-radius: 2em;
+  padding: 0.5em 1em;
+}
+
+/* Grouped Inputs */
+
+.cp-form .form-group fieldset {
+  margin-bottom: 10px;
+}
+
+.cp-form .form-group input,
+.cp-form .form-group textarea {
+  display: block;
+  padding: 10px;
+  margin: 0 0 -1px;
+  border-radius: 0;
+  position: relative;
+  top: -1px;
+}
+
+.cp-form .form-group input:focus,
+.cp-form .form-group textarea:focus {
+  z-index: 3;
+}
+
+.cp-form .form-group input:first-child,
+.cp-form .form-group textarea:first-child {
+  top: 1px;
+  border-radius: 4px 4px 0 0;
+  margin: 0;
+}
+
+.cp-form .form-group input:first-child:last-child,
+.cp-form .form-group textarea:first-child:last-child {
+  top: 1px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.cp-form .form-group input:last-child,
+.cp-form .form-group textarea:last-child {
+  top: -2px;
+  border-radius: 0 0 4px 4px;
+  margin: 0;
+}
+
+.cp-form .form-group button {
+  margin: 0.35em 0;
+}
+
+.cp-form-message-inline {
+  display: block;
+  padding-left: 0.3em;
+  color: #666;
+  vertical-align: middle;
+  margin-bottom: 1.2em;
+}
+
+/* Block help for forms */
+
+.cp-form-message {
+  display: block;
+  color: #666;
+  margin: 1.5em 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .cp-form button[type=submit] {
+    margin: 0.7em 0 0;
+  }
+
+  .cp-form input:not([type]),
+  .cp-form input[type=text],
+  .cp-form input[type=password],
+  .cp-form input[type=email],
+  .cp-form input[type=url],
+  .cp-form input[type=date],
+  .cp-form input[type=month],
+  .cp-form input[type=time],
+  .cp-form input[type=datetime],
+  .cp-form input[type=datetime-local],
+  .cp-form input[type=week],
+  .cp-form input[type=number],
+  .cp-form input[type=search],
+  .cp-form input[type=tel],
+  .cp-form input[type=color],
+  .cp-form label {
+    margin-bottom: 0.3em;
+    display: block;
+  }
+
+  .form-group input:not([type]),
+  .form-group input[type=text],
+  .form-group input[type=password],
+  .form-group input[type=email],
+  .form-group input[type=url],
+  .form-group input[type=date],
+  .form-group input[type=month],
+  .form-group input[type=time],
+  .form-group input[type=datetime],
+  .form-group input[type=datetime-local],
+  .form-group input[type=week],
+  .form-group input[type=number],
+  .form-group input[type=search],
+  .form-group input[type=tel],
+  .form-group input[type=color] {
+    margin-bottom: 0;
+  }
+
+  /* NOTE: pure-help-inline is deprecated. Use .cp-form-message-inline instead. */
+
+  .cp-form-message-inline,
+  .cp-form-message {
+    display: block;
+    /* Increased bottom padding to make it group with its related input element. */
+    padding: 0.2em 0 0.8em;
+  }
+}
+
+.loginBox {
+  background-color: #fff;
+  color: #333;
+  border-bottom: #ccc 1px solid;
+  padding: 0 0 40px 60px;
+  text-align: left;
+  margin-top: 1px;
+}
+
+.loginLogo {
+  text-align: left;
+  padding: 5px 0 0 60px;
+  color: #fff;
+}
+
+.loginInnerBox {
+  margin: 20px 50px 4px 0;
+}
+
+.cp-form-error {
+  color: #983030;
+}
+
+.tablePad {
+  padding: 1px 1px 1px 1px;
+  background-color: #fff;
+}
+
+table {
+  font-size: 12px;
+  width: 100%;
+}
+
+table tr td {
+  font-size: 12px;
+  padding: 5px;
+}
+
+.tableBorder {
+  border: 1px solid rgba(124, 113, 108, 0.25);
+  margin: 0 0 3px 0;
+  padding: 0;
+}
+
+.tableBorderNoTop {
+  border-bottom: 1px solid rgba(124, 113, 108, 0.25);
+  border-right: 1px solid rgba(124, 113, 108, 0.25);
+  border-left: 1px solid rgba(124, 113, 108, 0.25);
+}
+
+.tableBorderNoBottom {
+  border-top: 1px solid rgba(124, 113, 108, 0.25);
+  border-right: 1px solid rgba(124, 113, 108, 0.25);
+  border-left: 1px solid rgba(124, 113, 108, 0.25);
+}
+
+.tableBorderSides {
+  border-right: 1px solid rgba(124, 113, 108, 0.25);
+  border-left: 1px solid rgba(124, 113, 108, 0.25);
+}
+
+.tableHeading {
+  font-weight: normal;
+  color: #fff !important;
+  /* Need to fix everything and make it a <th> but that is LOTS of work */
+  padding: 6px 5px;
+  background: #635a56;
+  background: linear-gradient(to bottom, #7C716C, #635a56);
+}
+
+.tableHeading a {
+  color: #ffffff;
+}
+
+.tableHeading a:hover {
+  color: #ffffff;
+}
+
+.tableHeadingAlt {
+  font-weight: normal;
+  white-space: nowrap;
+  color: #ffffff !important;
+  padding: 6px 5px;
+  background: #556e7f;
+  background: linear-gradient(to bottom, #6c8494, #556e7f);
+}
+
+.tableHeadingAlt a {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tableHeadingAlt a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.tableHeadingSmall {
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #0C1216;
+  padding: 5px 6px 5px 6px;
+  background: #a9b9c2;
+  background: linear-gradient(to bottom, #a9b9c2, #859aa6);
+}
+
+.tableBorder tr th,
+.tableBorderNoTop tr th,
+.tableBorderSides tr th,
+.templateAreaBox tr th {
+  font-weight: normal;
+  white-space: nowrap;
+  text-align: left;
+  color: #fff !important;
+  /* Need to fix everything and make it a <th> but that is LOTS of work */
+  padding: 6px 5px;
+  background: #7C716C;
+  background: linear-gradient(to bottom, #7C716C, #635a56);
+}
+
+.tableBorder tr th.tableHeadingAlt,
+.tableBorderNoTop tr th.tableHeadingAlt,
+.tableBorderSides tr th.tableHeadingAlt,
+.templateAreaBox tr th.tableHeadingAlt {
+  color: #ffffff !important;
+  background: #6c8494;
+  background: linear-gradient(to bottom, #6c8494, #556e7f);
+  cursor: pointer;
+}
+
+.tableBorder tr td,
+.tableBorderNoTop tr td,
+.tableBorderSides tr td,
+.templateAreaBox tr td {
+  font-size: 1em;
+  line-height: 1.2em;
+  color: #333;
+  padding: 6px 5px;
+  border-bottom: 1px solid transparent;
+}
+
+.tableBorder tr.has-form td,
+.tableBorderNoTop tr.has-form td,
+.tableBorderSides tr.has-form td,
+.templateAreaBox tr.has-form td {
+  line-height: 2.5em;
+}
+
+.tableBorder tr:last-child td,
+.tableBorderNoTop tr:last-child td,
+.tableBorderSides tr:last-child td,
+.templateAreaBox tr:last-child td {
+  border-bottom: none;
+}
+
+.tableBorder tr:nth-child(even),
+.tableBorderNoTop tr:nth-child(even),
+.tableBorderSides tr:nth-child(even),
+.templateAreaBox tr:nth-child(even) {
+  background-color: #fff;
+}
+
+.tableBorder tr:nth-child(odd),
+.tableBorderNoTop tr:nth-child(odd),
+.tableBorderSides tr:nth-child(odd),
+.templateAreaBox tr:nth-child(odd) {
+  background-color: #F2F1F0;
+}
+
+.tableBorder tr.no-background,
+.tableBorderNoTop tr.no-background,
+.tableBorderSides tr.no-background,
+.templateAreaBox tr.no-background {
+  background-color: transparent;
+}
+
+.tableBorder.row-hover tr:nth-child(even):hover,
+.tableBorderNoTop.row-hover tr:nth-child(even):hover,
+.tableBorderSides.row-hover tr:nth-child(even):hover,
+.templateAreaBox.row-hover tr:nth-child(even):hover {
+  background-color: #ececec;
+}
+
+.tableBorder.row-hover tr:nth-child(odd):hover,
+.tableBorderNoTop.row-hover tr:nth-child(odd):hover,
+.tableBorderSides.row-hover tr:nth-child(odd):hover,
+.templateAreaBox.row-hover tr:nth-child(odd):hover {
+  background-color: #ececec;
+}
+
+.tableCellChecked {
+  background-color: #E1FAD8;
+  font-size: 11px;
+  color: #333;
+  padding: 6px 10px 6px 6px;
+  border-bottom: 1px solid #fff;
+}
+
+.publishRows {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 5px;
+  background: transparent;
+}
+
+.publishRows:last-child {
+  border-bottom: none;
+}
+
+.add-field {
+  margin: 0;
+  padding: 5px;
+  background: transparent;
+}
+
+.publish-box {
+  background-color: #f3f6f1;
+  border: #cfdcca 1px solid;
+  padding: 6px 6px 10px 14px;
+  margin: 0;
+}
+
+.publishButtonBox {
+  background: #4f5c63;
+  background: linear-gradient(to bottom, #4f5c63, #374045);
+  border: 1px solid #000;
+  color: #fff;
+  text-align: center;
+  margin: 20px 0 5px 14px;
+  padding: 6px 4px 6px 4px;
+}
+
+.previewBox {
+  background-color: #F7F7F9;
+  border: #7B81A9 1px solid;
+  color: #38394B;
+  font-size: 11px;
+  margin: 0 0 10px 0;
+  padding: 6px 8px 10px 8px;
+}
+
+.previewItemTitle {
+  font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+  font-size: 16px;
+  color: #44496B;
+  background-color: transparent;
+}
+
+.clusterBox {
+  margin: 6px 0 0 0;
+  border: #AFBBCF 1px solid;
+}
+
+.clusterLineR {
+  border-right: #C4CFE1 1px solid;
+}
+
+.publishItemWrapper {
+  font-size: 11px;
+  color: #333;
+  padding: 5px 15px 20px 15px;
+  margin: 0;
+  background-color: #fff;
+}
+
+.publishSmPad {
+  margin: 2px 0 2px 0;
+}
+
+.publishTabLine {
+  border-bottom: #C5CFDA 1px solid;
+  margin: 0;
+}
+
+.publish-tabs {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  height: calc(1.4em + 12px);
+  /* gear image + a padding */
+}
+
+.publish-tabs .publish-tab {
+  float: left;
+  min-width: 10em;
+  padding-bottom: 0;
+  height: calc(1.4em + 12px);
+}
+
+.publish-tabs .publish-tab .gear-image {
+  display: inline-block;
+  width: 1.4em;
+  width: 1.4em;
+  vertical-align: top;
+  margin-top: -0.1em;
+}
+
+.publish-tabs .publish-tab .gear-image svg path {
+  fill: #17659e;
+}
+
+.publish-tabs .publish-tab > a {
+  display: block;
+  color: #17659e;
+  border-top: #cfdcca 1px solid;
+  border-right: #cfdcca 1px solid;
+  border-bottom: #cfdcca 1px solid;
+  border-left: none;
+  background: #fff;
+  background: linear-gradient(to bottom, #fff, #f7f9f6);
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.4em;
+  /* allows for gear image */
+  padding: 6px 10px 6px 10px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.publish-tabs .publish-tab > a.selected {
+  background: #f3f6f1;
+  border-bottom: #f3f6f1 1px solid;
+}
+
+.publish-tabs .publish-tab > a:hover:not(.selected) {
+  color: #0e3f63;
+  background: #fff;
+  background: linear-gradient(to bottom, #fff, #f0f4ee);
+  border-color: #cfdcca;
+}
+
+.publish-tabs .publish-tab:first-child > a {
+  border-left: #cfdcca 1px solid;
+}
+
+.publishLabel {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.fieldWrapper {
+  font-size: 11px;
+  color: #333;
+  padding: 0 0 12px 0;
+}
+
+.xhtmlWrapper {
+  color: #666;
+  text-align: right;
+  padding: 0;
+  margin: 4px 0 0 0;
+}
+
+.weblog-drop-menu {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  margin: 30px 0 0 -200px;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-radius: 0 0 3px 3px;
+  z-index: 10;
+  list-style: none;
+  width: 200px;
+}
+
+.weblog-drop-menu li {
+  position: relative;
+  padding-bottom: 0 !important;
+}
+
+.weblog-drop-menu li:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.weblog-drop-menu li:last-child a {
+  border-radius: 0 0 3px 3px;
+}
+
+.weblog-drop-menu-inner {
+  border-bottom: 1px solid black;
+}
+
+.weblog-drop-menu-inner a {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 2.25em;
+  margin: 0;
+  padding-right: 5px;
+  width: 195px;
+  text-decoration: none;
+  color: #F4E3C3;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.weblog-drop-menu-inner a:hover {
+  color: #f6e8cf;
+  background-color: black;
+}
+
+.templateFolder {
+  margin-bottom: 10px;
+}
+
+.templateAreaBox {
+  background: #fff;
+  padding: 0px;
+  border: rgba(124, 113, 108, 0.25) 1px solid;
+  margin: 0;
+  background-color: #F2F1F0;
+}
+
+.templateBorderBox {
+  border: rgba(124, 113, 108, 0.25) 1px solid;
+}
+
+.cms-calendar {
+  border: 1px #6975A3 solid;
+  background-color: transparent;
+}
+
+.cms-calendar td {
+  font-size: 12px;
+}
+
+.cms-calendar-heading td {
+  background-color: #1d272d;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 4px;
+}
+
+.cms-calendar-navleft {
+  cursor: pointer;
+}
+
+.cms-calendar-navright {
+  text-align: right;
+  cursor: pointer;
+}
+
+.cms-calendar-dayheading {
+  background-color: #808080;
+  color: #fff;
+  text-align: center;
+  padding: 5px 2px;
+}
+
+.cms-calendar-first-row td {
+  border-top: 1px #fff solid;
+}
+
+.cms-calendar-daycells {
+  color: #000;
+  background-color: #e4eaf1;
+  text-align: center;
+  padding: 5px;
+  border-bottom: 1px #fff solid;
+  border-right: 1px #fff solid;
+  cursor: pointer;
+}
+
+.cms-calendar-daycells:first-child {
+  border-left: 1px #fff solid;
+}
+
+.cms-calendar-daycells:hover {
+  color: #fff;
+  background-color: #808080;
+}
+
+.cms-calendar-daycells.dayselected {
+  background-color: #7f7fff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.cms-calendar-blanktop,
+.cms-calendar-blankbottom {
+  background-color: #fff;
+  padding: 4px;
+}
+

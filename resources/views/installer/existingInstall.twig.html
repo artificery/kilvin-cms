@@ -1,0 +1,19 @@
+
+{% extends "kilvin::installer._page" %}
+
+{% block mainContent %}
+
+    <h1>Existing Installation Detected!</h1>
+
+    <h4 class="red">Kilvin CMS appears to be installed to your database.
+    Continuing with this installation will destroy any information currently in your database.
+    Are you sure you wish to proceed?</h4>
+
+    <form action="install.php?page=3" method="post">
+    	{{ csrfField() }}
+        {{fields | raw}}
+        <input type="hidden" name="install_override" value="y" />
+        <input type="submit" value="Continue Installation">
+    </form>
+
+{% endblock %}

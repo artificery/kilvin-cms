@@ -1,0 +1,73 @@
+{
+    "name": "kilvin/kilvin",
+    "description": "The Kilvin CMS.",
+    "keywords": ["cms", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7",
+        "doctrine/dbal": "2.5.*",
+        "erusev/parsedown": "^1.6",
+        "ezyang/htmlpurifier": "^4.9",
+        "laravel/framework": "5.5.*",
+        "predis/predis": "1.0.*",
+        "sentry/sentry-laravel": "^0.4.1",
+        "twig/twig": "^2.0"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0",
+        "laravel/tinker": "~1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "cms/database",
+            "cms/plugins"
+        ],
+        "files": [
+            "cms/app/helpers.php"
+        ],
+        "psr-4": {
+            "Kilvin\\": "cms/app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "cms/tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "vendor-dir": "cms/vendor"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "cms/plugins/*",
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
+}

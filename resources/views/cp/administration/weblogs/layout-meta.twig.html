@@ -1,0 +1,88 @@
+<div id="publish_block_meta" class="publish-tab-block" style="display: none; padding: 0px; margin: 0px;">
+	<div class="publish-box">
+		<table class="clusterBox" border="0" cellpadding="0" cellspacing="0" style="width:99%">
+			<tbody>
+				<tr>
+					<td class="publishItemWrapper">
+						<br>
+						<div class="clusterLineR">
+							<div class="defaultCenter">
+								<h5>Entry Date</h5>
+
+								<div class="littlePadding">
+									<input style="width:150px" type="text" name="entry_date" id="entry_date" value="2017-08-25 14:25" size="18" maxlength="23" class="input">
+									<a href="javascript:void(0);" class="toggle-element" data-toggle="calendar_entry_date">
+							            <span style="display:inline-block; height:25px; width:25px; vertical-align:top;">
+						                	{{calendar_image | raw}}
+						                </span>
+						            </a>
+						        </div>
+
+								<div class="littlePadding">
+									<a href="javascript:void(0);">Today</a>&nbsp;|&nbsp;<a href="javascript:void(0);">Clear</a>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td class="publishItemWrapper">
+						<br>
+						<div class="clusterLineR">
+							<div class="defaultCenter">
+
+								<h5>Expiration Date</h5>
+
+								<div class="littlePadding">
+									<input style="width:150px" type="text" name="expiration_date" id="expiration_date" value="" size="18" maxlength="23" class="input">
+									<a href="javascript:void(0);" class="toggle-element">
+						                <span style="display:inline-block; height:25px; width:25px; vertical-align:top;">
+											{{calendar_image | raw}}
+						                </span>
+						            </a>
+						        </div>
+
+								<div class="littlePadding">
+									<a href="javascript:void(0);">Today</a>&nbsp;|&nbsp;<a href="javascript:void(0);">Clear</a>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table class="clusterBox" border="0" cellpadding="0" cellspacing="0" style="width:99%">
+			<tbody>
+				<tr>
+					<td class="publishItemWrapper" valign="top">
+						<br>
+						<div class="clusterLineR">
+							<h5>&nbsp;Author</h5>
+							<select name="author_id" class="select">
+								<option value="1">Josephine McUser</option>
+							</select>
+						</div>
+					</td>
+					<td class="publishItemWrapper" valign="top">
+						<br>
+						<div class="clusterLineR">
+
+							<h5>&nbsp;Status</h5>
+
+							<select name="status" class="select">
+								<option value="open" selected="selected">Open</option>
+							</select>
+						</div>
+					</td>
+					<td class="publishItemWrapper" valign="top">
+						<br>
+						<h5>&nbsp;Sticky</h5>
+						<label style="display:inline-block;margin-top:2px;">
+							<input class="checkbox" type="checkbox" name="sticky" value="y">
+							Make Entry Sticky
+						</label>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

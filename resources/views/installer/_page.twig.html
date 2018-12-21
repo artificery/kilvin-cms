@@ -1,0 +1,313 @@
+<html>
+
+<head>
+<title>Kilvin CMS | Installer</title>
+
+<meta http-equiv='content-type' content='text/html; charset=UTF-8' />
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+
+<style type='text/css'>
+
+
+html, body {
+    background-color: #f7f7f7;
+    color: #4b4e50;
+    font-family: Lucida Grande, Arial, Verdana, Geneva, Sans-serif;
+	font-size: 12px;
+    height: 100vh;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 10px 15px;
+}
+
+.flex-center:first-child {
+	border-top: 1px solid #ccc;
+	margin-top: 20px;
+}
+
+.flex-center:last-child {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.content {
+    text-align: center;
+}
+
+.text > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a {
+	color: #1D7FC6;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1D7FC6;
+	text-decoration: underline;
+}
+
+
+.footer {
+	color: 			#666;
+	text-align:  	center;
+}
+
+.footer img {
+	display: block;
+	margin: 0 auto 5px auto;
+}
+
+
+.solidLine {
+	border-top:  #999 1px solid;
+}
+
+.error {
+	margin-bottom:      8px;
+	font-weight:        bold;
+	color:              #990000;
+	border-bottom: 	    1px solid #990000;
+}
+
+.shade {
+	background-color:   #f6f6f6;
+	padding: 			0 0 10px 22px;
+	margin-top: 		10px;
+	margin-bottom: 		20px;
+	border:      		#7B81A9 1px solid;
+}
+
+.mild-indent {
+	padding: 			0 0 0 22px;
+	margin-top: 		10px;
+}
+
+.stephead {
+	font-size:          18px;
+	font-weight:		bold;
+	color:              #999;
+	letter-spacing:     2px;
+	margin:      		0;
+	background-color:   transparent;
+}
+
+.settingHead {
+	font-size:          18px;
+	font-weight:		bold;
+	color:              #990000;
+	letter-spacing:     2px;
+	margin-top:         10px;
+	margin-bottom:      10px;
+	margin-left:		-10px;
+	background-color:   transparent;
+}
+
+h1 {
+	font-size:          1.8em;
+	font-weight:        bold;
+	color:              #5B6082;
+	margin-top:         0.5em;
+	margin-bottom:      0.3em;
+	border-bottom:      #7B81A9 2px solid;
+}
+
+h2 {
+	font-size:          1.6em;
+	margin-top:         0.6em;
+	margin-bottom:      0.5em;
+}
+
+h3 {
+	font-size:          1.2em;
+	margin-top:         0.8em;
+	margin-bottom:      0;
+}
+
+h4 {
+	font-size:          1em;
+	font-weight:        bold;
+	margin-top:         5px;
+	margin-bottom:      14px;
+}
+
+h5 {
+	font-size:          1em;
+	font-weight:        bold;
+	margin-top:         1em;
+	margin-bottom:      0.5em;
+}
+
+p {
+	margin-top:         2px;
+	margin-bottom:      8px;
+	margin-left:		10px;
+	margin-right:		5px;
+}
+
+.warning {
+	color: #990000;
+	font-size: 0.9em;
+	margin: 18px 0;
+}
+
+li {
+	margin-bottom:      4px;
+	margin-left:		  10px;
+}
+
+.pad {
+	padding:  1px 0 4px 0;
+}
+
+.center {
+	text-align: center;
+}
+
+.red {
+	color: #990000;
+}
+
+ul.errorsList {
+	padding: 10px 0 10px 15px;
+	margin: 0;
+}
+
+ul.errorsList li {
+	list-style: none;
+	color: #990000;
+	font-style: italic;
+	font-weight: normal;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+.settingsArea p
+{
+	font-size: 0.9em;
+	margin-left: 0;
+	color: #555;
+}
+
+
+input[type="text"],
+select,
+textarea {
+    padding: 0.3em 0.5em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    width: 95%;
+}
+
+select {
+    font-size: 1em;
+}
+
+input[type="submit"], button[type="submit"], a.btn-primary {
+    font-family: inherit;
+    font-size: 100%;
+    padding: .5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #0879da;
+    border: 1px solid #52a1e5;
+    margin: 0.5em 0;
+    cursor: pointer;
+}
+
+.error {
+	color: red;
+}
+
+
+</style>
+
+
+
+<script type="text/javascript" src="{{ mix('/js/installer.js') }}"></script>
+
+
+</head>
+
+<body>
+	<div class="flex-center position-ref inner">
+		{% block mainContent %}
+			<p>Seems to be missing some content, bucko.</p>
+		{% endblock mainContent %}
+	</div>
+
+	<div class="flex-center position-ref footer">
+		<svg style="display: block; margin:5px auto;" version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="30pt" height="30pt" viewBox="0 0 550.000000 550.000000"
+ preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,550.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M2545 5424 c-108 -9 -336 -47 -445 -74 -962 -242 -1708 -988 -1950
+-1950 -57 -227 -74 -379 -74 -650 0 -271 17 -423 74 -650 242 -962 988 -1708
+1950 -1950 227 -57 379 -74 650 -74 206 0 268 3 390 23 590 92 1094 346 1504
+757 411 410 665 914 757 1504 33 209 33 571 0 780 -92 590 -346 1094 -757
+1504 -409 410 -919 667 -1499 756 -136 21 -471 34 -600 24z m560 -433 c474
+-79 882 -285 1224 -616 360 -349 583 -782 667 -1300 25 -153 26 -496 0 -650
+-80 -494 -284 -906 -621 -1254 -349 -360 -782 -583 -1300 -667 -82 -14 -165
+-18 -325 -18 -222 0 -328 11 -520 55 -226 53 -517 177 -715 306 -269 176 -525
+438 -692 706 -161 261 -267 550 -319 872 -25 154 -25 496 0 650 80 494 284
+906 621 1254 381 393 889 634 1445 685 108 10 418 -4 535 -23z"/>
+<path fill="blue" d="M2542 4515 c16 -46 32 -104 36 -127 13 -81 6 -191 -18 -264 -56 -171
+-140 -297 -420 -634 -248 -298 -385 -494 -459 -655 -10 -22 -28 -61 -39 -86
+-25 -54 -59 -168 -77 -259 -47 -225 -18 -460 83 -685 49 -110 138 -252 241
+-385 116 -150 529 -546 549 -526 2 3 -19 31 -48 63 -62 68 -138 174 -187 261
+-143 255 -146 520 -8 793 18 37 51 94 72 129 l40 62 6 -49 c8 -67 34 -141 67
+-185 29 -41 78 -83 86 -75 3 3 0 79 -7 170 -23 311 20 512 153 712 47 70 155
+184 214 225 l41 29 -13 -39 c-38 -109 -33 -218 15 -325 26 -59 105 -180 212
+-325 121 -164 161 -224 207 -315 90 -178 124 -342 103 -503 -23 -179 -133
+-392 -291 -565 -29 -32 -50 -60 -48 -63 10 -10 197 153 338 295 677 680 733
+1280 189 2018 -21 28 -43 54 -49 58 -6 3 -7 11 -4 17 4 7 2 8 -4 4 -9 -5 -9
+-12 0 -26 29 -46 -25 -278 -85 -365 -44 -65 -169 -176 -182 -163 -2 2 4 76 14
+163 26 226 22 570 -8 705 -89 396 -302 705 -657 952 -27 20 -59 38 -70 42 -19
+6 -19 2 8 -79z"/>
+</g>
+</svg>
+    Kilvin CMS is copyright Paul Burdick
+	</div>
+
+
+{% block bottomJavascript %}
+
+{% endblock bottomJavascript %}
+
+</body>
+</html>
+
+

@@ -1,0 +1,502 @@
+
+
+{% extends "kilvin::cp._page" %}
+
+
+{% block mainContent %}
+
+{% if cp_message is defined %}
+	<div class="success-message">
+	    {{cp_message}}
+	</div>
+{% endif %}
+
+<form action="{{ kilvinCpUrl('weblogs-administration/update-weblog-layout') }}" name="layoutform" id="layoutform" method="post" class="cp-form">
+	<input type="hidden" name="_token" value="{{csrfToken()}}">
+	<div class="hidden"><input type="hidden" name="weblog_id" value="{{weblog_id}}"></div>
+
+	<ul class="publish-tabs">
+		{% for tab_handle,tab_name in publish_tabs %}
+			<li class="publish-tab" id="publish_tab_{{tab_handle}}">
+				<a href="#" class="publish-tab-link" data-tab="{{tab_handle}}">
+					<span class="tab-name">{{tab_name}}</span>
+					<div class="js-tab-pulldown gear-image" data-tab="{{tab_handle}}">
+						{{svg_icon_gear | raw}}
+					</div>
+				</a>
+				<ul class="tab-drop-menu" id="tab_pulldown_{{tab_handle}}" style="display: none; visibility: hidden;">
+					<li class="tabDropMenuInner">
+						<a href="#" class="js-edit-tab" data-tab="{{tab_handle}}">
+							{{__('kilvin::admin.Edit Tab')}}
+						</a>
+					</li>
+					<li class="tabDropMenuInner">
+						<a href="#" class="js-move-tab-left" data-tab="{{tab_handle}}">
+							{{__('kilvin::admin.Move Left')}}
+						</a>
+					</li>
+					<li class="tabDropMenuInner">
+						<a href="#" class="js-move-tab-right" data-tab="{{tab_handle}}">
+							{{__('kilvin::admin.Move Right')}}
+						</a>
+					</li>
+					<li class="tabDropMenuInner">
+						<a href="#" class="js-delete-tab delete-link" data-tab="{{tab_handle}}">
+							{{__('kilvin::admin.Delete Tab')}}
+						</a>
+					</li>
+				</ul>
+				<input
+					type="hidden"
+					class="hidden-tab"
+					name="tabs[{{tab_handle}}]"
+					value="{{tab_name}}"
+				>
+			</li>
+		{% endfor %}
+
+		<li class="publish-tab" id="meta_tab">
+			<a href="#" class="publish-tab-link" data-tab="meta">{{__('kilvin::publish.meta')}}</a>
+		</li>
+
+		<li class="publish-tab" id="add_tab">
+			<a href="#" class="js-add-tab">
+				<em>+ {{__('kilvin::admin.Add Tab')}}</em>
+			</a>
+		</li>
+	</ul>
+
+	<div class="publish-box">
+		<table border="0" cellpadding="0" cellspacing="0" style="width:99%">
+			<tbody>
+				<tr>
+					<td>
+						<div class="littlePadding">
+							<div class="itemTitle">
+							<span class="alert">*</span>
+							&nbsp;Title</div>
+							<input style="width:100%" type="text" name="title" id="title" value="" size="20" maxlength="100" class="input" onkeyup="liveUrlTitle('#title', '#url_title');">
+						</div>
+
+						<div class="littlePadding">
+							<div class="itemTitle">URL Title</div>
+							<input style="width:100%" type="text" name="url_title" id="url_title" value="" size="20" maxlength="75" class="input">
+						</div>
+					</td>
+
+					<td style="width:350px;padding-top: 4px;" valign="top">
+						<div class="publishButtonBox" style="padding-top:30px; padding-bottom: 30px; vertical-align: middle;">
+							<input name="submit" type="submit" value="Save Layout">
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="tab-layouts">
+		{% include 'kilvin::cp.administration.weblogs.layout-meta' %}
+
+		{% for tab_handle,tab_fields in layout %}
+			{% include 'kilvin::cp.administration.weblogs.layout-tab' %}
+		{% endfor %}
+	</div>
+
+</form>
+
+
+<div class="publishRows" id="tab_field_template" style="display:none;">
+	<input type="hidden" class="hidden-field" name="" value="">
+	<div class="littlePadding">
+		<h5 class="field-label"><!--Field Name--></h5>
+	</div>
+	<div class="littlePadding">
+		<strong>{{__('kilvin::admin.Field Type')}}:</strong>
+		<span class="field-type"><!--Field Type--></span>
+	</div>
+	<div class="littleMorePadding ">
+		<a class="button smaller js-field-move-up" data-tab="" data-field="">
+			▲ {{__('kilvin::admin.Move Up')}}
+		</a>
+		 &nbsp;
+		<a class="button smaller js-field-move-down" data-tab="" data-field="">
+			▼ {{__('kilvin::admin.Move Down')}}
+		</a>
+		 &nbsp;
+		<a class="button smaller delete js-field-remove" data-tab="" data-field="">
+			× {{__('kilvin::admin.Remove')}}
+		</a>
+	</div>
+</div>
+
+<ul style="display:none;">
+	<li class="publish-tab" id="publish_tab_template">
+		<a href="#" class="publish-tab-link" data-tab="#">
+			<!-- Tab Name -->
+			<span class="tab-name"></span>
+			<div class="js-tab-pulldown gear-image" data-tab="#">
+				{{svg_icon_gear | raw}}
+			</div>
+		</a>
+		<ul class="tab-drop-menu" id="tab_pulldown_#" style="display: none; visibility: hidden;">
+			<li class="tabDropMenuInner">
+				<a href="#" class="js-edit-tab" data-tab="#">
+					{{__('kilvin::admin.Edit Tab')}}
+				</a>
+			</li>
+			<li class="tabDropMenuInner">
+				<a href="#" class="js-move-tab-left" data-tab="#">
+					{{__('kilvin::admin.Move Left')}}
+				</a>
+			</li>
+			<li class="tabDropMenuInner">
+				<a href="#" class="js-move-tab-right" data-tab="#">
+					{{__('kilvin::admin.Move Right')}}
+				</a>
+			</li>
+			<li class="tabDropMenuInner">
+				<a href="#" class="js-delete-tab delete-link" data-tab="#">
+					{{__('kilvin::admin.Delete Tab')}}
+				</a>
+			</li>
+		</ul>
+		<!-- Hidden Input Field Goes Here, Created via jQuery -->
+	</li>
+</ul>
+
+
+{% include 'kilvin::cp.administration.weblogs.layout-tab' with {'tab_handle': 'template', tab_fields: [] } %}
+
+{% endblock %}
+
+
+{% block footerJavascript %}
+
+	<script type="text/javascript">
+
+		 $.fn.moveUp = function() {
+		    $.each(this, function() {
+		         $(this).after($(this).prev());
+		    });
+		};
+		$.fn.moveDown = function() {
+		    $.each(this, function() {
+		         $(this).before($(this).next());
+		    });
+		};
+
+
+	    $( document ).ready(function() {
+
+	        // ------------------------------------
+	        // Publish Option Tabs Open/Close
+	        // ------------------------------------
+
+	        $(document).on('click', '.publish-tab-link', function(e){
+	            e.preventDefault();
+	            var active_tab = $(this).data('tab');
+
+	            $('.publish-tab-block').css('display', 'none');
+	            $('#publish_block_'+active_tab).css('display', 'block');
+
+	            $('.publish-tab-link').removeClass('selected');
+	            $(this).addClass('selected');
+	        });
+
+	        // Load first tab
+	        $('.publish-tab-link').first().trigger('click');
+
+	        // ADD Field to Tab
+	        $(document).on('change', '.js-add-field', function(e){
+	        	e.preventDefault();
+
+	        	var target 		 = $(e.currentTarget);
+	        	var field_handle = target.val();
+
+	        	if (!field_handle) {
+	        		return;
+	        	}
+
+	        	var tab  = target.data('tab');
+	        	var field_type = target.children('option[value='+field_handle+']').data('type');
+	        	var field_name = target.children('option[value='+field_handle+']').html();
+
+	        	var template = $('#tab_field_template').clone();
+
+	        	var attributeId = 'tab_' + tab + '_field_' + field_handle;
+	        	var attributeName = 'fields[' + tab + '][]';
+
+	        	template.attr('id', attributeId);
+	        	$('input.hidden-field', template).attr('name', attributeName).attr('value', field_handle);
+	        	$('.field-label', template).html(field_name);
+	        	$('.field-type', template).html(field_type);
+	        	$('a.button', template).attr('data-tab', tab).attr('data-field', field_handle);
+
+	        	$('#publish_block_' + tab + ' .add-field').before(template);
+	        	template.slideDown();
+
+	        	// Field now disabled!
+	        	$('select.js-add-field option[value='+field_handle+']').attr('disabled', 'disabled');
+
+	        	// Reset select
+	        	$('select.js-add-field').val('');
+	        });
+
+	        // REMOVE Field from Tab
+	        $(document).on('click', '.js-field-remove', function(e){
+	        	e.preventDefault();
+
+	        	var target = $(e.currentTarget);
+
+	        	var tab = target.data('tab');
+	        	var field_handle = target.data('field');
+
+	        	$('#tab_' + tab + '_field_' + field_handle).remove();
+
+	        	// Field is BACK!
+	        	$('select.js-add-field option[value='+field_handle+']').removeAttr('disabled');
+	        });
+
+
+	        // Move Field up Tab
+	        $(document).on('click', '.js-field-move-up', function(e){
+	        	e.preventDefault();
+
+	        	var target = $(e.currentTarget);
+	        	var tab = target.data('tab');
+	        	var field_handle = target.data('field');
+
+	        	$('#tab_' + tab + '_field_' + field_handle).moveUp();
+	        });
+
+	        // Move Field up Tab
+	        $(document).on('click', '.js-field-move-down', function(e){
+	        	e.preventDefault();
+
+	        	var target = $(e.currentTarget);
+	        	var tab = target.data('tab');
+	        	var field_handle = target.data('field');
+
+	        	$('#tab_' + tab + '_field_' + field_handle).moveDown();
+	        });
+
+	        $(document).on('click', '.js-tab-pulldown', function(e) {
+	        	e.stopPropagation();
+	        	e.preventDefault();
+
+	        	var tab_handle = $(e.currentTarget).data('tab');
+
+	        	var el = $('#tab_pulldown_' + tab_handle);
+
+	        	var visible = el.css('visibility');
+
+	        	// Hide all dropdown tabs
+	        	$('.siteDropMenu, .tab-drop-menu, .tabDropMenu').css('display', 'none').css('visibility', 'hidden');
+
+	        	// If not visible before, make visible now
+	            if (visible != 'visible')
+	            {
+	                el.css('visibility', 'visible');
+                    el.css('display', 'block');
+	            }
+	        });
+
+	        // Edit Tab
+	        $(document).on('click', '.js-edit-tab', function(e){
+	        	e.preventDefault();
+	        	e.stopPropagation();
+
+	        	var tab_handle = $(e.currentTarget).data('tab');
+
+	        	var tab = $('#publish_tab_' + tab_handle);
+
+	        	// Prompt for tab name
+	        	var new_name = prompt("{{__('kilvin::admin.Please enter new tab name')}}", $('.tab-name', tab).html());
+
+	        	// ------------------------------
+	        	//  Validation of Tab Name
+	        	// ------------------------------
+
+	        	var existingTabLabels = $("input.hidden-tab").map(function(){
+			      return $(this).val();
+			    }).get();
+
+			    var invalidTabLabels = ['Meta', 'Categories', 'Revisions'];
+
+	        	if ($.inArray(new_name, existingTabLabels) != -1) {
+	        		return alert('{{__('kilvin::admin.You have chosen an invalid or existing tab name')}}');
+	        	}
+
+	        	if ($.inArray(new_name, invalidTabLabels) != -1) {
+	        		return alert('{{__('kilvin::admin.You have chosen an invalid or existing tab name')}}');
+	        	}
+
+	        	if (new_name.length > 15) {
+	        		return alert('{{__('kilvin::admin.Please choose a shorter tab name')}}');
+	        	}
+
+	        	if (/^\+?(0|[1-9]\d*)$/.test(new_name)) {
+	        		return alert('{{__('kilvin::admin.Tabs cannot be named integers')}}');
+	        	}
+
+	        	// ------------------------------
+	        	//  Rename
+	        	// ------------------------------
+
+	        	$('.tab-name', tab).html(new_name);
+	        	$('.hidden-tab', tab).attr('value', new_name);
+
+	        	// ------------------------------
+	        	//  Choose the Tab
+	        	// ------------------------------
+
+				$('#publish_tab_' + tab_handle + ' .publish-tab-link').trigger('click');
+	        });
+
+	        // Move Tab
+	        $(document).on('click', '.js-move-tab-left, .js-move-tab-right', function(e){
+	        	e.preventDefault();
+	        	e.stopPropagation();
+
+	        	var tab_handle = $(e.currentTarget).data('tab');
+
+	        	var el = $('#publish_tab_' + tab_handle);
+
+	        	if ($(e.currentTarget).hasClass('js-move-tab-left')) {
+	        		el.moveUp();
+	        	}
+
+	        	if ($(e.currentTarget).hasClass('js-move-tab-right')) {
+
+	        		// Check to see if they sibling to right is meta
+	        		if (el.next().attr('id') == 'meta_tab') {
+	        			return alert('One cannot go any further right.');
+	        		}
+
+	        		el.moveDown();
+	        	}
+
+				$('#publish_tab_' + tab_handle + ' .publish-tab-link').trigger('click');
+	        });
+
+
+	        // Delete tab
+	        $(document).on('click', '.js-delete-tab', function(e){
+	        	e.preventDefault();
+	        	e.stopPropagation();
+
+	        	if (!confirm('{{__('kilvin::admin.Do you wish to delete this tab')}}')) {
+	        		return;
+	        	}
+
+	        	var tab_handle = $(e.currentTarget).data('tab');
+
+	        	var selected = $('#publish_tab_' + tab_handle + ' .publish-tab-link').hasClass('selected');
+
+	        	// Find fields in tab and bring back!
+	        	$('#publish_block_' + tab_handle + ' .js-field-remove').each(function(item) {
+	        		var field_handle = $(this).data('field');
+	        		$('select.js-add-field option[value='+field_handle+']').removeAttr('disabled');
+	        	});
+
+	        	// Now delete tab and tab block
+	        	$('#publish_block_' + tab_handle).remove();
+	        	$('#publish_tab_' + tab_handle).remove();
+
+	        	// Deleted tab was selected, so we select first tab
+	        	if (selected) {
+	        		$('.publish-tab-link').first().trigger('click');
+	        	}
+	        });
+
+
+	        var newHandle = 100;
+
+	        // Add Tab
+	        $('.js-add-tab').click(function(e){
+	        	e.preventDefault();
+
+	        	// Prompt for tab name
+	        	var tab_name = prompt("{{__('kilvin::admin.Please enter tab name')}}", "");
+
+	        	// ------------------------------
+	        	//  Validation of Tab Name
+	        	// ------------------------------
+
+	        	var existingTabLabels = $("input.hidden-tab").map(function(){
+			      return $(this).val();
+			    }).get();
+
+			    var invalidTabLabels = ['Meta', 'Categories', 'Revisions'];
+
+	        	if ($.inArray(tab_name, existingTabLabels) != -1) {
+	        		return alert('{{__('kilvin::admin.You have chosen an invalid or existing tab name')}}');
+	        	}
+
+	        	if ($.inArray(tab_name, invalidTabLabels) != -1) {
+	        		return alert('{{__('kilvin::admin.You have chosen an invalid or existing tab name')}}');
+	        	}
+
+	        	if (tab_name.length > 15) {
+	        		return alert('{{__('kilvin::admin.Please choose a shorter tab name')}}');
+	        	}
+
+	        	if (/^\+?(0|[1-9]\d*)$/.test(tab_name)) {
+	        		return alert('{{__('kilvin::admin.Tabs cannot be named integers')}}');
+	        	}
+
+	        	// ------------------------------
+	        	//  Increment NewHandle and use
+	        	// ------------------------------
+
+	        	newHandle++;
+
+	        	var tab_handle = newHandle;
+
+	        	// ------------------------------
+	        	//  Create Tab Block
+	        	// ------------------------------
+
+	        	var template = $('#publish_block_template').clone();
+
+	        	var tabId  = "publish_block_" + tab_handle;
+
+	        	template.attr('id', tabId);
+	        	$('.js-add-field', template).attr('data-tab', tab_handle);
+
+	        	$('#tab-layouts').append(template);
+
+	        	// ------------------------------
+	        	//  Create Publish Tab
+	        	// ------------------------------
+
+	        	var tab = $('#publish_tab_template').clone();
+
+	        	tab.attr('id', 'publish_tab_' + tab_handle);
+
+	        	$('.tab-name', tab).html(tab_name);
+	        	$('.tab-drop-menu', tab).attr('id', 'tab_pulldown_' + tab_handle);
+	        	$('.js-tab-pulldown', tab).attr('data-tab', tab_handle)
+	        	$('a', tab).attr('data-tab', tab_handle);
+
+	        	var tabInput = $('<input>')
+	        		.attr('type', 'hidden')
+	        		.attr('class', 'hidden-tab')
+	        		.attr('name', 'tabs['+tab_handle+']')
+	        		.attr('value', tab_name);
+
+	        	$('.tab-drop-menu', tab).after(tabInput);
+
+				$('#meta_tab').before(tab);
+
+				// ------------------------------
+	        	//  Choose the New Tab!
+	        	// ------------------------------
+
+	        	$('.publish-tab-link', tab).trigger('click');
+	        });
+	    });
+
+	</script>
+{% endblock footerJavascript %}
+

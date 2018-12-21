@@ -1,0 +1,202 @@
+
+
+.publishRows {
+	border-bottom: 1px solid $publish-form-rows-border-color;
+	margin: 0;
+	padding: 5px;
+	background: transparent;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.add-field {
+	margin: 0;
+	padding: 5px;
+	background: transparent;
+}
+
+.publish-box {
+	background-color: $publish-form-background-color;
+	border: $publish-form-border-color 1px solid;
+	padding: 6px 6px 10px 14px;
+	margin: 0;
+}
+
+.publishButtonBox {
+	background: $btn-box-background-color-top;
+	background: linear-gradient(to bottom, $btn-box-background-color-top, $btn-box-background-color-bottom);
+	border: 1px solid $btn-box-border-color;
+	color: #fff;
+	text-align: center;
+	margin: 20px 0 5px 14px;
+	padding: 6px 4px 6px 4px;
+}
+
+.previewBox {
+	background-color: #F7F7F9;
+	border: #7B81A9 1px solid;
+	color: #38394B;
+	font-size: 11px;
+	margin: 0 0 10px 0;
+	padding: 6px 8px 10px 8px;
+}
+.previewItemTitle {
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 16px;
+	color: #44496B;
+	background-color: transparent;
+}
+.clusterBox {
+	margin: 6px 0 0 0;
+	border: #AFBBCF 1px solid;
+}
+.clusterLineR {
+	border-right: #C4CFE1 1px solid;
+}
+.publishItemWrapper {
+	font-size: 11px;
+	color: #333;
+	padding: 5px 15px 20px 15px;
+	margin: 0;
+	background-color: #fff;
+}
+.publishSmPad {
+	margin: 2px 0 2px 0;
+}
+
+
+.publishTabLine {
+	border-bottom: #C5CFDA 1px solid;
+	margin: 0;
+}
+
+.publish-tabs {
+
+	display: block;
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    height: calc(1.4em + 12px); /* gear image + a padding */
+
+	.publish-tab  {
+		float: left;
+		min-width: 10em;
+		padding-bottom: 0;
+		height: calc(1.4em + 12px);
+
+		.gear-image {
+			display: inline-block;
+			width: 1.4em;
+			width: 1.4em;
+			vertical-align: top;
+			margin-top: -0.1em;
+
+			svg path {
+				fill: $publish-form-tabs-color;
+			}
+		}
+
+		> a {
+			display: block;
+			color: $publish-form-tabs-color;
+			border-top: $publish-form-tabs-border-color 1px solid;
+			border-right: $publish-form-tabs-border-color 1px solid;
+			border-bottom: $publish-form-tabs-border-color 1px solid;
+			border-left: none;
+			background: $publish-form-tabs-background-color-top;
+			background: linear-gradient(to bottom, $publish-form-tabs-background-color-top, $publish-form-tabs-background-color-bottom);
+			text-align: center;
+			font-weight: bold;
+			line-height: 1.4em; /* allows for gear image */
+			padding: 6px 10px 6px 10px;
+			margin: 0;
+			white-space: nowrap;
+
+			&.selected {
+				background: $publish-form-background-color;
+				border-bottom: $publish-form-background-color 1px solid;
+			}
+
+			&:hover:not(.selected) {
+				color: $publish-form-tabs-hover-color;
+				background: $publish-form-tabs-hover-background-color-top;
+				background: linear-gradient(to bottom, $publish-form-tabs-hover-background-color-top, $publish-form-tabs-hover-background-color-bottom);
+				border-color: $publish-form-tabs-hover-border-color
+			}
+		}
+
+		&:first-child > a {
+			border-left: $publish-form-tabs-border-color 1px solid;
+		}
+	}
+}
+
+
+.publishLabel {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.fieldWrapper {
+	font-size: 11px;
+	color: #333;
+	padding: 0 0 12px 0;
+}
+.xhtmlWrapper {
+	color: #666;
+	text-align: right;
+	padding: 0;
+	margin: 4px 0 0 0;
+}
+
+.weblog-drop-menu {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  margin: 30px 0 0 -200px;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-radius: 0 0 3px 3px;
+  z-index: 10;
+  list-style: none;
+  width: 200px;
+}
+
+.weblog-drop-menu li {
+  position: relative;
+  padding-bottom: 0 !important;
+}
+
+.weblog-drop-menu li:last-child {
+  border-radius: 0 0 3px 3px;
+}
+
+.weblog-drop-menu li:last-child a {
+  border-radius: 0 0 3px 3px;
+}
+
+.weblog-drop-menu-inner {
+  border-bottom: 1px solid black;
+}
+
+.weblog-drop-menu-inner a {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 2.25em;
+  margin: 0;
+  padding-right: 5px;
+  width: 195px;
+  text-decoration: none;
+  color: #F4E3C3;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.weblog-drop-menu-inner a:hover {
+  color: #f6e8cf;
+  background-color: black;
+}
