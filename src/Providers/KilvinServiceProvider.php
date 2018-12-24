@@ -127,6 +127,7 @@ class KilvinServiceProvider extends ServiceProvider
             // Hide installer after installation
             if (!empty($installed_version) && config('cms.hide_installer') === true) {
                 \Log::debug('Kilvin CMS Installer requested but configuration indicates it is already installed.');
+                return;
             }
 
             // Define Installer Routes
