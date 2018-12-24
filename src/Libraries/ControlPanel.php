@@ -248,9 +248,6 @@ class ControlPanel
     {
         $label = Site::config('site_name');
 
-        $query = DB::table('sites')
-            ->whereIn('sites.id', array_keys(Session::userdata('assigned_sites')))
-            ->get();
 
         $sites_url = kilvinCpUrl('sites');
 
@@ -262,12 +259,12 @@ class ControlPanel
     <ul class="siteDropMenu">
 EOT;
 
-        foreach($query as $row) {
+        foreach(Session::userdata('assigned_sites') as $site_id => $site_name) {
             $d .= '<li>
                 <a href="'.kilvinCpUrl('sites/load-site').
-                    '/site_id='.$row->id.'" title="'.
-                    $row->site_name.'">'.
-                    $row->site_name.
+                    '/site_id='.$site_id.'" title="'.
+                    $site_name.'">'.
+                    $site_name.
                 '</a>
             </li>';
         }
