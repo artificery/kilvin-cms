@@ -244,8 +244,8 @@ class Templates
                     return Cp::errorMessage(__('kilvin::templates.reserved_name'));
                 }
 
-                $old_path = remove_double_slashes($folder_path.$old_name.'.twig.'.$old_type);
-                $new_path = remove_double_slashes($folder_path.$new_name.'.twig.'.$new_type);
+                $old_path = removeDoubleSlashes($folder_path.$old_name.'.twig.'.$old_type);
+                $new_path = removeDoubleSlashes($folder_path.$new_name.'.twig.'.$new_type);
 
                 if ($old_path === $new_path) {
                     continue;
@@ -274,7 +274,7 @@ class Templates
             '/folder='.$this->safeFolder($folder).
             '/msg=success';
 
-        return redirect(kilvin_cp_url($redirect));
+        return redirect(kilvinCpUrl($redirect));
     }
 
    /**
@@ -290,7 +290,7 @@ class Templates
         $number = $this->outOfSyncCheck();
 
         if ($number == 0) {
-            return redirect(kilvin_cp_url('templates'));
+            return redirect(kilvinCpUrl('templates'));
         }
     }
 
@@ -609,12 +609,12 @@ class Templates
             if ($tgpref == $this->safeFolder($row->folder)) {
                 $r .= Cp::input_select_option(
                     $this->safeFolder($row->folder),
-                    escape_attribute($row->folder),
+                    escapeAttribute($row->folder),
                     'y');
             } else {
                 $r .= Cp::input_select_option(
                     $this->safeFolder($row->folder),
-                    escape_attribute($row->folder),
+                    escapeAttribute($row->folder),
                     ($e == 0 && empty($tgpref)) ? 'y' : '');
             }
         }
@@ -991,7 +991,7 @@ $(function() {
         }
 
         // Clean up slashes
-        $folder = '/'.trim(remove_double_slashes($folder), '/');
+        $folder = '/'.trim(removeDoubleSlashes($folder), '/');
 
         if (in_array($folder, $this->reserved_names)) {
             return Cp::errorMessage(__('kilvin::templates.reserved_name'));
@@ -1075,8 +1075,8 @@ $(function() {
         // Existing Folder
         if ($edit) {
 
-            $old_path = remove_double_slashes($this->site_path.Request::input('old_name'));
-            $new_path = remove_double_slashes($this->site_path.$folder);
+            $old_path = removeDoubleSlashes($this->site_path.Request::input('old_name'));
+            $new_path = removeDoubleSlashes($this->site_path.$folder);
 
             if ($old_path != $new_path) {
                 File::moveDirectory($old_path, $new_path);
@@ -1095,7 +1095,7 @@ $(function() {
 
         $append = '/tgpref='.$this->safeFolder($folder);
 
-        return redirect(kilvin_cp_url('templates/msg='.$message.$append));
+        return redirect(kilvinCpUrl('templates/msg='.$message.$append));
     }
 
    /**
@@ -1160,7 +1160,7 @@ $(function() {
             return false;
         }
 
-        $folder_path = remove_double_slashes($this->site_path.$folder);
+        $folder_path = removeDoubleSlashes($this->site_path.$folder);
 
         // We need to delete all the saved template data in the versioning table
         $template_ids = DB::table('templates')
@@ -1180,7 +1180,7 @@ $(function() {
 
         File::deleteDirectory($folder_path);
 
-        return redirect(kilvin_cp_url('templates/msg=03'));
+        return redirect(kilvinCpUrl('templates/msg=03'));
     }
 
    /**
@@ -1351,7 +1351,7 @@ $(function() {
                 return Cp::errorMessage(__('kilvin::templates.unable_to_find_duplicate_template'));
             }
 
-            $template_path = remove_double_slashes(
+            $template_path = removeDoubleSlashes(
                 $this->site_path.
                 $query->folder.DIRECTORY_SEPARATOR.
                 $query->template_name.'.twig.'.$query->template_type
@@ -1394,7 +1394,7 @@ $(function() {
 
         $append = (Cp::pathVar('tgpref')) ? '/tgpref='.Cp::pathVar('tgpref') : '';
 
-        return redirect(kilvin_cp_url('templates/msg=04'.$append));
+        return redirect(kilvinCpUrl('templates/msg=04'.$append));
     }
 
    /**
@@ -1422,7 +1422,7 @@ $(function() {
             ->first();
 
         if (!$query) {
-            return redirect(kilvin_cp_url('templates'));
+            return redirect(kilvinCpUrl('templates'));
         }
 
         Cp::$title  = __('kilvin::templates.template_delete_confirm');
@@ -1478,14 +1478,14 @@ $(function() {
             ->delete();
 
         $folder_path = $this->site_path.$query->folder;
-        $file_path = remove_double_slashes(
+        $file_path = removeDoubleSlashes(
             $folder_path.DIRECTORY_SEPARATOR.
             $query->template_name.'.twig.'.$query->template_type
         );
 
         File::delete($file_path);
 
-        return redirect(kilvin_cp_url('templates/msg=05'));
+        return redirect(kilvinCpUrl('templates/msg=05'));
     }
 
    /**
@@ -1560,7 +1560,7 @@ $(function() {
         $template_path = rtrim($folder, '/').DIRECTORY_SEPARATOR.$template_name.'.twig.'.$template_type;
 
         // @todo = Load this via Storage facade
-        if ($file = file_get_contents(remove_double_slashes($this->site_path.$template_path))) {
+        if ($file = file_get_contents(removeDoubleSlashes($this->site_path.$template_path))) {
             $template_data = $file;
         }
 
@@ -1859,7 +1859,7 @@ $(function() {
         $message = __('kilvin::templates.template_updated');
 
         if (Request::has('return')) {
-            return redirect(kilvin_cp_url('templates/&msg=06'));
+            return redirect(kilvinCpUrl('templates/&msg=06'));
         }
 
         return $this->editTemplate($template_id, $message);
@@ -1885,7 +1885,7 @@ $(function() {
             return false;
         }
 
-        $folder_path = remove_double_slashes($this->site_path.$data['folder']);
+        $folder_path = removeDoubleSlashes($this->site_path.$data['folder']);
 
         if (!File::isDirectory($folder_path)){
             File::makeDirectory($folder_path);

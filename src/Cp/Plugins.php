@@ -315,7 +315,7 @@ class Plugins
             $message
         );
 
-         return redirect(kilvin_cp_url('plugins'));
+         return redirect(kilvinCpUrl('plugins'));
     }
 
    /**

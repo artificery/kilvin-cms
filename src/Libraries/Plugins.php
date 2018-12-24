@@ -171,7 +171,7 @@ class Plugins
     */
     public function findPluginLoadingDetails($plugin)
     {
-        $plugin = filename_security($plugin);
+        $plugin = filenameSecurity($plugin);
 
         if (isset($this->registered_plugins[$plugin])) {
             return $this->registered_plugins[$plugin];

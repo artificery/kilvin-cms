@@ -204,6 +204,6 @@ class Paginate
         // ------------------------------------
         //  Return the result
         // ------------------------------------
-        return remove_double_slashes($output);
+        return removeDoubleSlashes($output);
     }
 }

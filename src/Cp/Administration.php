@@ -288,7 +288,7 @@ EOT;
 			$left_menu .= Cp::quickDiv(
 				'navPad',
 				Cp::anchor(
-					kilvin_cp_url('administration/'.$key),
+					kilvinCpUrl('administration/'.$key),
 					__('kilvin::admin.'.$key)
 				)
 			);
@@ -1082,10 +1082,10 @@ EOT;
 		// ------------------------------------
 
 		if ($loc === 'templates_manager') {
-			return redirect(kilvin_cp_url('administration/config-manager/template-preferences/msg=updated'));
+			return redirect(kilvinCpUrl('administration/config-manager/template-preferences/msg=updated'));
 		}
 
-		return redirect(kilvin_cp_url($loc));
+		return redirect(kilvinCpUrl($loc));
 	}
 
    /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 use Kilvin\Facades\Site;
 
 
-if (! function_exists('kilvin_cp_url')) {
+if (! function_exists('kilvinCpUrl')) {
     /**
      * Takes a path and makes it into a CP URL
      *
@@ -12,7 +12,7 @@ if (! function_exists('kilvin_cp_url')) {
      * @param array $parameters @todo - Need to figure out what I want to do with these (add segments or query strings)
      * @return string
      */
-    function kilvin_cp_url($path = '', $parameters = [])
+    function kilvinCpUrl($path = '', $parameters = [])
     {
         // URL already?
         if (preg_match('~^https?://~', $path) && filter_var($path, FILTER_VALIDATE_URL) !== false) {
@@ -37,14 +37,14 @@ if (! function_exists('kilvin_cp_url')) {
 }
 
 
-if (! function_exists('remove_double_slashes')) {
+if (! function_exists('removeDoubleSlashes')) {
     /**
      * Removes double slashes from a string, except those in URL
      *
      * @param  string  $str
      * @return string
      */
-    function remove_double_slashes($str)
+    function removeDoubleSlashes($str)
     {
         $str = str_replace("://", "{:SS}", $str);
         $str = str_replace(":&#47;&#47;", "{:SHSS}", $str);  // Super HTTP slashes saved!
@@ -59,13 +59,13 @@ if (! function_exists('remove_double_slashes')) {
 }
 
 
-if (! function_exists('cms_clear_caching')) {
+if (! function_exists('cmsClearCaching')) {
     /**
      * Clears Caching
      *
      * @return boolean
      */
-    function cms_clear_caching()
+    function cmsClearCaching()
     {
         app('Illuminate\Cache\CacheManager')->flush();
 
@@ -73,14 +73,14 @@ if (! function_exists('cms_clear_caching')) {
     }
 }
 
-if (! function_exists('filename_security')) {
+if (! function_exists('filenameSecurity')) {
     /**
      * Cleans out unwanted characters from a filename
      *
      * @param  string  $str
      * @return string
      */
-    function filename_security($str)
+    function filenameSecurity($str)
     {
         $bad = [
             "../",
@@ -126,7 +126,7 @@ if (! function_exists('filename_security')) {
 }
 
 
-if (! function_exists('foreign_characters')) {
+if (! function_exists('foreignCharacters')) {
 
     /**
      * Accented Characters conversion options
@@ -134,7 +134,7 @@ if (! function_exists('foreign_characters')) {
      * @param  string  $str
      * @return string
      */
-    function foreign_characters()
+    function foreignCharacters()
     {
         return [
             '0'    => ['°', '₀', '۰', '０'],
@@ -254,7 +254,7 @@ if (! function_exists('foreign_characters')) {
 }
 
 
-if (! function_exists('url_title_javascript')) {
+if (! function_exists('urlTitleJavascript')) {
 
     /**
      * Javascript to convert Accented Chars to a url_title friendly version
@@ -262,11 +262,11 @@ if (! function_exists('url_title_javascript')) {
      * @param  string  $str
      * @return string
      */
-    function url_title_javascript($separator, $prefix = '')
+    function urlTitleJavascript($separator, $prefix = '')
     {
         $foreign_replace = '';
 
-        foreach(foreign_characters() as $to => $from_array)
+        foreach(foreignCharacters() as $to => $from_array)
         {
             foreach($from_array as $from) {
                 $foreign_replace .= "if (c == '$from') {NewTextTemp += '$to'; continue;}\n\t\t\t\t";
@@ -340,29 +340,6 @@ EOT;
     }
 }
 
-if (! function_exists('svg_icon_gear')) {
-    /**
-     * Clears Caching
-     *
-     * @return boolean
-     */
-    function svg_icon_gear()
-    {
-        return '<svg
-            xmlns:dc="http://purl.org/dc/elements/1.1/"
-            xmlns:cc="http://creativecommons.org/ns#"
-            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-            xmlns:svg="http://www.w3.org/2000/svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -256 1792 1792"
-            version="1.1"
-        >
-  <g transform="matrix(1,0,0,-1,121.49153,1285.4237)" id="g3027">
-    <path d="m 1024,640 q 0,106 -75,181 -75,75 -181,75 -106,0 -181,-75 -75,-75 -75,-181 0,-106 75,-181 75,-75 181,-75 106,0 181,75 75,75 75,181 z m 512,109 V 527 q 0,-12 -8,-23 -8,-11 -20,-13 l -185,-28 q -19,-54 -39,-91 35,-50 107,-138 10,-12 10,-25 0,-13 -9,-23 -27,-37 -99,-108 -72,-71 -94,-71 -12,0 -26,9 l -138,108 q -44,-23 -91,-38 -16,-136 -29,-186 -7,-28 -36,-28 H 657 q -14,0 -24.5,8.5 Q 622,-111 621,-98 L 593,86 q -49,16 -90,37 L 362,16 Q 352,7 337,7 323,7 312,18 186,132 147,186 q -7,10 -7,23 0,12 8,23 15,21 51,66.5 36,45.5 54,70.5 -27,50 -41,99 L 29,495 Q 16,497 8,507.5 0,518 0,531 v 222 q 0,12 8,23 8,11 19,13 l 186,28 q 14,46 39,92 -40,57 -107,138 -10,12 -10,24 0,10 9,23 26,36 98.5,107.5 72.5,71.5 94.5,71.5 13,0 26,-10 l 138,-107 q 44,23 91,38 16,136 29,186 7,28 36,28 h 222 q 14,0 24.5,-8.5 Q 914,1391 915,1378 l 28,-184 q 49,-16 90,-37 l 142,107 q 9,9 24,9 13,0 25,-10 129,-119 165,-170 7,-8 7,-22 0,-12 -8,-23 -15,-21 -51,-66.5 -36,-45.5 -54,-70.5 26,-50 41,-98 l 183,-28 q 13,-2 21,-12.5 8,-10.5 8,-23.5 z" id="path3029" inkscape:connector-curvature="0" style="fill:currentColor"/>
-  </g>
-</svg>';
-    }
-}
 
 if (! function_exists('parsedown')) {
     /**
@@ -377,7 +354,7 @@ if (! function_exists('parsedown')) {
 }
 
 
-if (! function_exists('rot13_javascript')) {
+if (! function_exists('encodeEmailJs')) {
 
     /**
      * Returns a rot13 converted string with JavaScript to decode it
@@ -388,7 +365,7 @@ if (! function_exists('rot13_javascript')) {
      * @param string $str The string to convert
      * @return string
      */
-    function rot13_javascript($str) {
+    function encodeEmailJs($str) {
         $rotated = str_replace('"','\"',str_rot13($str));
         return <<<EOF
              <script type="text/javascript">
@@ -403,14 +380,14 @@ EOF;
 }
 
 
-if (! function_exists('escape_attribute')) {
+if (! function_exists('escapeAttribute')) {
     /**
     * Prep String for Form Usage
     *
     * @param string $str
     * @return string
     */
-    function escape_attribute($str = '')
+    function escapeAttribute($str = '')
     {
         if ($str === '') {
             return '';
@@ -423,23 +400,7 @@ if (! function_exists('escape_attribute')) {
     }
 }
 
-
-
-if (! function_exists('convert_quotes')) {
-    /**
-    * Convert single and double quotes to entites
-    *
-    * @param string $str
-    * @return string
-    */
-    function convert_quotes($str)
-    {
-        return str_replace(["\'",'"'], ["&#39;","&quot;"], $str);
-    }
-}
-
-
-if (! function_exists('create_url_title')) {
+if (! function_exists('createUrlTitle')) {
     /**
     * Create URL Title - PHP Version
     *
@@ -451,7 +412,7 @@ if (! function_exists('create_url_title')) {
     * @param string $str
     * @return string
     */
-    function create_url_title($str, $lowercase = false)
+    function createUrlTitle($str, $lowercase = false)
     {
         if (function_exists('mb_convert_encoding'))
         {
@@ -470,7 +431,7 @@ if (! function_exists('create_url_title')) {
             $str = mb_strtolower($str, 'UTF-8');
         }
 
-        $str = convert_accented_characters(strip_tags($str));
+        $str = convertAccentedCharacters(strip_tags($str));
 
         // Use dash or underscore as separator
         $replace = (Site::config('word_separator') == 'dash') ? '-' : '_';
@@ -497,20 +458,20 @@ if (! function_exists('create_url_title')) {
 }
 
 
-if (! function_exists('convert_accented_characters')) {
+if (! function_exists('convertAccentedCharacters')) {
     /**
     * Convert Accented Characters to Unaccented Equivalents
     *
     * @param string $str
     * @return string
     */
-    function convert_accented_characters($str)
+    function convertAccentedCharacters($str)
     {
-        $foreign_characters = foreign_characters();
+        $foreign_characters = foreignCharacters();
 
         $find = $replace = [];
 
-        foreach(foreign_characters() as $new => $chars) {
+        foreach(foreignCharacters() as $new => $chars) {
             foreach($chars as $old) {
                 $find[]    = $old;
                 $replace[] = $new;

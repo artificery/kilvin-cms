@@ -140,7 +140,7 @@ class CmsSeeder extends Seeder
                 'category_group_id'     => 1,
                 'weblog_handle'         => 'default-site',
                 'weblog_name'           => 'Default Site Weblog',
-                'weblog_url'            => remove_double_slashes($this->data['site_url'].'/site/index/'),
+                'weblog_url'            => removeDoubleSlashes($this->data['site_url'].'/site/index/'),
                 'total_entries'         => 1,
                 'last_entry_date'       => $now,
                 'status_group_id'       => 1,

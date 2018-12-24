@@ -119,7 +119,7 @@ class Textarea extends FieldType
         $rows = (!empty($this->field->settings['textarea_num_rows'])) ? ceil($this->field->settings['textarea_num_rows']) : 10;
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
-        $value = escape_attribute($data['fields'][$this->field->field_handle] ?? '');
+        $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');
 
         return '<textarea
             style="width:100%;"
@@ -127,7 +127,7 @@ class Textarea extends FieldType
             name="fields['.$this->field->field_handle.']"
             rows="'.$rows.'"
             class="textarea"
-        >'.escape_attribute($value).'</textarea>';
+        >'.escapeAttribute($value).'</textarea>';
     }
 
     /**

@@ -252,7 +252,7 @@ class ControlPanel
             ->whereIn('sites.id', array_keys(Session::userdata('assigned_sites')))
             ->get();
 
-        $sites_url = kilvin_cp_url('sites');
+        $sites_url = kilvinCpUrl('sites');
 
         $d = <<<EOT
 
@@ -264,7 +264,7 @@ EOT;
 
         foreach($query as $row) {
             $d .= '<li>
-                <a href="'.kilvin_cp_url('sites/load-site').
+                <a href="'.kilvinCpUrl('sites/load-site').
                     '/site_id='.$row->id.'" title="'.
                     $row->site_name.'">'.
                     $row->site_name.
@@ -272,7 +272,7 @@ EOT;
             </li>';
         }
 
-        $sites_url = kilvin_cp_url('sites-administration/list-sites');
+        $sites_url = kilvinCpUrl('sites-administration/list-sites');
 
 
         $d .= <<<EOT
@@ -1038,7 +1038,7 @@ fill="#000000" stroke="none">
     {
         $PGR = new Paginate;
 
-        $PGR->base_url     = kilvin_cp_url($base_path);
+        $PGR->base_url     = kilvinCpUrl($base_path);
         $PGR->total_count  = $total_count;
         $PGR->per_page     = $per_page;
         $PGR->cur_page     = $cur_page;
@@ -1065,7 +1065,7 @@ fill="#000000" stroke="none">
             }
         }
 
-        $data['url'] = $data['url'] ? $data['url'] :  kilvin_cp_url($data['path']);
+        $data['url'] = $data['url'] ? $data['url'] :  kilvinCpUrl($data['path']);
 
         $r = $this->formOpen(['action' => $data['url']]);
 
@@ -1265,7 +1265,7 @@ fill="#000000" stroke="none">
             return '';
         }
 
-        $url = kilvin_cp_url($path);
+        $url = kilvinCpUrl($path);
 
         $url .= $this->url_append;
 
@@ -1297,7 +1297,7 @@ fill="#000000" stroke="none">
      */
     public function anchorpop($path, $name, $width='500', $height='480', $class = '')
     {
-        $url = kilvin_cp_url($path);
+        $url = kilvinCpUrl($path);
 
         return "<a href='javascript:nullo();' onclick=\"window.open('{$url}', '_blank', 'width={$width},height={$height},scrollbars=yes,status=yes,screenx=0,screeny=0,resizable=yes'); return false;\" class='{$class}'>$name</a>";
     }
@@ -1314,7 +1314,7 @@ fill="#000000" stroke="none">
      */
     public function buttonpop($path, $name, $width='500', $height='480', $class = '')
     {
-        $url = kilvin_cp_url($path);
+        $url = kilvinCpUrl($path);
 
         return "<button href='javascript:nullo();' onclick=\"window.open('{$url}', '_blank', 'width={$width},height={$height},scrollbars=yes,status=yes,screenx=0,screeny=0,resizable=yes'); return false;\" type='submit' class='{$class}'>$name</button>";
     }
@@ -1487,7 +1487,7 @@ fill="#000000" stroke="none">
     public function formOpen($data = '', $hidden = [])
     {
         if ( ! is_array($data)) {
-            $data = ['action' => kilvin_cp_url($data)];
+            $data = ['action' => kilvinCpUrl($data)];
         }
 
         if ( ! isset($data['action'])) {
@@ -1507,7 +1507,7 @@ fill="#000000" stroke="none">
         $str = '';
         foreach ($data as $key => $val) {
             if ($key == 'action') {
-                $str .= " {$key}='".kilvin_cp_url($val).$this->url_append."'";
+                $str .= " {$key}='".kilvinCpUrl($val).$this->url_append."'";
             } else {
                 $str .= " {$key}='{$val}'";
             }
@@ -1517,7 +1517,7 @@ fill="#000000" stroke="none">
 
         if (count($hidden) > 0) {
             foreach ($hidden as $key => $val) {
-                $form .= "<div class='hidden'><input type='hidden' name='{$key}' value='".escape_attribute($val)."' /></div>".PHP_EOL;
+                $form .= "<div class='hidden'><input type='hidden' name='{$key}' value='".escapeAttribute($val)."' /></div>".PHP_EOL;
             }
         }
 
@@ -1534,13 +1534,13 @@ fill="#000000" stroke="none">
     public function input_hidden($name, $value = '')
     {
         if ( ! is_array($name)) {
-            return "<div class='hidden'><input type='hidden' name='{$name}' value='".escape_attribute($value)."' /></div>".PHP_EOL;
+            return "<div class='hidden'><input type='hidden' name='{$name}' value='".escapeAttribute($value)."' /></div>".PHP_EOL;
         }
 
         $form = '';
 
         foreach ($name as $key => $val) {
-            $form .= "<div class='hidden'><input type='hidden' name='{$key}' value='".escape_attribute($val)."' /></div>".PHP_EOL;
+            $form .= "<div class='hidden'><input type='hidden' name='{$key}' value='".escapeAttribute($val)."' /></div>".PHP_EOL;
         }
 
         return $form;
@@ -1569,7 +1569,7 @@ fill="#000000" stroke="none">
         $extra = '',
         $convert = false)
     {
-        $value = escape_attribute($value);
+        $value = escapeAttribute($value);
 
         $id = (stristr($extra, 'id=')) ? '' : "id='".str_replace(['[',']', ' '], '', $name)."'";
 
@@ -1612,7 +1612,7 @@ fill="#000000" stroke="none">
             $width = "width:{$width};";
         }
 
-        $value = escape_attribute($value);
+        $value = escapeAttribute($value);
 
         $id = (stristr($extra, 'id=')) ? '' : "id='".str_replace(array('[',']'), '', $name)."'";
 

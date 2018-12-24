@@ -667,7 +667,7 @@ class Account
                 ->update($fields_data);
         }
 
-        return redirect(kilvin_cp_url('account/edit-profile/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/edit-profile/id='.$id.'/U=1'));
     }
 
    /**
@@ -753,7 +753,7 @@ class Account
 
         DB::table('members')->where('id', $id)->update($data);
 
-        return redirect(kilvin_cp_url('account/notification-settings/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/notification-settings/id='.$id.'/U=1'));
     }
 
    /**
@@ -884,7 +884,7 @@ class Account
         }
 
         if (!Request::filled('email') or !Request::input('screen_name'))  {
-            return redirect(kilvin_cp_url('account/email-password-form/id='.$id));
+            return redirect(kilvinCpUrl('account/email-password-form/id='.$id));
         }
 
         // ------------------------------------
@@ -952,7 +952,7 @@ class Account
         // Write log file
         Cp::log($VAL->log_msg);
 
-        return redirect(kilvin_cp_url('account/email-password-form/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/email-password-form/id='.$id.'/U=1'));
     }
 
    /**
@@ -1094,7 +1094,7 @@ class Account
         $order  = Request::input('order');
 
         if (!is_array($column)) {
-            return redirect(kilvin_cp_url('account/homepage-display'));
+            return redirect(kilvinCpUrl('account/homepage-display'));
         }
 
         foreach (array_keys($widgets) as $name) {
@@ -1117,7 +1117,7 @@ class Account
         }
 
         // Request they now order their display
-        return redirect(kilvin_cp_url('account/homepage-display/id='.$id.'/U=2'));
+        return redirect(kilvinCpUrl('account/homepage-display/id='.$id.'/U=2'));
     }
 
    /**
@@ -1190,7 +1190,7 @@ class Account
             ->where('id', $id)
             ->update(['cp_theme' => Request::input('cp_theme')]);
 
-        return redirect(kilvin_cp_url('account/choose-cp-theme/U=success/id='.$id));
+        return redirect(kilvinCpUrl('account/choose-cp-theme/U=success/id='.$id));
     }
 
    /**
@@ -1339,7 +1339,7 @@ class Account
                 ->first();
 
             if ($query->photo_filename == '') {
-                return redirect(kilvin_cp_url('account/edit-photo/id='.$id));
+                return redirect(kilvinCpUrl('account/edit-photo/id='.$id));
             }
 
             DB::table('members')
@@ -1353,7 +1353,7 @@ class Account
 
             @unlink(Site::config('photo_path', TRUE).$query->photo_filename);
 
-            return redirect(kilvin_cp_url('account/edit-photo/id='.$id));
+            return redirect(kilvinCpUrl('account/edit-photo/id='.$id));
         }
 
         // ------------------------------------
@@ -1361,7 +1361,7 @@ class Account
         // ------------------------------------
 
         if ( ! isset($_FILES['userfile'])) {
-            return redirect(kilvin_cp_url('account/edit-photo/id='.$id));
+            return redirect(kilvinCpUrl('account/edit-photo/id='.$id));
         }
 
         // ------------------------------------
@@ -1469,7 +1469,7 @@ class Account
         //  Success message
         // ------------------------------------
 
-        return redirect(kilvin_cp_url('account/'.$edit_image.'/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/'.$edit_image.'/id='.$id.'/U=1'));
     }
 
    /**
@@ -1572,7 +1572,7 @@ class Account
                 'notepad_size' => (ceil(Request::input('notepad_size')) > 0) ? Request::input('notepad_size') : 10
             ]);
 
-        return redirect(kilvin_cp_url('account/notepad/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/notepad/id='.$id.'/U=1'));
     }
 
    /**
@@ -1739,7 +1739,7 @@ class Account
             ->where('id', $id)
             ->update($data);
 
-        return redirect(kilvin_cp_url('account/administration/id='.$id.'/U=1'));
+        return redirect(kilvinCpUrl('account/administration/id='.$id.'/U=1'));
     }
 
    /**
@@ -1901,7 +1901,7 @@ class Account
             $url = 'account/tab-manager/id='.$id.'/U=1';
         }
 
-        return redirect(kilvin_cp_url($url));
+        return redirect(kilvinCpUrl($url));
     }
 
    /**

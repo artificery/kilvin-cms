@@ -17,7 +17,7 @@ abstract class ControlPanel implements ControlPanelInterface
     */
     public function urlBase()
     {
-        return kilvin_cp_url('plugins/'.$this->plugin_name);
+        return kilvinCpUrl('plugins/'.$this->plugin_name);
     }
 
    /**

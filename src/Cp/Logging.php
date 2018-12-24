@@ -137,7 +137,7 @@ class Logging
         if (Site::config('enable_throttling') == 'n') {
 
             $url = '<a href="'.
-            	kilvin_cp_url('administration/config-manager/security-preferences').
+            	kilvinCpUrl('administration/config-manager/security-preferences').
             	'">'.
             	__('kilvin::core.here').
             	'</a>';

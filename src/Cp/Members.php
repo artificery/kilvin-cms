@@ -1421,7 +1421,7 @@ class Members
 
                 DB::table('member_group_preferences')->insert($prefs);
             }
-            
+
             $message = __('kilvin::members.member_group_created').' '.Request::input('group_name');
         } else {
             DB::table('member_groups')
@@ -1452,11 +1452,11 @@ class Members
         $this->clearMemberGroupCache($member_group_id);
 
         if ($return == true) {
-            return redirect(kilvin_cp_url('members/member-group-manager'))->with('cp-message', $message);
+            return redirect(kilvinCpUrl('members/member-group-manager'))->with('cp-message', $message);
         }
 
         return redirect(
-            kilvin_cp_url(
+            kilvinCpUrl(
                 'members/edit-member-group'.
                 '/member_group_id='.$member_group_id
             )
@@ -1576,7 +1576,7 @@ class Members
 
         $this->clearMemberGroupCache($member_group_id);
 
-        return redirect(kilvin_cp_url('members/member-group-manager'))
+        return redirect(kilvinCpUrl('members/member-group-manager'))
             ->with('cp-message', __('kilvin::members.member_group_deleted'));
     }
 
@@ -1936,7 +1936,7 @@ class Members
                 );
         }
 
-        return redirect(kilvin_cp_url('members/member-banning/U=1'));
+        return redirect(kilvinCpUrl('members/member-banning/U=1'));
     }
 
    /**
@@ -2350,7 +2350,7 @@ EOT;
         }
 
         if (!empty($input['field_list_items'])) {
-            $input['field_list_items'] = convert_quotes($input['field_list_items']);
+            $input['field_list_items'] = htmlspecialchars($input['field_list_items']);
         }
 
         $n = 100;
@@ -2425,7 +2425,7 @@ EOT;
             DB::table('member_data')->insert(['member_id' => $row->member_id]);
         }
 
-        return redirect(kilvin_cp_url('members/profile-fields'));
+        return redirect(kilvinCpUrl('members/profile-fields'));
     }
 
    /**
@@ -2671,7 +2671,7 @@ EOT;
 
         if (Request::input('criteria')) {
             if (!Request::input('keywords') && ! Request::input('member_group_id')) {
-                return redirect(kilvin_cp_url(''));
+                return redirect(kilvinCpUrl(''));
             }
 
             if (starts_with(Request::input('criteria'), 'm_field_')) {
@@ -2695,7 +2695,7 @@ EOT;
             }
 
             if (empty($search) && $custom === false && !Request::input('member_group_id')) {
-                return redirect(kilvin_cp_url('members/member-search'));
+                return redirect(kilvinCpUrl('members/member-search'));
             }
 
             $search_query = DB::table('members')

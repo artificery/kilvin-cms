@@ -159,7 +159,7 @@ class Dropdown extends FieldType
                 continue;
             }
 
-            $typopts .= '<optgroup label="'.escape_attribute($row->weblog_name).'">';
+            $typopts .= '<optgroup label="'.escapeAttribute($row->weblog_name).'">';
 
             foreach ($rez as $frow)
             {
@@ -276,7 +276,7 @@ EOT;
 
                 $selected = ($v == $value) ? 1 : '';
 
-                $v = escape_attribute($v);
+                $v = escapeAttribute($v);
                 $r .= Cp::input_select_option($v, $n, $selected);
             }
         }
@@ -295,10 +295,10 @@ EOT;
                     $selected = ($prow->{'field_'.$field->settings['pulldown_field_name']} == $field_data) ? 1 : '';
                     $pretitle = substr($prow->{'field_'.$field->settings['pulldown_field_name']}, 0, 110);
                     $pretitle = preg_replace("/\r\n|\r|\n|\t/", ' ', $pretitle);
-                    $pretitle = escape_attribute($pretitle);
+                    $pretitle = escapeAttribute($pretitle);
 
                     $r .= Cp::input_select_option(
-                        escape_attribute(
+                        escapeAttribute(
                             $prow->{'field_'.$field->settings['pulldown_field_name']}),
                         $pretitle,
                         $selected

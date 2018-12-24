@@ -57,7 +57,7 @@ class Content
         }
 
         if (Cp::segment(1) == 'content') {
-			return redirect(kilvin_cp_url('content/list-entries'));
+			return redirect(kilvinCpUrl('content/list-entries'));
         }
 
         abort(404);
@@ -486,7 +486,7 @@ class Content
 EOT;
 
         $r .=
-            url_title_javascript($word_separator, $url_title_prefix).
+            urlTitleJavascript($word_separator, $url_title_prefix).
             $js.
             PHP_EOL.
             PHP_EOL;
@@ -1014,7 +1014,7 @@ EOT;
                             $selected = ($weblog_id == $row->weblog_id) ? 1 : '';
                         }
 
-                        $menu_weblog .= Cp::input_select_option($row->weblog_id, escape_attribute($row->weblog_name), $selected);
+                        $menu_weblog .= Cp::input_select_option($row->weblog_id, escapeAttribute($row->weblog_name), $selected);
                     }
                 }
 
@@ -1085,7 +1085,7 @@ EOT;
 
                 $no_status_flag = false;
                 $status_name = ($row->status == 'open' OR $row->status == 'closed') ? __('kilvin::publish.'.$row->status) : $row->status;
-                $menu_status .= Cp::input_select_option(escape_attribute($row->status), escape_attribute($status_name), $selected);
+                $menu_status .= Cp::input_select_option(escapeAttribute($row->status), escapeAttribute($status_name), $selected);
             }
 
             // ------------------------------------
@@ -1602,7 +1602,7 @@ EOT;
 
             if (empty($url_title)) {
                 // Forces a lowercased version
-                $url_title = create_url_title($title, true);
+                $url_title = createUrlTitle($title, true);
             }
 
             // Kill all the extraneous characters.
@@ -1614,10 +1614,10 @@ EOT;
                     ->first();
 
                 if ($url_query->url_title != $url_title) {
-                    $url_title = create_url_title($url_title);
+                    $url_title = createUrlTitle($url_title);
                 }
             } else {
-                $url_title = create_url_title($url_title);
+                $url_title = createUrlTitle($url_title);
             }
 
             // Is the url_title a pure number?  If so we show an error.
@@ -1856,20 +1856,27 @@ EOT;
 
         if ($entry_id == '') {
             $data['created_at'] = Carbon::now();
+            $data['site_id'] = Site::config('site_id');
             $entry_id = DB::table('weblog_entries')->insertGetId($data);
 
             // ------------------------------------
             //  Insert the custom field data
             // ------------------------------------
 
-            $cust_fields = [
-                'entry_id' => $entry_id,
+            $cust_fields_meta = [
+                'weblog_entry_id' => $entry_id,
                 'weblog_id' => $weblog_id,
                 'title'     => $title,
                 'locale'    => 'en_US' // @todo - For now!
             ];
 
-            $cust_fields = (array) Request::input('fields');
+            $cust_fields = collect(Request::input('fields'))
+                ->keyBy(function ($value, $name) {
+                    return 'field_'.$name;
+                })
+                ->toArray();
+
+            $cust_fields = array_merge($cust_fields, $cust_fields_meta);
 
             // Save the custom field data
             if (count($cust_fields) > 0) {
@@ -1963,16 +1970,14 @@ EOT;
             //  Update the custom fields
             // ------------------------------------
 
-            $cust_fields = [
-                'weblog_id' =>  $weblog_id,
-                'title'     => $title
-            ];
-
             $cust_fields = collect(Request::input('fields'))
                 ->keyBy(function ($value, $name) {
                     return 'field_'.$name;
                 })
                 ->toArray();
+
+            $cust_fields['title'] = $title;
+            $cust_fields['weblog_id'] = $weblog_id;
 
             DB::table('weblog_entry_data')
                 ->where('weblog_entry_id', $entry_id)
@@ -2070,7 +2075,7 @@ EOT;
         //---------------------------------
 
         if (isset($incoming['save'])) {
-            $loc = kilvin_cp_url('content/edit-entry/entry_id='.$entry_id);
+            $loc = kilvinCpUrl('content/edit-entry/entry_id='.$entry_id);
             return redirect($loc)->with('cp-message', __('kilvin::publish.entry_has_been_updated'));
         }
 
@@ -2089,14 +2094,14 @@ EOT;
         // ------------------------------------
 
         if (Site::config('new_posts_clear_caches') == 'y') {
-            cms_clear_caching('all');
+            cmsClearCaching('all');
         }
 
         // ------------------------------------
         //  Redirect to ths "success" page
         // ------------------------------------
 
-        return redirect(kilvin_cp_url('content/list-entries'))->with('cp-message', $message);
+        return redirect(kilvinCpUrl('content/list-entries'))->with('cp-message', $message);
     }
 
    /**
@@ -2319,7 +2324,7 @@ EOT;
                 $dropdown .=
                     '<li class="weblog-drop-menu-inner">'.
                     '<a href="'.
-                        kilvin_cp_url(
+                        kilvinCpUrl(
                             'content/entry-form/weblog_id='.$id
                         ).'" title="'.Cp::htmlAttribute($label).'">'.
                         htmlentities($label).
@@ -2972,7 +2977,7 @@ EOT;
         $r .= '<tr>'.PHP_EOL.
               Cp::td();
 
-        $pageurl = kilvin_cp_url('content/list-entries').'?'.http_build_query($pageurl);
+        $pageurl = kilvinCpUrl('content/list-entries').'?'.http_build_query($pageurl);
 
         // Pass the relevant data to the paginate class
         $r .=  Cp::div('crumblinks').
@@ -3290,7 +3295,7 @@ function changeFilterMenu()
         }
 
         if ( ! Request::filled('toggle')) {
-        	return redirect(kilvin_cp_url('content'));
+        	return redirect(kilvinCpUrl('content'));
         }
 
         if (Request::input('action') == 'delete') {
@@ -3481,9 +3486,9 @@ function changeFilterMenu()
                         $status_name =
                             ($status_row->status == 'open' OR $status_row->status == 'closed') ?
                             __('kilvin::publish.'.$status_row->status) :
-                            escape_attribute($status_row->status);
+                            escapeAttribute($status_row->status);
 
-                        $menu_status .= Cp::input_select_option(escape_attribute($status_row->status), $status_name, $selected);
+                        $menu_status .= Cp::input_select_option(escapeAttribute($status_row->status), $status_name, $selected);
                     }
 
                     // ------------------------------------
@@ -3589,12 +3594,12 @@ function changeFilterMenu()
                 // If not, create one from the title
                 if ($data['url_title'] == '') {
                     // Forces a lower case
-                    $data['url_title'] = create_url_title($data['title'], true);
+                    $data['url_title'] = createUrlTitle($data['title'], true);
                 }
 
                 // Kill all the extraneous characters.
                 // We want the URL title to pure alpha text
-                $data['url_title'] = create_url_title($data['url_title']);
+                $data['url_title'] = createUrlTitle($data['url_title']);
 
                 // Is the url_title a pure number?  If so we show an error.
                 if (is_numeric($data['url_title'])) {
@@ -3689,10 +3694,10 @@ function changeFilterMenu()
         // ------------------------------------
 
         if (Site::config('new_posts_clear_caches') == 'y') {
-            cms_clear_caching('all');
+            cmsClearCaching('all');
         }
 
-        return redirect(kilvin_cp_url('content/list-entries'))
+        return redirect(kilvinCpUrl('content/list-entries'))
             ->with('cp-message', __('kilvin::publish.multi_entries_updated'));
     }
 
@@ -3970,10 +3975,10 @@ EOT;
         // ------------------------------------
 
         if (Site::config('new_posts_clear_caches') == 'y') {
-            cms_clear_caching('all');
+            cmsClearCaching('all');
         }
 
-        return redirect(kilvin_cp_url('content'))
+        return redirect(kilvinCpUrl('content'))
         	->with('cp-message', __('kilvin::publish.multi_entries_updated'));
     }
 
@@ -3990,7 +3995,7 @@ EOT;
         }
 
         if ( ! Request::filled('toggle') or !is_array(Request::input('toggle'))) {
-            return redirect(kilvin_cp_url('content'));
+            return redirect(kilvinCpUrl('content'));
         }
 
         $r  = Cp::formOpen(['action' => 'content/delete-entries']);
@@ -4061,7 +4066,7 @@ EOT;
         }
 
         if ( ! Request::filled('delete') && is_array(Request::input('delete'))) {
-            return redirect(kilvin_cp_url('content'));
+            return redirect(kilvinCpUrl('content'));
         }
 
         $ids = Request::input('delete');
@@ -4077,7 +4082,7 @@ EOT;
         {
             if (Session::userdata('member_group_id') != 1) {
                 if ( ! in_array($row->weblog_id, $allowed_blogs)) {
-                    return redirect(kilvin_cp_url('content'));
+                    return redirect(kilvinCpUrl('content'));
                 }
             }
 
@@ -4122,13 +4127,13 @@ EOT;
         //  Clear caches
         // ------------------------------------
 
-        cms_clear_caching('all');
+        cmsClearCaching('all');
 
         // ------------------------------------
         //  Return success message
         // ------------------------------------
 
-        return redirect(kilvin_cp_url('content'))
+        return redirect(kilvinCpUrl('content'))
         	->with('cp-message', __('kilvin::publish.entries_deleted'));
     }
 
@@ -4168,7 +4173,7 @@ EOT;
         }
 
         Cp::$body .= '<form method="post" action="'.
-                kilvin_cp_url('content/upload-file/Z=1').
+                kilvinCpUrl('content/upload-file/Z=1').
             '" enctype="multipart/form-data">'.
             "\n";
 
@@ -4202,7 +4207,7 @@ EOT;
         Cp::$body .= Cp::quickDiv('tableHeading', __('kilvin::filebrowser.file_browser'));
         Cp::$body .= Cp::div('box');
 
-        Cp::$body .= '<form method="post" action="'.kilvin_cp_url('content/file-browser/Z=1')."\" enctype=\"multipart/form-data\">\n";
+        Cp::$body .= '<form method="post" action="'.kilvinCpUrl('content/file-browser/Z=1')."\" enctype=\"multipart/form-data\">\n";
 
         Cp::$body .= Cp::input_hidden('weblog_field_group_id', Request::input('weblog_field_group_id'));
 

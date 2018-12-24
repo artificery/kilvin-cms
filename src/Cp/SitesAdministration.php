@@ -678,9 +678,9 @@ class SitesAdministration
         // ------------------------------------
 
         if ($edit === true) {
-            return redirect(kilvin_cp_url('sites-administration/updated_id='.$site_id));
+            return redirect(kilvinCpUrl('sites-administration/updated_id='.$site_id));
         } else {
-            return redirect(kilvin_cp_url('sites-administration/created_id='.$site_id));
+            return redirect(kilvinCpUrl('sites-administration/created_id='.$site_id));
         }
     }
 
@@ -874,7 +874,7 @@ class SitesAdministration
         //  Reload to Site Admin
         // ------------------------------------
 
-        return redirect(kilvin_cp_url('sites-administration'));
+        return redirect(kilvinCpUrl('sites-administration'));
     }
 
    /**

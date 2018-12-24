@@ -58,7 +58,7 @@ class Utilities
     */
     public function clearCaching()
     {
-        cms_clear_caching();
+        cmsClearCaching();
 
         return $this->clearCacheForm(true);
     }
@@ -224,7 +224,7 @@ class Utilities
                 ]
             );
 
-        return redirect(kilvin_cp_url('administration/utilities/recount-preferences/U=updated'));
+        return redirect(kilvinCpUrl('administration/utilities/recount-preferences/U=updated'));
     }
 
    /**

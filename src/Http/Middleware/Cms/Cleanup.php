@@ -55,7 +55,7 @@ class Cleanup
                 DB::table('throttle')->where('last_activity', '<', $expire)->delete();
             }
 
-            cms_clear_caching('all');
+            cmsClearCaching('all');
         }
 
         return $response;

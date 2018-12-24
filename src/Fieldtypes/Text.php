@@ -120,7 +120,7 @@ class Text extends FieldType
         $maxlength = (!empty($field->settings['text_max_length'])) ? ceil($field->settings['text_max_length']) : '';
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
-        $value = escape_attribute($data['fields'][$this->field->field_handle] ?? '');
+        $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');
 
         return '<input
             style="width:100%""

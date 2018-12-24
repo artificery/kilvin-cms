@@ -45,7 +45,7 @@ class Sites
                 __('kilvin::sites.unable_to_load_site')
             );
 
-            return redirect(kilvin_cp_url('sites/list-sites'));
+            return redirect(kilvinCpUrl('sites/list-sites'));
         }
 
         // -----------------------------------------
@@ -70,7 +70,7 @@ class Sites
         Cookie::queue('cp_last_site_id', $site_id, 365*24*60);
 
         if (Request::input('location') == 'preferences' || Cp::pathVar('location') == 'preferences') {
-            return redirect(kilvin_cp_url('administration').'/site-preferences');
+            return redirect(kilvinCpUrl('administration').'/site-preferences');
         }
 
         return redirect('/'.trim(config('cms.cp_path'), '/'));
@@ -95,7 +95,7 @@ class Sites
         Cp::$crumb  = __('kilvin::admin.site_management');
 
         $right_links[] = [
-            kilvin_cp_url('sites-administration/new-site'),
+            kilvinCpUrl('sites-administration/new-site'),
             __('kilvin::sites.create_new_site')
         ];
 
@@ -144,7 +144,7 @@ class Sites
 
         $r .= Cp::quickDiv(
             'littlePadding',
-            "<a href='".kilvin_cp_url('sites-administration/list-sites')."'><em>&#187;&nbsp;<strong>".__('kilvin::cp.edit_sites')."</strong></em></a>");
+            "<a href='".kilvinCpUrl('sites-administration/list-sites')."'><em>&#187;&nbsp;<strong>".__('kilvin::cp.edit_sites')."</strong></em></a>");
 
         Cp::$body = $r;
     }

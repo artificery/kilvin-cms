@@ -474,7 +474,7 @@ EOT;
         if ($edit === false) {
             $old_group_id   = Request::input('old_group_id');
             $group_name     = strtolower(Request::input('group_name'));
-            $template_theme = filename_security(Request::input('template_theme'));
+            $template_theme = filenameSecurity(Request::input('template_theme'));
         }
 
         // ------------------------------------
@@ -581,10 +581,10 @@ EOT;
         $message = $success_msg.'<strong>'.$data['weblog_name'].'</strong>';
 
         if ($edit === false || $return === true) {
-            return redirect(kilvin_cp_url('weblogs-administration/weblogs-overview'))
+            return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'))
                 ->with('cp-message', $message);
         } else {
-            return redirect(kilvin_cp_url('weblogs-administration/edit-weblog/weblog_id='.$weblog_id))
+            return redirect(kilvinCpUrl('weblogs-administration/edit-weblog/weblog_id='.$weblog_id))
                 ->with('cp-message', $message);
         }
     }
@@ -699,10 +699,10 @@ EOT;
         $message = $success_msg.'<strong>'.$data['weblog_name'].'</strong>';
 
         if ($return === true) {
-            return redirect(kilvin_cp_url('weblogs-administration/weblogs-overview'))
+            return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'))
                 ->with('cp-message', $message);
         } else {
-            return redirect(kilvin_cp_url('weblogs-administration/edit-weblog-fields/weblog_id='.$weblog_id))
+            return redirect(kilvinCpUrl('weblogs-administration/edit-weblog-fields/weblog_id='.$weblog_id))
                 ->with('cp-message', $message);
         }
     }
@@ -730,7 +730,7 @@ EOT;
         $query = DB::table('weblogs')->where('id', $weblog_id)->first();
 
         if (!$query) {
-            return redirect(kilvin_cp_url('weblogs-administration/weblogs-overview'));
+            return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'));
         }
 
         foreach ($query as $key => $val) {
@@ -1029,8 +1029,8 @@ EOT;
             'publish_tabs'         => $publish_tabs,
             'layout'               => $layout,
             'fields'               => $available_fields,
-            'url_title_javascript' => url_title_javascript('_'),
-            'svg_icon_gear'        => svg_icon_gear()
+            'url_title_javascript' => urlTitleJavascript('_'),
+            'svg_icon_gear'        => svgIconGear()
         ];
 
         // -----------------------------------------
@@ -1171,7 +1171,7 @@ EOT;
         }
 
         //  Redirect with Message
-        return redirect(kilvin_cp_url('weblogs-administration/edit-weblog-layout/weblog_id='.$weblog_id))
+        return redirect(kilvinCpUrl('weblogs-administration/edit-weblog-layout/weblog_id='.$weblog_id))
             ->with('cp-message', __('kilvin::admin.Layout Updated'));
     }
 
@@ -1196,7 +1196,7 @@ EOT;
         $query = DB::table('weblogs')->where('id', $weblog_id)->first();
 
         if (!$query) {
-            return redirect(kilvin_cp_url('weblogs-administration/weblogs-overview'));
+            return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'));
         }
 
         foreach ($query as $key => $val) {
@@ -1453,7 +1453,7 @@ EOT;
         foreach ($tquery as $template) {
             $r .= Cp::input_select_option(
                 $template->template_id,
-                $template->site_name.': '.remove_double_slashes($template->folder.'/'.$template->template_name),
+                $template->site_name.': '.removeDoubleSlashes($template->folder.'/'.$template->template_name),
                 (($template->template_id == $live_look_template) ? 1 : ''));
         }
 
@@ -1678,7 +1678,7 @@ EOT;
 
         Stats::update_weblog_stats();
 
-        return redirect(kilvin_cp_url('weblogs-administration/weblogs-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'))
             ->with('cp-message', __('kilvin::admin.weblog_deleted').NBS.'<b>'.$weblog_name.'</b>');
     }
 
@@ -1967,7 +1967,7 @@ EOT;
 
         $message .= '</div>'.PHP_EOL;
 
-        return redirect(kilvin_cp_url('weblogs-administration/category-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/category-overview'))
             ->with('cp-message', $message);
     }
 
@@ -2063,9 +2063,9 @@ EOT;
 
         Cp::log(__('kilvin::admin.category_group_deleted').'&nbsp;'.$name);
 
-        cms_clear_caching('all');
+        cmsClearCaching('all');
 
-        return redirect(kilvin_cp_url('weblogs-administration/category-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/category-overview'))
             ->with('cp-message', $message);
     }
 
@@ -2288,7 +2288,7 @@ EOT;
         $zurl .= (Cp::pathVar('integrated') !== null) ? '/integrated='.Cp::pathVar('integrated') : '';
 
         // Return Location
-        $return = kilvin_cp_url('weblogs-administration/category-manager/category_group_id='.$category_group_id.$zurl);
+        $return = kilvinCpUrl('weblogs-administration/category-manager/category_group_id='.$category_group_id.$zurl);
 
         // Fetch the parent ID
         $parent_id = DB::table('categories')
@@ -2528,7 +2528,7 @@ EOT;
             ->where('id', $category_group_id)
             ->update(['sort_order' => $order]);
 
-        return redirect(kilvin_cp_url('weblogs-administration/category-manager/category_group_id='.$category_group_id));
+        return redirect(kilvinCpUrl('weblogs-administration/category-manager/category_group_id='.$category_group_id));
     }
 
    /**
@@ -2740,7 +2740,7 @@ EOT;
         //  Create Foreign Character Conversion JS
         // ------------------------------------
 
-        $r = url_title_javascript($word_separator);
+        $r = urlTitleJavascript($word_separator);
 
         $r .= Cp::quickDiv('tableHeading', __('kilvin::'.$title));
 
@@ -2871,7 +2871,7 @@ EOT;
         // ------------------------------------
 
         if (empty($data['category_url_title'])) {
-            $data['category_url_title'] = create_url_title($data['category_name'], true);
+            $data['category_url_title'] = createUrlTitle($data['category_name'], true);
 
             // Integer? Not allowed, so we show an error.
             if (is_numeric($data['category_url_title'])) {
@@ -3049,7 +3049,7 @@ EOT;
             $field_cat_id = Request::input('category_id');
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/category-manager/category_group_id='.$category_group_id))
+        return redirect(kilvinCpUrl('weblogs-administration/category-manager/category_group_id='.$category_group_id))
             ->with(
                 'cp-message',
                 ($edit) ? __('kilvin::admin.category_updated') : __('kilvin::admin.category_created')
@@ -3151,7 +3151,7 @@ EOT;
         DB::table('categories')->where('parent_id', $cat_id)->where('category_group_id', $category_group_id)->update(['parent_id' => 0]);
         DB::table('categories')->where('id', $cat_id)->where('category_group_id', $category_group_id)->delete();
 
-        return redirect(kilvin_cp_url('weblogs-administration/category-manager/category_group_id='.$category_group_id))
+        return redirect(kilvinCpUrl('weblogs-administration/category-manager/category_group_id='.$category_group_id))
             ->with('cp-message', __('kilvin::admin.category_deleted'));
     }
 
@@ -3421,7 +3421,7 @@ EOT;
             }
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/status-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/status-overview'))
             ->with('cp-message', $message);
     }
 
@@ -3481,7 +3481,7 @@ EOT;
 
         $message = __('kilvin::admin.status_group_deleted').'&nbsp;'.'<b>'.$group_name.'</b>';
 
-        return redirect(kilvin_cp_url('weblogs-administration/status-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/status-overview'))
             ->with('cp-message', $message);
     }
 
@@ -3776,7 +3776,7 @@ EOT;
            $message = __('kilvin::admin.status_updated');
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/status-manager/status_group_id='.$data['status_group_id']))
+        return redirect(kilvinCpUrl('weblogs-administration/status-manager/status_group_id='.$data['status_group_id']))
             ->with('cp-message', $message);
     }
 
@@ -3966,7 +3966,7 @@ EOT;
         $query = DB::table('statuses')->where('id', $status_id)->first();
 
         if (!$query) {
-            return redirect(kilvin_cp_url('weblogs-administration/status-overview'));
+            return redirect(kilvinCpUrl('weblogs-administration/status-overview'));
         }
 
         $status_group_id = $query->status_group_id;
@@ -3993,7 +3993,7 @@ EOT;
                 ->delete();
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/status-manager/status_group_id='.$status_group_id))
+        return redirect(kilvinCpUrl('weblogs-administration/status-manager/status_group_id='.$status_group_id))
             ->with('cp-message', __('kilvin::admin.status_deleted'));
     }
 
@@ -4084,7 +4084,7 @@ EOT;
                 ->update(['status_order' => $val]);
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/status-manager/status_group_id='.$status_group_id));
+        return redirect(kilvinCpUrl('weblogs-administration/status-manager/status_group_id='.$status_group_id));
     }
 
 //=====================================================================
@@ -4343,7 +4343,7 @@ EOT;
             }
         }
 
-        return redirect(kilvin_cp_url('weblogs-administration/fields-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/fields-overview'))
             ->with('cp-message', $message);
     }
 
@@ -4412,9 +4412,9 @@ EOT;
 
         Cp::log(__('kilvin::admin.field_group_deleted').$name);
 
-        cms_clear_caching('all');
+        cmsClearCaching('all');
 
-        return redirect(kilvin_cp_url('weblogs-administration/fields-overview'))
+        return redirect(kilvinCpUrl('weblogs-administration/fields-overview'))
             ->with('cp-message', __('kilvin::admin.field_group_deleted').'<b>'.$name.'</b>');
     }
 
@@ -4595,7 +4595,7 @@ EOT;
                 ->first();
 
             if (!$query) {
-                redirect(kilvin_cp_url('weblogs-administration/fields-overview'));
+                redirect(kilvinCpUrl('weblogs-administration/fields-overview'));
             }
 
             foreach ($query as $key => $val) {
@@ -5135,11 +5135,11 @@ EOT;
         //  We have done the impossible and that makes us mighty.
         // ------------------------------------
 
-        cms_clear_caching('all');
+        cmsClearCaching('all');
 
         session()->flash('cp-message', __('kilvin::admin.Field Updated'));
 
-        return redirect(kilvin_cp_url('weblogs-administration/field-manager/weblog_field_group_id='.$weblog_field_group_id));
+        return redirect(kilvinCpUrl('weblogs-administration/field-manager/weblog_field_group_id='.$weblog_field_group_id));
     }
 
    /**
@@ -5222,9 +5222,9 @@ EOT;
         //  Clear Caching and Back to Field Manager
         // ------------------------------------
 
-        cms_clear_caching('all');
+        cmsClearCaching('all');
 
-        return redirect(kilvin_cp_url('weblogs-administration/field-manager/weblog_field_group_id='.$weblog_field_group_id))
+        return redirect(kilvinCpUrl('weblogs-administration/field-manager/weblog_field_group_id='.$weblog_field_group_id))
             ->with('cp-message', __('kilvin::admin.field_deleted').' '.$field_name);
     }
 
@@ -5406,7 +5406,7 @@ EOT;
             '</div>'.
             '<div style="margin-top:5px;">'.
                 '<textarea name="allowed_mimes" style="width:100%" rows="4" placeholder="'.$mime_placeholder.'">'.
-                    escape_attribute($allowed_mimes).
+                    escapeAttribute($allowed_mimes).
                 '</textarea>'.
             '</div>'.
         '</div>';
@@ -5443,8 +5443,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[local][root]"
-                    value="'.escape_attribute($configuration['local']['root']).'"
-                    placeholder="'.escape_attribute($root_placeholder).'"
+                    value="'.escapeAttribute($configuration['local']['root']).'"
+                    placeholder="'.escapeAttribute($root_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5457,8 +5457,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[local][url]"
-                    value="'.escape_attribute($configuration['local']['url']).'"
-                    placeholder="'.escape_attribute($url_placeholder).'"
+                    value="'.escapeAttribute($configuration['local']['url']).'"
+                    placeholder="'.escapeAttribute($url_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5479,8 +5479,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[s3][key]"
-                    value="'.escape_attribute($configuration['s3']['key']).'"
-                    placeholder="'.escape_attribute($key_placeholder).'"
+                    value="'.escapeAttribute($configuration['s3']['key']).'"
+                    placeholder="'.escapeAttribute($key_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5493,8 +5493,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[s3][secret]"
-                    value="'.escape_attribute($configuration['s3']['secret']).'"
-                    placeholder="'.escape_attribute($secret_placeholder).'"
+                    value="'.escapeAttribute($configuration['s3']['secret']).'"
+                    placeholder="'.escapeAttribute($secret_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5507,8 +5507,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[s3][region]"
-                    value="'.escape_attribute($configuration['s3']['region']).'"
-                    placeholder="'.escape_attribute($region_placeholder).'"
+                    value="'.escapeAttribute($configuration['s3']['region']).'"
+                    placeholder="'.escapeAttribute($region_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5522,8 +5522,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[s3][bucket]"
-                    value="'.escape_attribute($configuration['s3']['bucket']).'"
-                    placeholder="'.escape_attribute($bucket_placeholder).'"
+                    value="'.escapeAttribute($configuration['s3']['bucket']).'"
+                    placeholder="'.escapeAttribute($bucket_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5536,8 +5536,8 @@ EOT;
                 '<input
                     type="text"
                     name="configuration[s3][url]"
-                    value="'.escape_attribute($configuration['s3']['url']).'"
-                    placeholder="'.escape_attribute($url_placeholder).'"
+                    value="'.escapeAttribute($configuration['s3']['url']).'"
+                    placeholder="'.escapeAttribute($url_placeholder).'"
                     class="input"
                     size="90"
                     style="width: 100%;">'.
@@ -5829,7 +5829,7 @@ EOT;
 
         Cp::log($message);
 
-        return redirect(kilvin_cp_url('weblogs-administration/asset-containers'))
+        return redirect(kilvinCpUrl('weblogs-administration/asset-containers'))
                 ->with('cp-message', $message);
     }
 
@@ -5892,7 +5892,7 @@ EOT;
 
         Cp::log($msg);
 
-        return redirect(kilvin_cp_url('weblogs-administration/asset-containers'))
+        return redirect(kilvinCpUrl('weblogs-administration/asset-containers'))
                 ->with('cp-message', $msg);
     }
 }

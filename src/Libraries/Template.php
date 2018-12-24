@@ -79,7 +79,7 @@ class Template
         //  Meta
         // ------------------------------------
 
-        $path = remove_double_slashes($this->find($template));
+        $path = removeDoubleSlashes($this->find($template));
 
         if(empty($path)) {
             return response()->view('_errors.404', [], 404);
