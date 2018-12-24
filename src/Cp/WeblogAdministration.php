@@ -2373,10 +2373,8 @@ EOT;
             return Cp::unauthorizedAccess();
         }
 
-        if ($category_group_id == '') {
-            if (!($category_group_id = Cp::pathVar('category_group_id')) || ! is_numeric($category_group_id)) {
-                return false;
-            }
+        if (!($category_group_id = Cp::pathVar('category_group_id')) || ! is_numeric($category_group_id)) {
+            return false;
         }
 
         $zurl  = (Cp::pathVar('Z') == 1) ? '/Z=1' : '';
