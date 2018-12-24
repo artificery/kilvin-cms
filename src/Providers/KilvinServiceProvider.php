@@ -338,7 +338,6 @@ class KilvinServiceProvider extends ServiceProvider
 
         define('CMS_NAME'                , 'Kilvin CMS');
         define('KILVIN_VERSION'          , '0.0.2');
-        define('KILVIN_BUILD_DATE'       , '20181210');
 
         define('KILVIN_PACKAGE_PATH'     , realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
         define('KILVIN_TEMPLATES_PATH'   , $system_path.'templates'.DIRECTORY_SEPARATOR);

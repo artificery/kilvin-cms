@@ -24,7 +24,6 @@ class Installer
         $view->with('cms', [
                 'name' => CMS_NAME,
                 'version' => KILVIN_VERSION,
-                'build_date' => KILVIN_BUILD_DATE
             ]
         );
 
