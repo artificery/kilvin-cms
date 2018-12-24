@@ -124,6 +124,7 @@ class Site
 
         if ($query->count() == 1) {
             $this->loadSiteUrlPrefs($query->first()->site_url_id);
+            return;
         }
 
         // @todo - We have two matches? Figure out which one is the best based off domain + uri
