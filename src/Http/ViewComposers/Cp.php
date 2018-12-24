@@ -33,7 +33,7 @@ class Cp
         // Exception was thrown somewhere and CMS is not loaded
         // So, we disable this ViewComposer's loading as it requires
         // that the CMS be loaded and functioning
-        if ( ! defined('CMS_NAME') or ! defined('PATH_THEMES')) {
+        if ( ! defined('CMS_NAME')) {
             return;
         }
 
@@ -51,10 +51,15 @@ class Cp
         $view->with('elapsed_time', $elapsed_time);
         $view->with('page_creation_time', $elapsed_time);
 
-        $view->with('theme', ['css_url' => '/themes/cp_themes/default/default.css']);
-
         // Not logged in? No more work to be done.
         if (!Auth::check() || Auth::user()->is_banned == true) {
+            $view->with(
+                'cp',
+                [
+                    'header_elements' => CpFacade::jsAndCssHeaderElements()
+                ]
+            );
+
             return;
         }
 
@@ -68,7 +73,8 @@ class Cp
                 'sites_pulldown' => CpFacade::buildSitesPulldown(),
                 'quick_links' => CpFacade::buildQuickLinks(),
                 'tabs' => CpFacade::pageNavigation(),
-                'quick_tab' => CpFacade::buildQuickTab()
+                'quick_tab' => CpFacade::buildQuickTab(),
+                'js_css_header_elements' => CpFacade::jsAndCssHeaderElements()
             ]
         );
 

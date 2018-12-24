@@ -31,13 +31,6 @@ class Controller extends BaseController
     protected $container;
 
     /**
-     * The manifest for CSS/JS
-     *
-     * @var array
-     */
-    static $manifest;
-
-    /**
      * Create a new controller dispatcher instance.
      *
      * @param  \Illuminate\Container\Container  $container
@@ -215,72 +208,17 @@ class Controller extends BaseController
     /**
      * Loads up the Javascript
      *
-     * @return string
-     */
-    private function displayFile($path, $content_type)
-    {
-        if (file_exists($path)) {
-
-            $lifetime = 60*60*24*365;
-
-            $handler = new \Symfony\Component\HttpFoundation\File\File($path);
-
-            $file_time = $handler->getMTime();
-            $header_content_length = $handler->getSize();
-            $header_etag = md5($file_time . $path);
-            $header_last_modified = gmdate('r', $file_time);
-            $header_expires = gmdate('r', $file_time + $lifetime);
-
-            $headers = [
-                'Last-Modified' => $header_last_modified,
-                'Cache-Control' => 'public',
-                'Expires' => $header_expires,
-                'Pragma' => 'public',
-                'Etag' => $header_etag
-            ];
-
-            /**
-             * Is the resource cached?
-             */
-            $h1 = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] == $header_last_modified;
-            $h2 = isset($_SERVER['HTTP_IF_NONE_MATCH']) && str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH'])) == $header_etag;
-
-            if ($h1 || $h2) {
-                return response()->make('', 304, $headers);
-            }
-
-            $headers = array_merge($headers, [
-                'Content-Type' => $content_type,
-                'Content-Length' => $header_content_length
-            ]);
-
-            return response()->make(file_get_contents($path), 200, $headers);
-        }
-
-
-        abort(404);
-    }
-
-    /**
-     * Loads up the Javascript
-     *
-     * @return string
+     * @return \Illuminate\Http\Response
      */
     public function javascript()
     {
-        $path = KILVIN_CP_THEMES.'cp.js';
-
-        if (file_exists($path)) {
-            return $this->displayFile($path, 'application/javascript');
-        }
-
-        abort(404);
+        return outputThemeFile(KILVIN_CP_THEMES.'cp.js', 'application/javascript');
     }
 
     /**
      * Loads up the CSS
      *
-     * @return string
+     * @return \Illuminate\Http\Response
      */
     public function css()
     {
@@ -299,7 +237,7 @@ class Controller extends BaseController
 
         foreach ($paths as $path) {
             if (file_exists($path)) {
-                return $this->displayFile($path, 'text/css');
+                return outputThemeFile($path, 'text/css');
             }
         }
 

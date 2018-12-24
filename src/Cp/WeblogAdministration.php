@@ -4149,7 +4149,6 @@ EOT;
                 ->where('weblog_fields.weblog_field_group_id', $row->weblog_field_group_id)
                 ->count();
 
-
             $r .= '<tr>'.PHP_EOL;
 
             $r .= Cp::tableCell('',
@@ -4930,7 +4929,9 @@ EOT;
         //  Field Handle or Name already taken?
         // ------------------------------------
 
-        $query = DB::table('weblog_fields')->where('field_handle', $data['field_handle']);
+        $query = DB::table('weblog_fields')
+            ->where('field_handle', $data['field_handle'])
+            ->where('site_id',Site::config('site_id'));
 
         if ($edit === true) {
             $query->where('id', '!=', $data['field_id']);
@@ -4940,7 +4941,9 @@ EOT;
             return Cp::errorMessage(__('kilvin::admin.duplicate_field_handle'));
         }
 
-        $query = DB::table('weblog_fields')->where('field_name', $data['field_name']);
+        $query = DB::table('weblog_fields')
+            ->where('field_name', $data['field_name'])
+            ->where('site_id',Site::config('site_id'));
 
         if ($edit === true) {
             $query->where('id', '!=', $data['field_id']);
@@ -5078,9 +5081,10 @@ EOT;
         //  Creation
         // ------------------------------------
 
-        if ($edit !== true) {
+        if ($edit === false) {
             unset($data['field_id']);
 
+            $data['site_id'] = Site::config('site_id');
             $insert_id = DB::table('weblog_fields')->insertGetId($data);
 
             // ------------------------------------

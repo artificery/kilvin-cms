@@ -124,8 +124,9 @@ class KilvinServiceProvider extends ServiceProvider
 
             $installed_version = config('cms.installed_version');
 
+            // Hide installer after installation
             if (!empty($installed_version) && config('cms.hide_installer') === true) {
-                return;
+                \Log::debug('Kilvin CMS Installer requested but configuration indicates it is already installed.');
             }
 
             // Define Installer Routes
@@ -146,7 +147,6 @@ class KilvinServiceProvider extends ServiceProvider
         // Define CMS Routes
         $this->defineCmsRoutes();
         $this->defineResources();
-
 
         // Nothing to do for these requests?
         if (in_array(REQUEST, ['INSTALL','CONSOLE'])) {
@@ -316,8 +316,14 @@ class KilvinServiceProvider extends ServiceProvider
             define('REQUEST', 'SITE');
         }
 
+        define('KILVIN_THEMES', realpath(__DIR__.'/../../themes').'/');
+
         if (REQUEST === 'CP') {
             view()->composer('*', 'Kilvin\Http\ViewComposers\Cp');
+        }
+
+        if (REQUEST === 'INSTALL') {
+            view()->composer('*', 'Kilvin\Http\ViewComposers\Installer');
         }
 
         // --------------------------------------------------

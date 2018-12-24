@@ -298,7 +298,8 @@ class CreateCmsTables extends Migration
         Schema::create('weblog_fields', function($table)
         {
             $table->increments('id');
-            $table->unsignedInteger('weblog_field_group_id')->index();
+            $table->unsignedInteger('site_id')->index();
+            $table->unsignedInteger('weblog_field_group_id')->nullable()->index();
             $table->string('field_name', 60);
             $table->string('field_handle', 40);
             $table->text('field_instructions');
@@ -472,7 +473,7 @@ class CreateCmsTables extends Migration
             $table->integer('field_order')->index()->default(1);
             $table->timestamps();
 
-            $table->foreign('tab_id')->references('weblog_layout_tab_id')->on('weblog_layout_tabs')->onDelete('cascade');
+            $table->foreign('weblog_layout_tab_id')->references('id')->on('weblog_layout_tabs')->onDelete('cascade');
         });
     }
 

@@ -26,7 +26,7 @@ class CmsSeeder extends Seeder
         $unique_id = Uuid::uuid4();
         $password  = Hash::make($this->data['password']);
 
-        $now    = Carbon::now()->toDateTimeString();
+        $now = now()->toDateTimeString();
 
         $themes_path = $this->system_path.'resources'.DIRECTORY_SEPARATOR.'site_themes'.DIRECTORY_SEPARATOR;
 
@@ -224,7 +224,7 @@ class CmsSeeder extends Seeder
 
         DB::table('weblog_layout_tabs')
             ->insert([
-                'weblog_layout_tab_id' => 1,
+                'id' => 1,
                 'weblog_id' => 1,
                 'tab_name' => 'Publish',
                 'tab_order' => 1
@@ -332,7 +332,7 @@ class CmsSeeder extends Seeder
         DB::table('members')
             ->insert(
             [
-                'member_id'         => 1,
+                'id'                => 1,
                 'member_group_id'   => 1,
                 'password'          => $password,
                 'unique_id'         => $unique_id,
@@ -416,7 +416,7 @@ class CmsSeeder extends Seeder
             DB::table('categories')
                 ->insert(
                     [
-                        'category_id'           => $key + 1,
+                        'id'                    => $key + 1,
                         'site_id'               => 1,
                         'category_group_id'     => 1,
                         'parent_id'             => 0,
@@ -487,13 +487,13 @@ ENTRY;
         DB::table('weblog_entry_data')
             ->insert(
             [
-                'entry_id'       => 1,
-                'weblog_id'      => 1,
-                'locale'         => 'en_US',
-                'title'          => 'Getting Started with Kilvin CMS',
-                'field_excerpt'  => '',
-                'field_body'     => $body,
-                'field_extended' => ''
+                'weblog_entry_id' => 1,
+                'weblog_id'       => 1,
+                'locale'          => 'en_US',
+                'title'           => 'Getting Started with Kilvin CMS',
+                'field_excerpt'   => '',
+                'field_body'      => $body,
+                'field_extended'  => ''
             ]);
 
         // --------------------------------------------------------------------
@@ -509,6 +509,7 @@ ENTRY;
                 'handle'        => 'main-assets',
                 'driver'        => 'local',
                 'allowed_types' => 'all',
+                'allowed_mimes' => '',
                 'configuration' => json_encode([
                     'root' => $this->data['uploads_path'],
                     'url'  => $this->data['uploads_url'],

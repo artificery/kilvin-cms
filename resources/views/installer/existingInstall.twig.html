@@ -9,7 +9,7 @@
     Continuing with this installation will destroy any information currently in your database.
     Are you sure you wish to proceed?</h4>
 
-    <form action="install.php?page=3" method="post">
+    <form action="/installer/perform-install" method="post">
     	{{ csrfField() }}
         {{fields | raw}}
         <input type="hidden" name="install_override" value="y" />

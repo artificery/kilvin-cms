@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\Finder\Finder;
-
-
+use Kilvin\Http\Controllers\Cp\Controller as CpController;
 
 class InstallController extends Controller
 {
@@ -120,7 +119,6 @@ class InstallController extends Controller
     {
         return view('kilvin::installer.homepage', $this->variables);
     }
-
 
     /**
      *  Settings Form
@@ -251,8 +249,7 @@ class InstallController extends Controller
         //  Existing Install?
         // -----------------------------------
 
-        if ($sites_exists && ! $this->request->input('install_override'))
-        {
+        if ($sites_exists && ! $this->request->input('install_override')) {
             $fields = '';
 
             foreach($this->request->all() as $key => $value)
@@ -771,5 +768,25 @@ class InstallController extends Controller
         }
 
         return (empty($errors)) ? true : $errors;
+    }
+
+    /**
+     * Loads up the Javascript
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function javascript()
+    {
+        return outputThemeFile(KILVIN_THEMES.'installer/installer.js', 'application/javascript');
+    }
+
+    /**
+     * Loads up the CSS
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function css()
+    {
+        return outputThemeFile(KILVIN_THEMES.'installer/installer.css', 'text/css');
     }
 }

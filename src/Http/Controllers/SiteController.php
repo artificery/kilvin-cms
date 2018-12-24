@@ -21,6 +21,19 @@ class SiteController extends Controller
      */
     public function __construct(Request $request)
     {
+
+    }
+
+   /**
+     * Loads up Templates for Site
+     *
+     * This is where the magic happens!
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function all(Request $request)
+    {
         // ----------------------------------------------
         //  Parse Page Request and Set Variables Used in Plugins
         // ----------------------------------------------
@@ -48,18 +61,7 @@ class SiteController extends Controller
         if (REQUEST == 'SITE' && ! defined('ACTION')) {
             $stats = Stats::fetchSiteStats();
         }
-    }
 
-   /**
-     * Loads up Templates for Site
-     *
-     * This is where the magic happens!
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function all(Request $request)
-    {
         // @todo - Check for maintenance/update mode.
 
         if($this->isSitePage($request)) {

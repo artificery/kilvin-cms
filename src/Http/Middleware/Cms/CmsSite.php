@@ -91,8 +91,7 @@ class CmsSite
             error_reporting(E_ALL);
         }
 
-        if (REQUEST == 'CP') {
-            define('KILVIN_THEMES', realpath(__DIR__.'/../../../../themes').'/');
+        if (REQUEST === 'CP') {
             define('KILVIN_CP_THEMES', KILVIN_THEMES.'cp/');
         }
 

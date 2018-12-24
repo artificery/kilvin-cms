@@ -195,7 +195,7 @@ class ControlPanel
     }
 
     /**
-     * Sites Pulldown
+     * Script and Link elements for CP header
      *
      * @return string
      */
@@ -237,8 +237,6 @@ class ControlPanel
             "<script type='text/javascript' src='/{$cp_path}/javascript/{$js_suffix}'></script>".PHP_EOL.
             "<link rel='stylesheet' type='text/css' href='/{$cp_path}/css/{$css_suffix}' />".PHP_EOL;
     }
-
-
 
 
     /**
