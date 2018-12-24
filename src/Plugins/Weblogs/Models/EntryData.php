@@ -23,6 +23,6 @@ class EntryData extends Model
      */
     public function entry()
     {
-        return $this->belongsTo(Entry::class, 'id', 'entry_id');
+        return $this->belongsTo(Entry::class, 'id', 'weblog_entry_id');
     }
 }
