@@ -2110,8 +2110,8 @@ EOT;
             return $cat_array;
         }
 
-        $up     = '<img src="'.PATH_CP_IMG.'arrow_up.png" border="0"  width="16" height="16" alt="" title="" />';
-        $down   = '<img src="'.PATH_CP_IMG.'arrow_down.png" border="0"  width="16" height="16" alt="" title="" />';
+        $up     = '<img src="'.arrowUp().'" border="0"  width="16" height="16" alt="" title="" />';
+        $down   = '<img src="'.arrowDown().'" border="0"  width="16" height="16" alt="" title="" />';
 
         $can_delete = (Session::access('can_edit_categories')) ? true : false;
 
@@ -2186,14 +2186,14 @@ EOT;
     {
         if ($type == 'table') {
             $spcr = '<span style="display:inline-block; margin-left:10px;"></span>';
-            $indent = $spcr.'<img src="'.PATH_CP_IMG.'category_indent.png" border="0" width="12" height="12" title="indent" style="vertical-align:top; display:inline-block;"  />';
+            $indent = $spcr.'<img src="'.categoryIndent().'" border="0" width="12" height="12" title="indent" style="vertical-align:top; display:inline-block;"  />';
         } else {
             $spcr = '&nbsp;';
             $indent = $spcr.$spcr.$spcr.$spcr;
         }
 
-        $up   = '<img src="'.PATH_CP_IMG.'arrow_up.png" border="0"  width="16" height="16" alt="" title="" />';
-        $down = '<img src="'.PATH_CP_IMG.'arrow_down.png" border="0"  width="16" height="16" alt="" title="" />';
+        $up   = '<img src="'.arrowUp().'" border="0"  width="16" height="16" alt="" title="" />';
+        $down = '<img src="'.arrowDown().'" border="0"  width="16" height="16" alt="" title="" />';
 
 
         if ($depth == 0) {

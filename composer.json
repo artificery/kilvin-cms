@@ -31,7 +31,8 @@
             "Kilvin\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/helpers.php",
+            "src/images.php"
         ]
     },
     "autoload-dev": {

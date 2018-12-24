@@ -1681,7 +1681,7 @@ $(function() {
             ->where('item_table', 'templates')
             ->where('item_field', 'template_data')
             ->where('item_id', $template_id)
-            ->orderBy('id', 'desc')
+            ->orderBy('revision_tracker.id', 'desc')
             ->select('revision_tracker.id AS tracker_id', 'item_date', 'screen_name')
             ->get();
 
@@ -1711,8 +1711,8 @@ $(function() {
 
         $r .= Cp::quickDiv('templatepad', Cp::input_textarea('template_data', $template_data, Session::userdata('template_size'), 'textarea', '100%'));
 
-        $expand     = '<img src="'.PATH_CP_IMG.'expand_white.gif" border="0"  width="10" height="10" alt="Expand" />';
-        $collapse   = '<img src="'.PATH_CP_IMG.'collapse_white.gif" border="0"  width="10" height="10" alt="Collapse" />';
+        $expand     = '<img src="'.expandWhite().'" border="0"  width="10" height="10" alt="Expand" />';
+        $collapse   = '<img src="'.collapseWhite().'" border="0"  width="10" height="10" alt="Collapse" />';
 
         $r .= '<div id="noteslink" style="display: block; padding:0; margin: 0; cursor:pointer;">';
         $r .= '<div class="tableHeadingAlt" id="noteopen" onclick="switchNotesDisplay();return false;">';
@@ -1745,7 +1745,7 @@ $(function() {
 
         $r .= '</td>'.PHP_EOL
              .Cp::td('', '25%', '', '', 'top')
-             .Cp::input_text('columns', Session::userdata('template_size'), '4', '2', 'input', '30px').
+             .Cp::input_text('columns', Session::userdata('template_size'), '4', '3', 'input', '3em').
                 NBS.
                 __('kilvin::templates.template_size')
              .
@@ -1794,7 +1794,7 @@ $(function() {
         // ------------------------------------
 
         $query = DB::table('templates')
-            ->where('template_id', $template_id)
+            ->where('id', $template_id)
             ->select('template_name', 'folder', 'template_type')
             ->first();
 
