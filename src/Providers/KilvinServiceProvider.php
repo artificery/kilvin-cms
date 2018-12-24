@@ -51,7 +51,6 @@ class KilvinServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('cms.site', function () {
-            \Log::debug('cms.site');
             return new Libraries\Site;
         });
 
