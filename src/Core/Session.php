@@ -285,31 +285,29 @@ class Session
 
         // -----------------------------------
         //  Offline Sites Member Can View
+        //  - Only non-Admins and only when viewing a SITE request
         // -----------------------------------
 
-        $offline_sites = [];
+        if (REQUEST === 'SITE') {
+            $offline_sites = [];
 
-        // Congrats, SuperAdmin, you get 'em all
-        if ($group_id == 1) {
-            $result = DB::table('sites')
-                ->select('sites.id AS site_id')
-                ->get();
-        } elseif (!empty($special['offline_sites'])) {
-            $result = DB::table('sites')
-                ->select('sites.id AS site_id')
-                ->whereIn('id', $special['offline_sites'])
-                ->get();
-        }
-
-        if (isset($result) && $result->count() > 0) {
-            foreach ($result as $row) {
-                $offline_sites[$row->site_id] = $row->site_id;
+            if ($group_id != 1 && !empty($special['offline_sites'])) {
+                $result = DB::table('sites')
+                    ->select('sites.id AS site_id')
+                    ->whereIn('id', $special['offline_sites'])
+                    ->get();
             }
+
+            if (isset($result) && $result->count() > 0) {
+                foreach ($result as $row) {
+                    $offline_sites[$row->site_id] = $row->site_id;
+                }
+            }
+
+            unset($result);
+
+            $data['offline_sites'] = $offline_sites;
         }
-
-        unset($result);
-
-        $data['offline_sites'] = $offline_sites;
 
         // -----------------------------------
         //  Load Assigned Sites
