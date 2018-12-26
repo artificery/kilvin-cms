@@ -17,11 +17,10 @@ class Templates
     public $template_map   = [];
 
     // Reserved Template names
-    public $reserved_names = ['act', 'css'];
+    public $reserved_names = ['action', 'css'];
 
     // Reserved Template Variable names
-    public $reserved_vars  =
-    [
+    public $reserved_vars  = [
         'version',
         'elapsed_time',
         'total_queries',
@@ -63,8 +62,7 @@ class Templates
     */
     public function run()
     {
-        if (Cp::segment(2))
-        {
+        if (Cp::segment(2)) {
             $method = camel_case(Cp::segment(2));
 
             if (method_exists($this, $method)) {
@@ -125,8 +123,10 @@ class Templates
 
         $r = '';
 
-        if (Cp::pathVar('msg') == 'success') {
-            $r .= Cp::quickDiv('success-message', __('kilvin::templates.template_names_updated'));
+        $cp_message = session()->pull('cp-message');
+
+        if (!empty($cp_message)) {
+            $r .= Cp::quickDiv('success-message', $cp_message);
         }
 
         $r  .= '<h2>'.sprintf(__('kilvin::templates.templates_within_x_directory'), $folder).'</h2>';
@@ -271,10 +271,10 @@ class Templates
         }
 
         $redirect = 'templates/edit-template-names'.
-            '/folder='.$this->safeFolder($folder).
-            '/msg=success';
+            '/folder='.$this->safeFolder($folder);
 
-        return redirect(kilvinCpUrl($redirect));
+        return redirect(kilvinCpUrl($redirect))
+            ->with('cp-message', __('kilvin::templates.template_names_updated'));
     }
 
    /**
@@ -480,25 +480,10 @@ class Templates
         //  Messages
         // ------------------------------------
 
-        switch (Cp::pathVar('msg')) {
-            case '01' : $message = __('kilvin::templates.folder_created');
-                break;
-            case '02' : $message = __('kilvin::templates.folder_updated');
-                break;
-            case '03' : $message = __('kilvin::templates.folder_deleted');
-                break;
-            case '04' : $message = __('kilvin::templates.template_created');
-                break;
-            case '05' : $message = __('kilvin::templates.template_deleted');
-                break;
-            case '06' : $message = __('kilvin::templates.template_updated');
-                break;
-            default   : $message = '';
-                break;
-        }
+        $cp_message = session()->pull('cp-message');
 
-        if ($message != '') {
-            $r .= Cp::quickDiv('success-message', $message);
+        if (!empty($cp_message)) {
+            $r .= Cp::quickDiv('success-message', $cp_message);
         }
 
         if (Request::input('keywords') !== null && trim(Request::input('keywords')) != '') {
@@ -553,7 +538,6 @@ class Templates
                     $term  = (substr($term, 0,1) == '-') ? substr($term, 1) : $term;
                     $q->where('template_data', $type, '%'.$term.'%');
                 }
-
             });
         }
 
@@ -563,7 +547,7 @@ class Templates
             ->get();
 
         // ------------------------------------
-        //  We're Sorry, No Templates For You
+        //  No Templates Found for you
         // ------------------------------------
 
         if ($query->count() == 0) {
@@ -741,7 +725,7 @@ $(function() {
         $viewurl .= ($row->folder == '/') ? '/' : $row->folder.'/';
         $viewurl .= $row->template_name.'.'.$row->template_type;
 
-        $edit_url = 'templates/edit-template/id='.$row->template_id.'/tgpref='.$this->safeFolder($row->folder);
+        $edit_url = 'templates/edit-template/template_id='.$row->template_id.'/tgpref='.$this->safeFolder($row->folder);
 
         $t .= Cp::tableCell(
             '',
@@ -759,7 +743,7 @@ $(function() {
         }
 
         $del_url = 'templates/template-delete-confirm'.
-            '/id='.$row->template_id.
+            '/template_id='.$row->template_id.
             '/tgpref='.$this->safeFolder($row->folder);
 
         $delete =  ($row->template_name == 'index') ? '--' : Cp::anchor($del_url, __('kilvin::cp.delete'));
@@ -1048,10 +1032,8 @@ $(function() {
                 $this->saveTemplateToFilesystem($data);
             }
 
-            if ($duplicate === true)
-            {
-                foreach ($templates_query as $row)
-                {
+            if ($duplicate === true) {
+                foreach ($templates_query as $row) {
                     $data = [
                         'folder'                => $folder,
                         'template_name'         => $row->template_name,
@@ -1068,13 +1050,11 @@ $(function() {
                 }
             }
 
-            $message = '01';
+            $message = __('kilvin::templates.folder_created');
         }
-
 
         // Existing Folder
         if ($edit) {
-
             $old_path = removeDoubleSlashes($this->site_path.Request::input('old_name'));
             $new_path = removeDoubleSlashes($this->site_path.$folder);
 
@@ -1090,12 +1070,11 @@ $(function() {
                     ]
                 );
 
-            $message = '02';
+            $message = __('kilvin::templates.folder_updated');
         }
 
-        $append = '/tgpref='.$this->safeFolder($folder);
-
-        return redirect(kilvinCpUrl('templates/msg='.$message.$append));
+        return redirect(kilvinCpUrl('templates/tgpref='.$this->safeFolder($folder)))
+            ->with('cp-message', $message);
     }
 
    /**
@@ -1180,7 +1159,8 @@ $(function() {
 
         File::deleteDirectory($folder_path);
 
-        return redirect(kilvinCpUrl('templates/msg=03'));
+        return redirect(kilvinCpUrl('templates'))
+            ->with('cp-message', __('kilvin::templates.folder_deleted'));
     }
 
    /**
@@ -1394,7 +1374,8 @@ $(function() {
 
         $append = (Cp::pathVar('tgpref')) ? '/tgpref='.Cp::pathVar('tgpref') : '';
 
-        return redirect(kilvinCpUrl('templates/msg=04'.$append));
+        return redirect(kilvinCpUrl('templates'.$append))
+            ->with('cp-message', __('kilvin::templates.template_created'));
     }
 
    /**
@@ -1408,7 +1389,7 @@ $(function() {
             return Cp::unauthorizedAccess();
         }
 
-        if ( ! $id = Cp::pathVar('id')) {
+        if ( ! $id = Cp::pathVar('template_id')) {
             return false;
         }
 
@@ -1485,28 +1466,25 @@ $(function() {
 
         File::delete($file_path);
 
-        return redirect(kilvinCpUrl('templates/msg=05'));
+        return redirect(kilvinCpUrl('templates'))
+            ->with('cp-message', __('kilvin::templates.template_deleted'));
     }
 
    /**
      * Edit Template Form
      *
-     * @param integer $template_id
-     * @param string $message Message from previous page submission
      * @return string
      */
-    public function editTemplate($template_id = '', $message = '')
+    public function editTemplate()
     {
         if ( ! $this->checkAccess()) {
             return Cp::unauthorizedAccess();
         }
 
-        if ($template_id == '') {
-            $template_id = Cp::pathVar('id');
-        }
+        $template_id = Cp::pathVar('template_id');
 
-        if ( ! is_numeric($template_id)) {
-            return false;
+        if (!is_numeric($template_id)) {
+            abort(404);
         }
 
         // ------------------------------------
@@ -1594,12 +1572,12 @@ $(function() {
 
                     flipButtonText(1);
 
-                    window.open ("<?php echo 'templates/clear-revisions/id='.$template_id.'/Z=1'; ?>" ,"Revision", "width=500, height=260, location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, screenX=60, left=60, screenY=60, top=60");
+                    window.open ("<?php echo 'templates/clear-revisions/template_id='.$template_id.'/Z=1'; ?>" ,"Revision", "width=500, height=260, location=0, menubar=0, resizable=0, scrollbars=0, status=0, titlebar=0, toolbar=0, screenX=60, left=60, screenY=60, top=60");
 
                     return false;
                 }
 
-				window.open ("<?php echo 'templates&M=viewRevisionHistory&Z=1'; ?>&id="+id ,"Revision");
+				window.open ("<?php echo 'templates/view-revision-history/Z=1'; ?>/template_id="+id ,"Revision");
 
 				return false;
             }
@@ -1656,8 +1634,10 @@ $(function() {
             ]
         );
 
-        if (!empty($message)) {
-            $r .= Cp::quickDiv('success-message', $message);
+        $cp_message = session()->pull('cp-message');
+
+        if (!empty($cp_message)) {
+            $r .= Cp::quickDiv('success-message', $cp_message);
         }
 
         $r .= Cp::heading($template_path);
@@ -1844,10 +1824,8 @@ $(function() {
                 ]
             );
 
-        if (is_numeric(Request::input('columns')))
-        {
-            if (Session::userdata('template_size') != Request::input('columns'))
-            {
+        if (is_numeric(Request::input('columns'))) {
+            if (Session::userdata('template_size') != Request::input('columns')) {
                 Session::userdata('template_size', Request::input('columns'));
 
                 DB::table('members')
@@ -1858,11 +1836,14 @@ $(function() {
 
         $message = __('kilvin::templates.template_updated');
 
+
         if (Request::has('return')) {
-            return redirect(kilvinCpUrl('templates/&msg=06'));
+            return redirect(kilvinCpUrl('templates'))
+                ->with('cp-message', __('kilvin::templates.template_updated'));
         }
 
-        return $this->editTemplate($template_id, $message);
+        return redirect(kilvinCpUrl('templates/edit-template/template_id='.$template_id))
+            ->with('cp-message', $message);
     }
 
    /**
@@ -1905,12 +1886,12 @@ $(function() {
      */
     public function viewRevisionHistory()
     {
-        if ( ! $id = Request::input('id')) {
+        if ( ! $template_id = Cp::pathVar('template_id')) {
             return false;
         }
 
         $query = DB::table('revision_tracker')
-            ->where('id', $id)
+            ->where('id', $template_id)
             ->where('item_table', 'templates')
             ->where('item_field', 'template_data')
             ->select('item_id', 'item_data')
@@ -1931,7 +1912,7 @@ $(function() {
         Cp::$body .= Cp::quickDiv(
             'littlePadding',
             BR.
-                '<div align="center"><a href="JavaScript:window.close();"><b>'.
+                '<div align="center"><a href="javascript:window.close();"><b>'.
                 __('kilvin::cp.close_window').
                 '</b></a></div>'
         );
@@ -2039,7 +2020,7 @@ $(function() {
                         Cp::quickSpan(
                             'defaultBold',
                             Cp::anchor(
-                                'templates/edit-template-variable/id='.$row->variable_id,
+                                'templates/edit-template-variable/template_id='.$row->variable_id,
                                 $row->variable_name
                             )
                         ),
@@ -2047,7 +2028,7 @@ $(function() {
                         Cp::quickSpan(
                             'defaultBold',
                             Cp::anchor(
-                                'templates/delete-template-variable-confirm/id='.$row->variable_id,
+                                'templates/delete-template-variable-confirm/template_id='.$row->variable_id,
                                 __('kilvin::cp.delete')
                             )
                         ),
@@ -2212,7 +2193,7 @@ $(function() {
         Cp::$title  = __('kilvin::templates.delete_template_variable');
         Cp::$crumb  = __('kilvin::templates.delete_template_variable');
 
-        if ( ! $id = Cp::pathVar('id')) {
+        if ( ! $id = Cp::pathVar('template_id')) {
             return false;
         }
 

@@ -806,7 +806,7 @@ class SitesAdministration
         // ------------------------------------
         //  Delete Every DB Row Having to Do with the Site
         // ------------------------------------
-        
+
         $tables = [
             'weblog_field_groups' => [
                 'weblog_fields' => 'weblog_field_group_id',
