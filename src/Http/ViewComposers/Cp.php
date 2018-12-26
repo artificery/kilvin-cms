@@ -43,13 +43,6 @@ class Cp
             ]
         );
 
-        $elapsed_time = number_format(microtime(true) - LARAVEL_START, 4);
-        $query_log = DB::getQueryLog();
-
-        $view->with('total_queries', sizeof($query_log));
-        $view->with('elapsed_time', $elapsed_time);
-        $view->with('page_creation_time', $elapsed_time);
-
         // Not logged in? No more work to be done.
         if (!Auth::check() || Auth::user()->is_banned == true) {
             $view->with(
@@ -73,12 +66,12 @@ class Cp
                 'quick_links' => CpFacade::buildQuickLinks(),
                 'tabs' => CpFacade::pageNavigation(),
                 'quick_tab' => CpFacade::buildQuickTab(),
-                'js_css_header_elements' => CpFacade::jsAndCssHeaderElements()
+                'header_elements' => CpFacade::jsAndCssHeaderElements()
             ]
         );
 
         if (Session::userdata('member_group_id') == 1 && Site::config('show_queries') == 'y' && !empty($query_log)) {
-            $query_log = $this->prettifyQueries($query_log);
+            $query_log = $this->prettifyQueries(DB::getQueryLog());
             $view->with('query_log', $query_log);
         }
 

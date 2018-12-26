@@ -842,27 +842,13 @@ fill="#000000" stroke="none">
             "<div class='copyright'>".
                 $logo.
                 PHP_EOL.
-                '<br>'.
-                PHP_EOL.
                 $this->anchor(
                     'https://arliden.com/',
                     CMS_NAME." ".KILVIN_VERSION
                 ).
-                ' • '.
+                '<br>'.
                 __('kilvin::cp.copyright').
                 ' &#169; 2019 Arliden, LLC'.
-                BR.PHP_EOL.
-                str_replace(
-                    "%x",
-                    "{elapsed_time}",
-                    __('kilvin::cp.page_rendered')
-                ).
-                ' • '.
-                str_replace(
-                    "%x",
-                    sizeof(DB::getQueryLog()),
-                    __('kilvin::cp.queries_executed')
-                ).
             "</div>".
             PHP_EOL;
     }
@@ -2016,7 +2002,7 @@ $( document ).ready(function() {
 
         $global_vars = [
             'cms', 'now',
-            'debug_mode', 'elapsed_time', 'email',
+            'debug_mode', 'email',
             'group_description', 'member_group_id',
             'ip_address', 'location',
             'member_group', 'member_id',
