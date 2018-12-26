@@ -195,7 +195,7 @@ class Session
     {
         $key = 'cms.member_group:'.$group_id.'.specialPreferences';
 
-        $storeTime = Carbon::now()->addMinutes(30);
+        $storeTime = Carbon::now()->addMinutes(5);
 
         // File and database storage stores do not support tags
         // And Laravel throws an exception if you even try ::rolls eyes::
