@@ -1625,7 +1625,10 @@ return [
 'Minimum Length' =>
 "Minimum Length",
 
-'Maxiumum Length' =>
-"Maxiumum Length",
+'Maximum Length' =>
+"Maximum Length",
+
+'Integer Settings' =>
+"Integer Settings",
 
 ];

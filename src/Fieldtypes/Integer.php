@@ -70,12 +70,12 @@ class Integer extends FieldType implements FieldTypeContract
         return
             '<table class="tableBorder">
                 <tr>
-                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Minimum Length').'</td>
+                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Integer Settings').'</td>
                 </tr>
                 <tr>
                     <td>
                         <label for="integer_minimum_length">
-                            '.__('kilvin::admin.field_max_length').'
+                            '.__('kilvin::admin.Minimum Length').'
                         </label>
                         <div class="littlePadding">
                             <input
@@ -88,13 +88,10 @@ class Integer extends FieldType implements FieldTypeContract
                         </div>
                      </td>
                  </tr>
-                 <tr>
-                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Maximum Length').'</td>
-                </tr>
                 <tr>
                     <td>
                         <label for="integer_maximum_length">
-                            '.__('kilvin::admin.field_max_length').'
+                            '.__('kilvin::admin.Maximum Length').'
                         </label>
                         <div class="littlePadding">
                             <input
@@ -140,18 +137,20 @@ class Integer extends FieldType implements FieldTypeContract
      */
     public function publishFormHtml($which, $entry_data, $request_data, $submission_error)
     {
-        $maxlength = (!empty($field->settings['text_max_length'])) ? ceil($field->settings['text_max_length']) : '';
+        $min = (!empty($field->settings['minimum_length'])) ? ceil($field->settings['minimum_length']) : '';
+        $max = (!empty($field->settings['maximum_length'])) ? ceil($field->settings['maximum_length']) : '';
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
         $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');
 
         return '<input
-            style="width:100%""
-            type="text"
+            type="number"
             id="'.$this->field->field_handle.'"
             name="fields['.$this->field->field_handle.']"
             value="'.$value.'"
-            maxlength="'.$maxlength.'">';
+            pattern="\d*"
+            min="'.$min.'"
+            max="'.$max.'">';
     }
 
     /**

@@ -93,6 +93,7 @@ class KilvinServiceProvider extends ServiceProvider
 
         Plugins::registerFieldType('Kilvin', 'Date', \Kilvin\FieldTypes\Date::class);
         Plugins::registerFieldType('Kilvin', 'Dropdown', \Kilvin\FieldTypes\Dropdown::class);
+        Plugins::registerFieldType('Kilvin', 'Integer', \Kilvin\FieldTypes\Integer::class);
         Plugins::registerFieldType('Kilvin', 'Text', \Kilvin\FieldTypes\Text::class);
         Plugins::registerFieldType('Kilvin', 'Textarea', \Kilvin\FieldTypes\Textarea::class);
     }
