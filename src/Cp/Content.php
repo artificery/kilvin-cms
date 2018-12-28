@@ -1576,8 +1576,15 @@ EOT;
                 $submission_error = null
             );
 
-            if (!empty($results)) {
-                list($field_rules, $field_messages) = $results;
+            // No validation for field
+            if (empty($results)) {
+                continue;
+            }
+
+            list($field_rules, $field_messages) = $results;
+
+            if (empty($field_rules)) {
+                continue;
             }
 
             $rules = array_merge($rules, $field_rules);
