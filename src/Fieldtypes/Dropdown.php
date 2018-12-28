@@ -67,9 +67,9 @@ class Dropdown extends FieldType implements FieldTypeContract
     {
         extract($settings);
 
-        $populate_type = $dropdown_populate_type ?? 'manual';
-        $list_items    = $dropdown_list_items ?? '';
-        $weblog_field  = $dropdown_weblog_field ?? '';
+        $populate_type = $settings['populate_type'] ?? 'manual';
+        $list_items    = $settings['list_items'] ?? '';
+        $weblog_field  = $settings['weblog_field'] ?? '';
 
         // ------------------------------------
         //  Create the "populate" radio options
@@ -165,7 +165,7 @@ class Dropdown extends FieldType implements FieldTypeContract
 
             foreach ($rez as $frow)
             {
-                $sel = ($weblog_id == $row->weblog_id AND $field_handle == $frow->field_handle) ? 1 : 0;
+                $sel = ($weblog_id == $row->weblog_id && $field_handle == $frow->field_handle) ? 1 : 0;
 
                 $typopts .= Cp::input_select_option(
                     $row->weblog_id.':'.$frow->field_handle,
