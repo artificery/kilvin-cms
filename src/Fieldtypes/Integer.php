@@ -46,10 +46,9 @@ class Integer extends FieldType implements FieldTypeContract
      *
      * @param string|null $value The value of the field
      * @param array $entry All of the incoming entry data
-     * @param array $settings Settings for field
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function templateOutput($value, $entry, $settings)
+    public function templateOutput($value, $entry)
     {
         return $value;
     }
@@ -137,8 +136,10 @@ class Integer extends FieldType implements FieldTypeContract
      */
     public function publishFormHtml($which, $entry_data, $request_data, $submission_error)
     {
-        $min = (!empty($field->settings['minimum_length'])) ? ceil($field->settings['minimum_length']) : '';
-        $max = (!empty($field->settings['maximum_length'])) ? ceil($field->settings['maximum_length']) : '';
+        $settings = $this->field->settings['Integer'];
+
+        $min = (!empty($settings['minimum_length'])) ? ceil($settings['minimum_length']) : '';
+        $max = (!empty($settings['maximum_length'])) ? ceil($settings['maximum_length']) : '';
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
         $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');
@@ -151,5 +152,50 @@ class Integer extends FieldType implements FieldTypeContract
             pattern="\d*"
             min="'.$min.'"
             max="'.$max.'">';
+    }
+
+    /**
+     * Publish Form Validation
+     *
+     * The validation rules performed on submission
+     *
+     * @param string $which new/edit
+     * @param array|null $entry_data The Entry's current data in database, if any
+     * @param array|null $request_data If entry was submitted and there were errors, this is data submitted
+     * @param string $submission_error
+     * @return null|array Return array of [validation rules array, validation messages array]
+     */
+    public function publishFormValidation($which, $entry_data, $request_data, $submission_error)
+    {
+        $settings = $this->field->settings['Integer'];
+
+        $min = (!empty($settings['minimum_length'])) ? ceil($settings['minimum_length']) : '';
+        $max = (!empty($settings['maximum_length'])) ? ceil($settings['maximum_length']) : '';
+
+        $rules = [];
+        $messages = [];
+
+        $rules['fields.'.$this->field->field_handle][] = 'nullable';
+        $rules['fields.'.$this->field->field_handle][] = 'integer';
+
+        if ($min) {
+            $rules['fields.'.$this->field->field_handle][] = 'min:'.$min;
+            $messages['fields.'.$this->field->field_handle.'.min'] =
+                sprintf(
+                    'The '.$this->field->field_name.' must have a minimum value of %s.',
+                    $min
+                );
+        }
+
+        if ($max) {
+            $rules['fields.'.$this->field->field_handle][] = 'max:'.$max;
+            $messages['fields.'.$this->field->field_handle.'.max'] =
+                sprintf(
+                    'The '.$this->field->field_name.' must have a maximum value of %s.',
+                    $min
+                );
+        }
+
+        return [$rules, $messages];
     }
 }
