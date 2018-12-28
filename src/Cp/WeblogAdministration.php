@@ -4493,20 +4493,9 @@ EOT;
 
                 $r .= Cp::tableCell('', $row->field_name);
 
-                $field_type = (__('kilvin::'.$row->field_type) == false) ? '' : __('kilvin::'.$row->field_type);
+                $fieldType = app($field_types[$row->field_type]);
 
-                switch (strtolower($row->field_type)) {
-                    case 'text' :  $field_type = __('kilvin::admin.Text Input');
-                        break;
-                    case 'textarea' :  $field_type = __('kilvin::admin.Textarea');
-                        break;
-                    case 'dropdown' :  $field_type = __('kilvin::admin.Dropdown');
-                        break;
-                    case 'date' :  $field_type = __('kilvin::admin.Date');
-                        break;
-                }
-
-                $r .= Cp::tableCell('', $field_type);
+                $r .= Cp::tableCell('', $fieldType->name());
 
                 $r .= Cp::tableCell('', $row->is_field_required ? 'Yes' : 'No');
 
@@ -4812,7 +4801,6 @@ EOT;
         $r .= '<td>';
         $r .= '<select name="field_type" class="select">';
         $r .= Cp::input_select_option('', __('kilvin::admin.Choose Field Type'));
-
 
         $field_types = Plugins::fieldTypes();
 
