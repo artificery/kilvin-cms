@@ -50,10 +50,9 @@ class Date extends FieldType implements FieldTypeContract
      *
      * @param string|null $value The value of the field
      * @param array $entry All of the incoming entry data
-     * @param array $settings Settings for field
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function templateOutput($value, $entry, $settings)
+    public function templateOutput($value, $entry)
     {
         if (empty($value)) {
             return null;
