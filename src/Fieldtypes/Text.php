@@ -46,10 +46,10 @@ class Text extends FieldType implements FieldTypeContract
      *
      * @param string|null $value The value of the field
      * @param array $entry All of the incoming entry data
-     * @param string $source db/post
+     * @param array $settings Settings for field
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function templateOutput($value, $entry, $source)
+    public function templateOutput($value, $entry, $settings)
     {
         return $value;
     }
@@ -131,19 +131,5 @@ class Text extends FieldType implements FieldTypeContract
             name="fields['.$this->field->field_handle.']"
             value="'.$value.'"
             maxlength="'.$maxlength.'">';
-    }
-
-    /**
-     * Template Output
-     *
-     * What you output to the Template
-     *
-     * @param string|null $value The value of the field
-     * @param array $entry All of the incoming entry data
-     * @return mixed
-     */
-    public function templateOutput($value, $entry)
-    {
-        return $value;
     }
 }

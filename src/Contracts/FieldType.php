@@ -50,10 +50,10 @@ interface FieldType
      *
      * @param string|null $value The value of the field
      * @param array $entry All of the incoming entry data
-     * @param string $source db/post
+     * @param array $settings Settings for field
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function templateOutput($value, $entry, $source);
+    public function templateOutput($value, $entry, $settings);
 
     /**
      * Settings Form HTML
@@ -101,15 +101,4 @@ interface FieldType
      * @return array Return validation rules and validation messages
      */
     public function publishFormValidation($which, $entry_data, $request_data, $submission_error);
-
-    /**
-     * Template Output
-     *
-     * What you output to the Template
-     *
-     * @param string|null $value The value of the field
-     * @param array $entry All of the incoming entry data
-     * @return mixed
-     */
-    public function templateOutput($value, $entry);
 }
