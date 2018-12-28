@@ -162,21 +162,21 @@ class CmsSeeder extends Seeder
                 'excerpt',
                 'Excerpt',
                 'Excerpts are optional hand-crafted summaries of your content.',
-                json_encode(['textarea_num_rows' => 3])
+                '{"Textarea":{"rows":3}}',
             ],
             [
                 2,
                 'body',
                 'Body',
                 '',
-                json_encode(['textarea_num_rows' => 10])
+                '{"Textarea":{"rows":3}}',
             ],
             [
                 3,
                 'extended',
                 'Extended',
                 '',
-                json_encode(['textarea_num_rows' => 20])
+                '{"Textarea":{"rows":3}}',
             ]
         ];
 

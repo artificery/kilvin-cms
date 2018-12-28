@@ -10,8 +10,9 @@ use Kilvin\Plugins\Weblogs\Models\Entry;
 use Illuminate\Database\Schema\Blueprint;
 use Kilvin\Support\Plugins\FieldType;
 use Illuminate\Validation\ValidationException;
+use Kilvin\Contracts\FieldType as FieldTypeContract;
 
-class Date extends FieldType
+class Date extends FieldType implements FieldTypeContract
 {
     protected $field;
 
@@ -33,10 +34,11 @@ class Date extends FieldType
      * @link https://laravel.com/docs/5.5/migrations#columns
      * @param string $column_name What the column will be called in the weblog_field_data table
      * @param Illuminate\Database\Schema\Blueprint $table The table that is having the field added
+     * @param null|array $settings The values of the settings for field
      * @param null|object $existing On edit, if changing field type, we send existing column details
      * @return void
      */
-    public function columnType($column_name, Blueprint &$table, $existing = null)
+    public function columnType($column_name, Blueprint &$table, $settings = null, $existing = null)
     {
         $table->timestamp($column_name)->nullable(true);
     }

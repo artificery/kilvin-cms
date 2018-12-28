@@ -8,11 +8,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Kilvin\Support\Plugins\FieldType;
 use Kilvin\Contracts\FieldType as FieldTypeContract;
 
-class Textarea extends FieldType implements FieldTypeContract
+class Integer extends FieldType implements FieldTypeContract
 {
     protected $field;
-
-    const ROWS_DEFAULT = 10;
 
     /**
      * Name of the FieldType
@@ -21,7 +19,7 @@ class Textarea extends FieldType implements FieldTypeContract
      */
     public function name()
     {
-        return __('kilvin::admin.Textarea');
+        return __('kilvin::admin.Integer');
     }
 
     /**
@@ -38,7 +36,7 @@ class Textarea extends FieldType implements FieldTypeContract
      */
     public function columnType($column_name, Blueprint &$table, $settings = null, $existing = null)
     {
-        $table->text($column_name)->nullable(true);
+        $table->integer($column_name)->nullable(true);
     }
 
     /**
@@ -66,25 +64,45 @@ class Textarea extends FieldType implements FieldTypeContract
      */
     public function settingsFormHtml(array $settings = [])
     {
-        $rows = (!empty($settings['rows'])) ? $settings['rows'] : self::ROWS_DEFAULT;
+        $minimum_length = (!empty($settings['minimum_length'])) ? $settings['minimum_length'] : 0;
+        $maximum_length = (!empty($settings['maximum_length'])) ? $settings['maximum_length'] : 100;
 
         return
             '<table class="tableBorder">
                 <tr>
-                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Field Settings').'</td>
+                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Minimum Length').'</td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="textarea_rows">
-                            '.__('kilvin::admin.Number of Rows').'
+                        <label for="integer_minimum_length">
+                            '.__('kilvin::admin.field_max_length').'
                         </label>
                         <div class="littlePadding">
                             <input
                                 type="text"
-                                id="textarea_rows"
-                                name="settings[Textarea][rows]"
-                                size="3"
-                                value="'.$rows.'"
+                                id="integer_minimum_length"
+                                name="settings[Integer][minimum_length]"
+                                size="6"
+                                value="'.$minimum_length.'"
+                            >
+                        </div>
+                     </td>
+                 </tr>
+                 <tr>
+                    <td class="tableHeading" colspan="2">'.__('kilvin::admin.Maximum Length').'</td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="integer_maximum_length">
+                            '.__('kilvin::admin.field_max_length').'
+                        </label>
+                        <div class="littlePadding">
+                            <input
+                                type="text"
+                                id="integer_maximum_length"
+                                name="settings[Integer][maximum_length]"
+                                size="6"
+                                value="'.$maximum_length.'"
                             >
                         </div>
                      </td>
@@ -102,7 +120,8 @@ class Textarea extends FieldType implements FieldTypeContract
      */
     public function settingsValidationRules($incoming = [])
     {
-        $rules['settings.Textarea.rows'] = 'nullable|integer|max:100';
+        $rules['settings.Integer.minimum_length'] = 'nullable|integer';
+        $rules['settings.Integer.maximum_length'] = 'nullable|integer';
 
         return $rules;
     }
@@ -121,18 +140,18 @@ class Textarea extends FieldType implements FieldTypeContract
      */
     public function publishFormHtml($which, $entry_data, $request_data, $submission_error)
     {
-        $rows = (!empty($this->field->settings['rows'])) ? ceil($this->field->settings['rows']) : self::ROWS_DEFAULT;
+        $maxlength = (!empty($field->settings['text_max_length'])) ? ceil($field->settings['text_max_length']) : '';
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
         $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');
 
-        return '<textarea
-            style="width:100%;"
+        return '<input
+            style="width:100%""
+            type="text"
             id="'.$this->field->field_handle.'"
             name="fields['.$this->field->field_handle.']"
-            rows="'.$rows.'"
-            class="textarea"
-        >'.escapeAttribute($value).'</textarea>';
+            value="'.$value.'"
+            maxlength="'.$maxlength.'">';
     }
 
     /**

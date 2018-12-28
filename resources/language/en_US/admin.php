@@ -1619,4 +1619,13 @@ return [
 'asset_container_updated' =>
 "Asset Container updated: %s",
 
+'Integer' =>
+"Integer",
+
+'Minimum Length' =>
+"Minimum Length",
+
+'Maxiumum Length' =>
+"Maxiumum Length",
+
 ];

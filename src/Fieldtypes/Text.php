@@ -6,8 +6,9 @@ use Kilvin\Facades\Cp;
 use Kilvin\Plugins\Weblogs\Models\Entry;
 use Illuminate\Database\Schema\Blueprint;
 use Kilvin\Support\Plugins\FieldType;
+use Kilvin\Contracts\FieldType as FieldTypeContract;
 
-class Text extends FieldType
+class Text extends FieldType implements FieldTypeContract
 {
     protected $field;
 
@@ -29,10 +30,11 @@ class Text extends FieldType
      * @link https://laravel.com/docs/5.5/migrations#columns
      * @param string $column_name What the column will be called in the weblog_field_data table
      * @param Illuminate\Database\Schema\Blueprint $table The table that is having the field added
+     * @param null|array $settings The values of the settings for field
      * @param null|object $existing On edit, if changing field type, we send existing column details
      * @return void
      */
-    public function columnType($column_name, Blueprint &$table, $existing = null)
+    public function columnType($column_name, Blueprint &$table, $settings = null, $existing = null)
     {
         $table->text($column_name)->nullable(true);
     }
@@ -62,7 +64,7 @@ class Text extends FieldType
      */
     public function settingsFormHtml(array $settings = [])
     {
-        $maxlength = (!empty($settings['text_max_length'])) ? $settings['text_max_length'] : 10;
+        $maxlength = (!empty($settings['max_length'])) ? $settings['max_length'] : 10;
 
         return
             '<table class="tableBorder">
@@ -78,7 +80,7 @@ class Text extends FieldType
                             <input
                                 type="text"
                                 id="text_max_length"
-                                name="settings[text_max_length]"
+                                name="settings[Text][max_length]"
                                 size="3"
                                 value="'.$maxlength.'"
                             >
@@ -98,7 +100,7 @@ class Text extends FieldType
      */
     public function settingsValidationRules($incoming = [])
     {
-        $rules['settings.text_max_length'] = 'nullable|integer|max:100';
+        $rules['settings.Text.max_length'] = 'nullable|integer|max:100';
 
         return $rules;
     }
@@ -117,7 +119,7 @@ class Text extends FieldType
      */
     public function publishFormHtml($which, $entry_data, $request_data, $submission_error)
     {
-        $maxlength = (!empty($field->settings['text_max_length'])) ? ceil($field->settings['text_max_length']) : '';
+        $maxlength = (!empty($field->settings['max_length'])) ? ceil($field->settings['max_length']) : '';
 
         $data  = array_merge((array) $request_data, (array) $entry_data);
         $value = escapeAttribute($data['fields'][$this->field->field_handle] ?? '');

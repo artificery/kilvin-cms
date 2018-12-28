@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Kilvin\Plugins\Weblogs\Models\Entry;
 use Illuminate\Database\Schema\Blueprint;
 use Kilvin\Support\Plugins\FieldType;
+use Kilvin\Contracts\FieldType as FieldTypeContract;
 
-class Dropdown extends FieldType
+class Dropdown extends FieldType implements FieldTypeContract
 {
     protected $field;
 
@@ -30,10 +31,11 @@ class Dropdown extends FieldType
      * @link https://laravel.com/docs/5.5/migrations#columns
      * @param string $column_name What the column will be called in the weblog_field_data table
      * @param Illuminate\Database\Schema\Blueprint $table The table that is having the field added
+     * @param null|array $settings The values of the settings for field
      * @param null|object $existing On edit, if changing field type, we send existing column details
      * @return void
      */
-    public function columnType($column_name, Blueprint &$table, $existing = null)
+    public function columnType($column_name, Blueprint &$table, $settings = null, $existing = null)
     {
         $table->text($column_name)->nullable(true);
     }
@@ -65,9 +67,9 @@ class Dropdown extends FieldType
     {
         extract($settings);
 
-        $populate_type = $pulldown_populate_type ?? 'manual';
-        $list_items    = $pulldown_list_items ?? '';
-        $weblog_field  = $pulldown_weblog_field ?? '';
+        $populate_type = $dropdown_populate_type ?? 'manual';
+        $list_items    = $dropdown_list_items ?? '';
+        $weblog_field  = $dropdown_weblog_field ?? '';
 
         // ------------------------------------
         //  Create the "populate" radio options
@@ -77,10 +79,10 @@ class Dropdown extends FieldType
             'default',
             '<label>'.
                 Cp::input_radio(
-                    'settings[pulldown_populate_type]',
+                    'settings[Dropdown][populate_type]',
                     'manual',
                     ($populate_type == 'manual') ? true : false,
-                    ' class="js-pulldown-populate"'
+                    ' class="js-dropdown-populate"'
                 ).
                 ' '.
                 __('kilvin::admin.Populate dropdown manually').
@@ -90,10 +92,10 @@ class Dropdown extends FieldType
             'default',
             '<label>'.
                 Cp::input_radio(
-                    'settings[pulldown_populate_type]',
+                    'settings[Dropdown][populate_type]',
                     'weblog',
                     ($populate_type == 'weblog') ? true : false,
-                    ' class="js-pulldown-populate"'
+                    ' class="js-dropdown-populate"'
                 ).
                 ' '.
                 __('kilvin::admin.Populate dropdown from weblog field').
@@ -103,7 +105,7 @@ class Dropdown extends FieldType
         //  Populate Manually
         // ------------------------------------
 
-        $typopts = '<div id="pulldown_populate_manual" style="display: none;">';
+        $typopts = '<div id="dropdown_populate_manual" style="display: none;">';
 
         $typopts .= Cp::quickDiv(
                 'defaultBold',
@@ -114,7 +116,7 @@ class Dropdown extends FieldType
                 __('kilvin::admin.field_list_instructions')
             ).
             Cp::input_textarea(
-                'settings[pulldown_list_items]',
+                'settings[Dropdown][list_items]',
                 $list_items,
                 10,
                 'textarea',
@@ -128,7 +130,7 @@ class Dropdown extends FieldType
         //  Populate via an existing field
         // ------------------------------------
 
-        $typopts .= '<div id="pulldown_populate_weblog" style="display: none;">';
+        $typopts .= '<div id="dropdown_populate_weblog" style="display: none;">';
 
         $query = DB::table('weblogs')
             ->orderBy('weblog_name', 'asc')
@@ -137,7 +139,7 @@ class Dropdown extends FieldType
 
         // Create the drop-down menu
         $typopts .= Cp::quickDiv('defaultBold', __('kilvin::admin.select_weblog_for_field'));
-        $typopts .= "<select name='settings[pulldown_weblog_field]' class='select'>".PHP_EOL;
+        $typopts .= "<select name='settings[Dropdown][weblog_field]' class='select'>".PHP_EOL;
 
         $pieces = explode(':', $weblog_field, 2);
 
@@ -185,21 +187,21 @@ class Dropdown extends FieldType
     <script type="text/javascript">
 
          $( document ).ready(function() {
-            $('input[name=settings\\\\[pulldown_populate_type\\\\]]').change(function(e) {
+            $('input[name=settings\\\\[Dropdown\\\\]\\\\[populate_type\\\\]]').change(function(e) {
                 e.preventDefault();
 
-                var type = $('input[name=settings\\\\[pulldown_populate_type\\\\]]:checked').val();
+                var type = $('input[name=settings\\\\[Dropdown\\\\]\\\\[populate_type\\\\]]:checked').val();
 
                 console.log(type);
 
-                $('div[id^=pulldown_populate_]').css('display', 'none');
+                $('div[id^=dropdown_populate_]').css('display', 'none');
 
-                $('#pulldown_populate_'+type).css('display', 'block');
+                $('#dropdown_populate_'+type).css('display', 'block');
 
             });
 
-            $('input[name=settings\\\\[pulldown_populate_type\\\\]][value={$populate_type}]').prop("checked",true);;
-            $('input[name=settings\\\\[pulldown_populate_type\\\\]]').trigger("change");
+            $('input[name=settings\\\\[Dropdown\\\\]\\\\[populate_type\\\\]][value={$populate_type}]').prop("checked",true);;
+            $('input[name=settings\\\\[Dropdown\\\\]\\\\[populate_type\\\\]]').trigger("change");
         });
 
     </script>
@@ -238,10 +240,10 @@ EOT;
      */
     public function settingsValidationRules($incoming = [])
     {
-        $rules['settings.pulldown_populate_type'] = 'required|in:manual,weblog';
-        $rules['settings.pulldown_weblog_id'] = 'integer|exists:weblogs,id';
-        $rules['settings.pulldown_list_items'] = 'required_if:pulldown_populate_type,manual';
-        $rules['settings.pulldown_weblog_field'] = 'required_if:pulldown_populate_type,weblog';
+        $rules['settings.Dropdown.populate_type'] = 'required|in:manual,weblog';
+        $rules['settings.Dropdown.weblog_id'] = 'integer|exists:weblogs,id';
+        $rules['settings.Dropdown.list_items'] = 'required_if:settings.Dropdown.populate_type,manual';
+        $rules['settings.Dropdown.weblog_field'] = 'required_if:settings.Dropdown.populate_type,weblog';
 
         return $rules;
     }
@@ -267,8 +269,8 @@ EOT;
 
         $r = Cp::input_select_header('fields['.$field->field_handle.']', '', '');
 
-        if ($field->settings['pulldown_populate_type'] == 'manual') {
-            foreach (explode("\n", trim($field->settings['pulldown_list_items'])) as $option) {
+        if ($field->settings['populate_type'] == 'manual') {
+            foreach (explode("\n", trim($field->settings['list_items'])) as $option) {
                 $x = explode(':', trim($option));
 
                 $v = $x[0];
@@ -282,24 +284,24 @@ EOT;
         }
 
         // We need to pre-populate this menu from an another weblog custom field
-        if ($field->settings['pulldown_populate_type'] == 'weblog') {
+        if ($field->settings['populate_type'] == 'weblog') {
             $pop_query = DB::table('weblog_entry_data')
-                ->where('weblog_id', $field->settings['pulldown_weblog_id'])
-                ->select("field_".$field->settings['pulldown_field_name'])
+                ->where('weblog_id', $field->settings['weblog_id'])
+                ->select("field_".$field->settings['field_name'])
                 ->get();
 
             $r .= Cp::input_select_option('', '--', '');
 
             if ($pop_query->count() > 0) {
                 foreach ($pop_query as $prow) {
-                    $selected = ($prow->{'field_'.$field->settings['pulldown_field_name']} == $field_data) ? 1 : '';
-                    $pretitle = substr($prow->{'field_'.$field->settings['pulldown_field_name']}, 0, 110);
+                    $selected = ($prow->{'field_'.$field->settings['field_name']} == $field_data) ? 1 : '';
+                    $pretitle = substr($prow->{'field_'.$field->settings['field_name']}, 0, 110);
                     $pretitle = preg_replace("/\r\n|\r|\n|\t/", ' ', $pretitle);
                     $pretitle = escapeAttribute($pretitle);
 
                     $r .= Cp::input_select_option(
                         escapeAttribute(
-                            $prow->{'field_'.$field->settings['pulldown_field_name']}),
+                            $prow->{'field_'.$field->settings['field_name']}),
                         $pretitle,
                         $selected
                     );

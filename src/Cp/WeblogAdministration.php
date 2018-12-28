@@ -4836,7 +4836,7 @@ EOT;
 
         foreach($field_types as $name => $class) {
             $r .= '<div id="field_type_settings_'.$name.'" class="field-option" style="display:none;">';
-            $r .= app($class)->settingsFormHtml($settings);
+            $r .= app($class)->settingsFormHtml($settings[$name] ?? []);
             $r .= '</div>';
         }
 
@@ -4929,7 +4929,7 @@ EOT;
 
         $query = DB::table('weblog_fields')
             ->where('field_handle', $data['field_handle'])
-            ->where('site_id',Site::config('site_id'));
+            ->where('site_id', Site::config('site_id'));
 
         if ($edit === true) {
             $query->where('id', '!=', $data['field_id']);
@@ -4974,13 +4974,14 @@ EOT;
         }
 
         // ------------------------------------
-        //  Settings to JSON String
+        //  All Settings to JSON String
         // ------------------------------------
 
-        $data['settings'] = null;
+        $data['settings'] = $settings = null;
 
         if (Request::filled('settings') && is_array(Request::input('settings'))) {
-            $data['settings'] = json_encode(Request::input('settings'));
+            $settings = Request::input('settings');
+            $data['settings'] = json_encode($settings);
         }
 
         // ------------------------------------
