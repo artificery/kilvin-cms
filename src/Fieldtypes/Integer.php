@@ -40,7 +40,7 @@ class Integer extends FieldType implements FieldTypeContract
     }
 
     /**
-     * Field Ouput
+     * Template Ouput
      *
      * That which is pushed out to the Template parser as final value
      *
@@ -49,7 +49,7 @@ class Integer extends FieldType implements FieldTypeContract
      * @param string $source db/post
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function storedValue($value, $entry, $source)
+    public function templateOutput($value, $entry, $source)
     {
         return $value;
     }

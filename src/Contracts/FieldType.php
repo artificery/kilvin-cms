@@ -44,7 +44,7 @@ interface FieldType
     public function columnType($column_name, Blueprint &$table, $settings = null, $existing = null);
 
     /**
-     * Field Ouput
+     * Template Ouput
      *
      * That which is pushed out to the Template parser as final value
      *
@@ -53,7 +53,7 @@ interface FieldType
      * @param string $source db/post
      * @return mixed Could be anything really, as long as Twig can use it
      */
-    public function storedValue($value, $entry, $source);
+    public function templateOutput($value, $entry, $source);
 
     /**
      * Settings Form HTML
