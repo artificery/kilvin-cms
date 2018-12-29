@@ -92,7 +92,7 @@ class Engine extends CompilerEngine
         $data = array_merge($this->global_data, $data);
 
         // This captures a fair amount of debugging info and suppresses it
-        // May want a way to switch this off.
+        // May want a way to switch this off. -PB
         try {
             $content = $this->compiler->load($path)->render($data);
         } catch (Twig_Error $ex) {
