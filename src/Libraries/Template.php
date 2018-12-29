@@ -195,25 +195,34 @@ class Template
     {
         $segments = $this->segments($uri);
 
-        // Homepage, change this once we handle folders vs template groups
+        // No segments? Homepage!
         if (empty($segments[0])) {
             return $this->render('index');
         }
 
         // Homepage with pagination
+        // Pagination is the only segment we allow for a homepage request
+        // i.e. One cannot do https://site.com/entry-url-title
+        // However, one can do this:  https://site.com/page3
         if(count($segments) == 2 && preg_match("#^(\/page\/\d+\/)$#", $uri, $match)) {
             Url::$QSTR = $match[1];
             return $this->render('index');
         }
 
         // ------------------------------------
-        //  Two Options, Folder with Template or Folder with Index
-        //  - Folder with Template is PRIMARY
+        //  Two Options for Name, Template within Folder or Folder with Index
+        //  - Template within Folder is PRIMARY
         // ------------------------------------
 
         $original_segments = $segments;
         $last              = array_pop($segments);
 
+        // We allow certain suffixes in the segments of a request indicating the template type
+        // ex: http://site.com/my_folder/index.html
+        // ex: http://site.com/my_folder/index.css
+        // HOWEVER, if you have an index.html AND index.css template, both of the above
+        // requests will load the 'html' template as that type is the primary view.
+        // No way currently around this without futzing with how Views are loaded by Laravel
         $suffixes = array_map(function($val) {
             return str_replace('twig.', '', $val);
         }, app('cms.twig.suffixes'));
@@ -224,14 +233,16 @@ class Template
             if (sizeof($x) == 2) {
                 $suffix = array_pop($x);
 
-                if(in_array($suffix, $suffixes)) {
+                if (in_array($suffix, $suffixes)) {
+                    $valid_suffix = $suffix;
                     $last = $x[0];
                 }
             }
         }
 
         // ------------------------------------
-        //  Template within Folder
+        //  Folder within Template
+        //  - https://site.com/examples/doom => ./templates/default-site/examples/doom.twig.html
         // ------------------------------------
 
         $check  =
@@ -239,12 +250,13 @@ class Template
             '/'.
             $last;
 
-        if($this->exists($check)) {
+        if ($this->exists($check)) {
             return $this->render($check);
         }
 
         // ------------------------------------
-        //  Folder Request, so look for index
+        //  Folder Request, so look for index file
+        //  - https://site.com/examples/doom => ./templates/default-site/examples/doom/index.twig.html
         // ------------------------------------
 
         $check =
@@ -257,11 +269,14 @@ class Template
         }
 
         // ------------------------------------
-        //  Single Segment? 404
-        //  - Otherwise it will go to the site index
+        //  No Results? Only a Single Segment in URI?
+        //  - Send a 404!
+        //  - Dynamic URIs only allowed when there is a template specified in URI
+        //  - ex: https://site.com/template-name/my-dynamic-url-segment
+        //  - Yes, this means the site's primary index template does not allow dynamic segments
         // ------------------------------------
 
-        if(sizeof($original_segments) == 1) {
+        if (sizeof($original_segments) == 1) {
             return $this->output404();
         }
 
