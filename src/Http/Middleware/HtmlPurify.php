@@ -1,6 +1,6 @@
 <?php
 
-namespace Kilvin\Http\Middleware\Cms;
+namespace Kilvin\Http\Middleware;
 
 use File;
 use Illuminate\Foundation\Http\Middleware\TransformsRequest;
@@ -20,9 +20,7 @@ class HtmlPurify extends TransformsRequest
         'password_confirmation',
     ];
 
-    // ------------------------------------------------------
-
-    /**
+   /**
      * Load up Purifier
      *
      * @return void
@@ -34,9 +32,7 @@ class HtmlPurify extends TransformsRequest
     	$this->purifier = new \HTMLPurifier($this->settings);
     }
 
-    // ------------------------------------------------------
-
-    /**
+   /**
      * Transform the given value.
      *
      * @param  string  $key
@@ -52,9 +48,7 @@ class HtmlPurify extends TransformsRequest
         return is_string($value) ? trim($this->purifier->purify($value)) : $value;
     }
 
-    // ------------------------------------------------------
-
-    /**
+   /**
      * Loads the General Settings
      *
      * @return void
@@ -80,9 +74,7 @@ class HtmlPurify extends TransformsRequest
     	}
     }
 
-    // ------------------------------------------------------
-
-    /**
+   /**
      * Determine whether to perform the cleaning
      *
      * @param string

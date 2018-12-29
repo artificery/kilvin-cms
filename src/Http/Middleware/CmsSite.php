@@ -1,6 +1,6 @@
 <?php
 
-namespace Kilvin\Http\Middleware\Cms;
+namespace Kilvin\Http\Middleware;
 
 use Closure;
 use Illuminate\Foundation\Application;
