@@ -58,7 +58,9 @@ class TwigServiceProvider extends ViewServiceProvider
      */
     protected function registerViewExtension()
     {
-        foreach($this->suffixes as $suffix) {
+        // Array reverse makes sure the search by FileViewFinder
+        // is done in the order suffixes are listed
+        foreach(array_reverse($this->suffixes) as $suffix) {
             $this->app['view']->addExtension(
                 $suffix,
                 'cms.twig',
