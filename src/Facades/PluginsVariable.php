@@ -4,7 +4,7 @@ namespace Kilvin\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class PluginVariable extends Facade
+class PluginsVariable extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class PluginVariable extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'cms.twig.plugin_variable';
+        return 'cms.twig.plugins_variable';
     }
 }

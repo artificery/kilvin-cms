@@ -62,8 +62,8 @@ class KilvinServiceProvider extends ServiceProvider
             return new Libraries\Plugins;
         });
 
-        $this->app->singleton('cms.twig.plugin_variable', function () {
-            return new Libraries\Twig\Templates\PluginVariable;
+        $this->app->singleton('cms.twig.plugins_variable', function () {
+            return new Libraries\Twig\Templates\PluginsVariable;
         });
 
         $this->registerCmsConstants();
