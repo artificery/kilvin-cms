@@ -21,7 +21,7 @@ class PluginsVariableElement
     }
 
    /**
-     * Call the method, which is actually a plugin
+     * Call the method, which is actually a plugin's element
      *
      * @param string $method
      * @param array  $arguments

@@ -7,11 +7,17 @@ use Kilvin\Facades\Plugins;
 use Carbon\Carbon;
 
 /*
-The idea behind this was to have a "Plugin" variable
+The idea behind this was to have a "Plugins" variable
 in Twig templates that would have a few helpful methods
-available, such as Plugins.
+available, such as Plugins.pluginsList()
 
+And then the __call method allows us to call a Plugin's name
+as an object. This object can then load all of the registered
+elements for a Plugin.
 
+ex: Plugins.Element('Entries').with('fields').orderByDesc('entry_date').first()
+
+It will load up the Weblogs plugin's Entries element and get the most recent one's model
 
 */
 
