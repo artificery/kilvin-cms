@@ -13,7 +13,6 @@ use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\AliasLoader;
 
 class KilvinServiceProvider extends ServiceProvider
@@ -189,7 +188,7 @@ class KilvinServiceProvider extends ServiceProvider
     {
         // If the routes have not been cached, we will include them in a route group
         if (! $this->app->routesAreCached()) {
-            Route::group([
+            $this->getRouter()->group([
                 'namespace' => 'Kilvin\Http\Controllers'],
                 function ($router) {
                     require __DIR__.'/../../routes/cms-routes.php';
@@ -207,13 +206,23 @@ class KilvinServiceProvider extends ServiceProvider
     {
         // If the routes have not been cached, we will include them in a route group
         if (! $this->app->routesAreCached()) {
-            Route::group([
+            $this->getRouter()->group([
                 'namespace' => 'Kilvin\Http\Controllers'],
                 function ($router) {
                     require __DIR__.'/../../routes/installer-routes.php';
                 }
             );
         }
+    }
+
+    /**
+     * Get the active router.
+     *
+     * @return Router
+     */
+    protected function getRouter()
+    {
+        return $this->app['router'];
     }
 
     /**
