@@ -2,13 +2,13 @@
 
 namespace Kilvin\Plugins\Weblogs\Templates\Elements;
 
-use Kilvin\Libraries\Twig\Templates\Element as TemplatesElement;
+use Kilvin\Libraries\Twig\Templates\ModelElement;
 use Kilvin\Plugins\Weblogs\Models\Entry as BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 
 class Entries extends BaseModel implements \IteratorAggregate
 {
-    use TemplatesElement;
+    use ModelElement;
 
 	/**
      * Built in page limit for this element

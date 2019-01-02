@@ -5,7 +5,7 @@ namespace Kilvin\Libraries\Twig\Templates;
 /**
  * Model Element for Templates
  */
-trait Element
+trait ModelElement
 {
 	// ALL SEARCH CRITERIA SHOULD BE SCOPES!!!
 
