@@ -188,8 +188,6 @@ class KilvinServiceProvider extends ServiceProvider
     protected function defineCmsRoutes()
     {
         // If the routes have not been cached, we will include them in a route group
-        // so that all of the routes will be conveniently registered to the given
-        // controller namespace. After that we will load the Spark routes file.
         if (! $this->app->routesAreCached()) {
             Route::group([
                 'namespace' => 'Kilvin\Http\Controllers'],
@@ -208,8 +206,6 @@ class KilvinServiceProvider extends ServiceProvider
     protected function defineInstallerRoutes()
     {
         // If the routes have not been cached, we will include them in a route group
-        // so that all of the routes will be conveniently registered to the given
-        // controller namespace. After that we will load the Spark routes file.
         if (! $this->app->routesAreCached()) {
             Route::group([
                 'namespace' => 'Kilvin\Http\Controllers'],
