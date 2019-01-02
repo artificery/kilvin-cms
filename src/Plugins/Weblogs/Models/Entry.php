@@ -22,7 +22,7 @@ class Entry extends Model
     /**
      * Get the fields data associated with this Entry
      */
-    public function fields()
+    public function fieldsData()
     {
         return $this->hasOne(EntryData::class, 'weblog_entry_id', 'id');
     }
@@ -112,6 +112,29 @@ class Entry extends Model
         $status = is_array($status) ? $status : array_slice(func_get_args(), 1);
 
         return $query->whereIn('status', $status);
+    }
+
+    /**
+     * Begin querying a model with eager loading.
+     *
+     * @param  array|string  $relations
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public static function with($relations)
+    {
+        if (is_string($relations) && $relations == 'fields') {
+            $relations = 'fieldsData';
+        }
+
+        if (is_array($relations) && in_array('fields', $relations)) {
+            $key = array_search('fields', $relations);
+            unset($relations[$key]);
+            $relations[] = 'fieldsData';
+        }
+
+        return (new static)->newQuery()->with(
+            is_string($relations) ? func_get_args() : $relations
+        );
     }
 }
 

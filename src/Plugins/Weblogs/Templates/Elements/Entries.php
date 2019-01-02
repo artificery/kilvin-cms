@@ -48,14 +48,21 @@ class Entries extends BaseModel implements \IteratorAggregate
         // Will need to see if this is a plugin field, if so we will
         // send it to the plugin for parsing first.
 
-        $dbFields = $this->fields()->getResults()->toArray();
+        $fields = [];
 
-        $fields['title'] = $dbFields['title'];
+        foreach($this->fieldsData->toArray() as $name => $value) {
 
-        foreach($dbFields as $dbField => $dbValue) {
-            if (substr($dbField, 0, strlen('field_')) == 'field_') {
-                $fields[substr($dbField, strlen('field_'))] = $dbValue;
+            if ($name == 'title') {
+                $fields['title'] = $value;
             }
+
+            if (substr($name, 0, strlen('field_')) == 'field_') {
+                $fields[substr($name, strlen('field_'))] = $value;
+            }
+        }
+
+        if (empty($fields)) {
+            dd($this->fieldsData);
         }
 
         return $fields;
