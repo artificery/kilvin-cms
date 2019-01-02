@@ -117,6 +117,10 @@ class Entry extends Model
     /**
      * Begin querying a model with eager loading.
      *
+     * - We made a change here to allow the Weblog Entries Element to have
+     * an eager loading name of 'fields' that loads the data with fieldsData()
+     * but the attributes still come out via a 'fields' array
+     *
      * @param  array|string  $relations
      * @return \Illuminate\Database\Eloquent\Builder|static
      */
