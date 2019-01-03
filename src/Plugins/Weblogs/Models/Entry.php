@@ -140,5 +140,15 @@ class Entry extends Model
             is_string($relations) ? func_get_args() : $relations
         );
     }
+
+    /**
+     * Get entry date as month_year
+     *
+     * @return bool
+     */
+    public function getEntryDateMonthYearAttribute()
+    {
+        return $this->attributes['entry_date_month_year'] = Carbon::parse($this->attributes['entry_date'])->format('M Y');
+    }
 }
 
