@@ -27,6 +27,10 @@ class Entries extends BaseModel implements \IteratorAggregate
     {
         parent::boot();
 
+        static::addGlobalScope('currentSite', function (Builder $builder) {
+            return BaseModel::scopeCurrentSite($builder); // must call scopeLive method directly
+        });
+
         // By default, only send out entries that are NOT closed,
         // have an entry date in the past, and an expiration date in the future
         // This global scope can be overridden by removing all global scopes
@@ -35,19 +39,7 @@ class Entries extends BaseModel implements \IteratorAggregate
             return BaseModel::scopeLive($builder); // must call scopeLive method directly
         });
 
-        // Default limit for the Model
-        // If one is already set for query, we ignore our default limit
-        static::addGlobalScope('pageLimit', function (Builder $builder) {
-            $limit = null;
-
-            try {
-                $limit = $builder->getQuery()->limit;
-            } catch (\Exception $e) {}
-
-            if (is_null($limit)) {
-                $builder->limit(static::$pageLimit);
-            }
-        });
+        static::addPageLimitScope();
     }
 
 	/**

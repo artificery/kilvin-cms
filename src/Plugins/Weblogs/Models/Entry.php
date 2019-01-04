@@ -4,9 +4,12 @@ namespace Kilvin\Plugins\Weblogs\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Kilvin\Traits\LocalizedModel;
 
 class Entry extends Model
 {
+    use LocalizedModel;
+
 	 /**
      * The primary key for this model
      * @var string
