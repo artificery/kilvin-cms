@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Kilvin\Core\Regex;
 use Kilvin\Core\Session;
+use Kilvin\Plugins\Weblogs\Models\Category;
 
 class WeblogAdministration
 {
@@ -2629,10 +2630,8 @@ EOT;
 
         $order = 0;
 
-        foreach($this->cat_update as $key => $val)
-        {
-            if (0 == $val[0])
-            {
+        foreach($this->cat_update as $key => $val) {
+            if (0 == $val[0]) {
                 $order++;
                 $this->cat_update[$key][1] = $order;
                 $this->processSubcategories($key);
@@ -2792,11 +2791,16 @@ EOT;
               Cp::input_select_header('parent_id').
               Cp::input_select_option('0', __('kilvin::admin.none'));
 
-        $this->categoryTree('list', $category_group_id, $parent_id, $sort_order);
+        // We only allow one level of nesting. If one needs more than that, they should either use
+        // tags or we will need to find a more efficient way of nesting in templates.
+        $parents = Category::where('category_group_id', $category_group_id)
+            ->isParent()
+            ->orderBy('category_name')
+            ->pluck('category_name', 'id')
+            ->toArray();
 
-        foreach ($this->categories as $val) {
-            $prefix = (strlen($val[0]) == 1) ? NBS : NBS;
-            $r .= $val;
+        foreach ($parents as $id => $name) {
+            $r .= Cp::input_select_option($id, $name);
         }
 
         $r .= Cp::input_select_footer().
