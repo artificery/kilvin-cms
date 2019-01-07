@@ -6,7 +6,7 @@ use Kilvin\Libraries\Twig\Templates\ModelElement;
 use Kilvin\Plugins\Weblogs\Models\Category as BaseModel;
 use Illuminate\Database\Eloquent\Builder;
 
-class Entries extends BaseModel implements \IteratorAggregate
+class Categories extends BaseModel implements \IteratorAggregate
 {
     use ModelElement;
 

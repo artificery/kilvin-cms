@@ -5,8 +5,6 @@ namespace Kilvin\Traits;
 use Illuminate\Database\Eloquent\Builder;
 use Kilvin\Facades\Site;
 
-// @stop - Maybe merge ModelElement and this one together?
-
 trait LocalizedModel
 {
     /**

@@ -84,6 +84,7 @@ class KilvinServiceProvider extends ServiceProvider
         Plugins::register('Weblogs',\Kilvin\Plugins\Weblogs\Manager::class);
 
         Plugins::registerTwig('Weblogs', 'element', \Kilvin\Plugins\Weblogs\Templates\Elements\Entries::class);
+        Plugins::registerTwig('Weblogs', 'element', \Kilvin\Plugins\Weblogs\Templates\Elements\Categories::class);
 
         Plugins::registerTwig('Parsedown', 'filter', \Kilvin\Plugins\Parsedown\Templates\Filters\Markdown::class);
         Plugins::registerTwig('Parsedown', 'filter', \Kilvin\Plugins\Parsedown\Templates\Filters\Parsedown::class);

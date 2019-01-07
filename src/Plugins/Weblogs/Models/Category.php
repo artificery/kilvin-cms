@@ -31,6 +31,22 @@ class Category extends Model
     }
 
     /**
+     * Children
+     */
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
+    /**
+     * Entries
+     */
+    public function entries()
+    {
+        return $this->belongsToMany(Entry::class, 'weblog_entry_categories', 'category_id', 'weblog_entry_id');
+    }
+
+    /**
      * Is Category a Parent
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
