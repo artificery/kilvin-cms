@@ -4,6 +4,9 @@ namespace Kilvin\Libraries\Twig\Templates;
 
 /**
  * Model Element for Templates
+ *
+ * Allows an Eloquent model to become a Twig Element
+ * This means that we can iterate over the results of an Eloquent query essentially.
  */
 trait ModelElement
 {
@@ -36,7 +39,6 @@ trait ModelElement
 		return $this->get();
 	}
 
-
 	/**
      * Create a new (modified) Eloquent query builder for the model.
      *
@@ -46,5 +48,17 @@ trait ModelElement
     public function newEloquentBuilder($query)
     {
         return new Builder($query);
+    }
+
+    /**
+     * Automatically called when treated as a Twig function
+     *
+     * Can override this to set default Eloquent search criteria or even accept function arguments
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function run()
+    {
+        return $this;
     }
 }
