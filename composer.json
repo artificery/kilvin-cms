@@ -15,7 +15,8 @@
         "laravel/framework": "5.7.*",
         "predis/predis": "1.0.*",
         "sentry/sentry-laravel": "^0.4.1",
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "artificery/kilvin-docs": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -46,5 +47,11 @@
                 "Kilvin\\Providers\\KilvinServiceProvider"
             ]
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../kilvin-docs"
+        }
+    ]
 }
