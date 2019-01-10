@@ -47,11 +47,5 @@
                 "Kilvin\\Providers\\KilvinServiceProvider"
             ]
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../kilvin-docs"
-        }
-    ]
+    }
 }
