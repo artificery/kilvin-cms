@@ -46,7 +46,6 @@ class DocsController extends Controller
             ], 404);
         }
 
-        // @todo - Replace
         $title = $section = '';
 
         if (preg_match('/<h1>(.+)<\/h1>/is', $content, $match)) {
