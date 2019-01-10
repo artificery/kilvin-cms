@@ -345,11 +345,14 @@ class KilvinServiceProvider extends ServiceProvider
 
         define('CMS_NAME'                , 'Kilvin CMS');
         define('KILVIN_VERSION'          , '0.0.2');
+        define('KILVIN_DOCS_VERSION'     , '1.0');
 
         define('KILVIN_PACKAGE_PATH'     , realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
         define('KILVIN_TEMPLATES_PATH'   , $system_path.'templates'.DIRECTORY_SEPARATOR);
         define('KILVIN_THIRD_PARTY_PATH' , $system_path.'plugins'.DIRECTORY_SEPARATOR);
         define('KILVIN_PLUGINS_PATH'     , KILVIN_PACKAGE_PATH.'src/Plugins'.DIRECTORY_SEPARATOR);
+
+        define('KILVIN_DOCS_PACKAGE_PATH', realpath(__DIR__.'/../../../kilvin-docs').DIRECTORY_SEPARATOR);
 
         // @todo - Exterminate!
         define('AMP'                     , '&amp;');

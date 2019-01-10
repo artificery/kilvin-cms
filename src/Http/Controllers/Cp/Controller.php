@@ -75,7 +75,7 @@ class Controller extends BaseController
             'administration'         => ['Administration'],
             'weblogs-administration' => ['WeblogAdministration'],
             'sites'                  => ['Sites'],
-            'sites-administration'   => ['SitesAdministration'],
+            'sites-administration'   => ['SitesAdministration']
         ];
 
         // ------------------------------------
