@@ -1692,6 +1692,14 @@ table tr td {
   margin: -10px auto;
 }
 
+.docs-wrapper p {
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 10px 0 20px;
+  color: #525252;
+  font-family: sans-serif;
+}
+
 .docs-wrapper .docs-sidebar {
   border-right: 1px solid #f0f2f1;
   width: 200px;
@@ -1727,5 +1735,45 @@ table tr td {
 .docs-wrapper .docs-main {
   padding: 15px 25px 40px 15px;
   margin-left: 250px;
+}
+
+.docs-wrapper .docs-main h1 {
+  font-size: 36px;
+}
+
+.docs-wrapper .docs-main h2 {
+  font-size: 28px;
+  font-weight: 400;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.docs-wrapper .docs-main h2:first-of-type {
+  margin-top: 15px;
+}
+
+.docs-wrapper .docs-main h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.docs-wrapper .docs-main ul li {
+  margin: 8px;
+  line-height: 1.5;
+}
+
+.docs-wrapper .docs-main ul li:last-child {
+  margin-bottom: 0px;
+}
+
+.docs-wrapper .docs-main blockquote {
+  background: #f4645f;
+  color: #fff;
+  border-radius: 3px;
+  margin: 10px 0 20px;
+  padding: 10px 15px;
 }
 
