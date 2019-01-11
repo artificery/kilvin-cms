@@ -1688,19 +1688,44 @@ table tr td {
 
 .docs-wrapper {
   overflow: hidden;
-  max-width: 1080px;
+  max-width: 1030px;
   margin: -10px auto;
 }
 
 .docs-wrapper .docs-sidebar {
   border-right: 1px solid #f0f2f1;
-  width: 250px;
+  width: 200px;
   float: left;
-  padding: 35px;
+  padding: 15px;
+}
+
+.docs-wrapper .docs-sidebar h2 {
+  position: relative;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.1s linear;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.docs-wrapper .docs-sidebar > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-wrapper .docs-sidebar > ul ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  font-size: 13px;
+  padding-left: 0.75rem;
 }
 
 .docs-wrapper .docs-main {
-  padding: 25px 125px 50px 50px;
-  margin-left: 300px;
+  padding: 15px 25px 40px 15px;
+  margin-left: 250px;
 }
 
