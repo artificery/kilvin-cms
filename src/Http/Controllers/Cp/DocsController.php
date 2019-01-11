@@ -40,9 +40,6 @@ class DocsController extends Controller
                 'title' => 'Page not found',
                 'index' => $this->docs->getIndex(),
                 'content' => view('kilvin::cp.docs.missing'),
-                'currentVersion' => KILVIN_DOCS_VERSION,
-                'currentSection' => '',
-                'canonical' => null,
             ], 404);
         }
 
@@ -52,25 +49,10 @@ class DocsController extends Controller
             $title = $match[1];
         }
 
-        if ($this->docs->sectionExists($page)) {
-            $section .= '/'.$page;
-        } elseif (! is_null($page)) {
-            return redirect(kilvin_cp_url('docs'));
-        }
-
-        $canonical = null;
-
-        if ($this->docs->sectionExists($sectionPage)) {
-            $canonical = 'docs/'.$sectionPage;
-        }
-
         return view('kilvin::cp.docs.page', [
             'title' => $title,
             'index' => $this->docs->getIndex(),
             'content' => $content,
-            'currentVersion' => KILVIN_DOCS_VERSION,
-            'currentSection' => $section,
-            'canonical' => $canonical,
         ]);
     }
 }
