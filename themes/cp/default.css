@@ -1777,3 +1777,20 @@ table tr td {
   padding: 10px 15px;
 }
 
+.docs-wrapper .docs-main table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.docs-wrapper .docs-main table th {
+  font-size: 14px;
+}
+
+.docs-wrapper .docs-main table th,
+.docs-wrapper .docs-main table td {
+  border: 1px solid #dee0df;
+  padding: 10px;
+  text-align: left;
+}
+

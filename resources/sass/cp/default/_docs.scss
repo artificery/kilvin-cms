@@ -88,6 +88,22 @@
 			margin: 10px 0 20px;
 			padding: 10px 15px;
 		}
+		
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 13px;
+			
+			th {
+				font-size: 14px;
+			}
+			
+			th, td {
+				border: 1px solid #dee0df;
+				padding: 10px;
+				text-align: left;
+			}
+		}
 	}
 }
 
