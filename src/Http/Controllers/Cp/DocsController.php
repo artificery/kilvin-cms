@@ -40,7 +40,8 @@ class DocsController extends Controller
                 'title' => 'Page not found',
                 'content' => view('kilvin::cp.docs.missing'),
                 'menu' => $this->docs->get('documentation'),
-                'is_docs' => true
+                'is_docs' => true,
+                'breadcrumb' => ['name' => 'Documentation', 'link' => kilvinCpUrl('docs')],
             ], 404);
         }
 

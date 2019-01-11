@@ -77,6 +77,24 @@
     	{% include 'kilvin::cp._breadcrumbs' %}
     {% else %}
         {% include 'kilvin::cp._simple_header' %}
+
+        {% if breadcrumb is defined %}
+            <div class="breadcrumb">
+                <table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td class="breadcrumbLeft">
+                                <span class="crumblinks">
+                                    <a href="{{ breadcrumb.link }}">{{ breadcrumb.name }}</a>
+                                </span>
+                            </td>
+
+                            <td class="breadcrumbRight" style="width:270px;" valign="bottom" align="right"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
     {% endif %}
 
 
