@@ -14,27 +14,7 @@
 
 <body>
 
-<div class="pageHeader">
-
-	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
-		<tbody>
-			<tr>
-				<td class="quickLinks">
-					<div class="quickLinksLeft">
-			            <div class="simpleHeader">Welcome to {{cms.name}}</div>
-			        </div>
-
-			        <div class="quickLinksRight">
-			            {% if(Auth.user) %}
-				            <a href="{{ kilvinCpUrl('logout') }}">{{__('kilvin::cp.logout')}}</a>
-			            {% endif %}
-			        </div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
+{% include 'kilvin::cp._simple_header' %}
 
 <div class="main-content">
 	{% block mainContent %}

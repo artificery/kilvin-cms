@@ -238,5 +238,8 @@ return [
 'new_entry' =>
 "New Entry",
 
+'docs' =>
+"Documentation",
+
 
 ];
