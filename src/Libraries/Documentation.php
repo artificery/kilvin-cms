@@ -61,20 +61,7 @@ class Documentation
      */
     public static function replaceLinks($content)
     {
-        $path = '';
+        $path = kilvinCpUrl('docs');
         return str_replace('{{path}}', $path, $content);
-    }
-
-    /**
-     * Check if the given section exists.
-     *
-     * @param  string  $page
-     * @return boolean
-     */
-    public function sectionExists($page)
-    {
-        return $this->files->exists(
-            KILVIN_DOCS_PACKAGE_PATH.$page.'.md'
-        );
     }
 }
