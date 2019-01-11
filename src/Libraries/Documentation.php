@@ -35,24 +35,6 @@ class Documentation
     }
 
     /**
-     * Get the documentation index page.
-     *
-     * @return string
-     */
-    public function getIndex()
-    {
-        return $this->cache->remember('kilvin.docs.index', 5, function () {
-            $path = KILVIN_DOCS_PACKAGE_PATH.'documentation.md';
-
-            if ($this->files->exists($path)) {
-                return $this->replaceLinks(parsedown($this->files->get($path)));
-            }
-
-            return null;
-        });
-    }
-
-    /**
      * Get the given documentation page.
      *
      * @param  string  $page

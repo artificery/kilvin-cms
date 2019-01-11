@@ -4,6 +4,14 @@
 
 {% block mainContent %}
 
-	{{ content | raw }}
+    <div class="docs-wrapper">
+        <div class="docs-sidebar">
+            {{ menu | raw }}
+        </div>
+
+        <div class="docs-main">
+        	{{ content | raw }}
+        </div>
+    </div>
 
 {% endblock %}
