@@ -39,7 +39,8 @@ class DocsController extends Controller
             return response()->view('kilvin::cp.docs.page', [
                 'title' => 'Page not found',
                 'content' => view('kilvin::cp.docs.missing'),
-                'menu' => $this->docs->get('documentation')
+                'menu' => $this->docs->get('documentation'),
+                'is_docs' => true
             ], 404);
         }
 
@@ -52,7 +53,8 @@ class DocsController extends Controller
         return view('kilvin::cp.docs.page', [
             'title' => $title,
             'content' => $content,
-            'menu' => $this->docs->get('documentation')
+            'menu' => $this->docs->get('documentation'),
+            'is_docs' => true,
         ]);
     }
 }
