@@ -1735,6 +1735,13 @@ table tr td {
 .docs-wrapper .docs-main {
   padding: 15px 25px 40px 15px;
   margin-left: 250px;
+  /**
+   * prism.js default theme for JavaScript, CSS and HTML
+   * Based on dabblet (http://dabblet.com)
+   * @author Lea Verou
+   */
+  /* Code blocks */
+  /* Inline code */
 }
 
 .docs-wrapper .docs-main h1 {
@@ -1758,6 +1765,30 @@ table tr td {
   font-weight: 400;
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.docs-wrapper .docs-main h1 + ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.8;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #f0f2f1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.docs-wrapper .docs-main h1 + ul li {
+  margin: 0 0 0 8px;
+  line-height: 1.3;
+}
+
+.docs-wrapper .docs-main h1 + ul li:before {
+  content: "# ";
+  margin-right: 0.25em;
+  color: #000;
+  opacity: 0.3;
 }
 
 .docs-wrapper .docs-main ul li {
@@ -1792,5 +1823,76 @@ table tr td {
   border: 1px solid #dee0df;
   padding: 10px;
   text-align: left;
+}
+
+.docs-wrapper .docs-main .docs article code[class*=language-],
+.docs-wrapper .docs-main .docs article pre[class*=language-] {
+  font-size: 12px;
+  line-height: 2;
+  vertical-align: middle;
+}
+
+.docs-wrapper .docs-main code[class*=language-],
+.docs-wrapper .docs-main pre[class*=language-] {
+  color: black;
+  text-shadow: 0 1px white;
+  font-family: "Operator Mono", "Fira Code", Consolas, Monaco, "Andale Mono", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.7;
+  font-size: 12px;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.docs-wrapper .docs-main pre[class*=language-]::-moz-selection,
+.docs-wrapper .docs-main pre[class*=language-] ::-moz-selection,
+.docs-wrapper .docs-main code[class*=language-]::-moz-selection,
+.docs-wrapper .docs-main code[class*=language-] ::-moz-selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+.docs-wrapper .docs-main pre[class*=language-]::selection,
+.docs-wrapper .docs-main pre[class*=language-] ::selection,
+.docs-wrapper .docs-main code[class*=language-]::selection,
+.docs-wrapper .docs-main code[class*=language-] ::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
+
+@media print {
+  .docs-wrapper .docs-main code[class*=language-],
+  .docs-wrapper .docs-main pre[class*=language-] {
+    text-shadow: none;
+  }
+}
+
+.docs-wrapper .docs-main pre[class*=language-] {
+  padding: 1em;
+  margin: 10px 0 20px;
+  overflow: auto;
+}
+
+.docs-wrapper .docs-main :not(pre) > code[class*=language-],
+.docs-wrapper .docs-main pre[class*=language-] {
+  background: rgba(238, 238, 238, 0.35);
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+}
+
+.docs-wrapper .docs-main :not(pre) > code[class*=language-] {
+  background: #f0f2f1;
+  color: #f4645f;
+  padding: 1px 5px;
+  border-radius: 3px;
 }
 
