@@ -1800,6 +1800,12 @@ table tr td {
   margin-bottom: 0px;
 }
 
+.docs-wrapper .docs-main ul li > ul {
+  margin-top: 4px;
+  list-style: none;
+  padding-left: 20px;
+}
+
 .docs-wrapper .docs-main blockquote {
   background: #f4645f;
   color: #fff;

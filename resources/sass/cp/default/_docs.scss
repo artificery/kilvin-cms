@@ -102,6 +102,12 @@
 			&:last-child {
 				margin-bottom: 0px;
 			}
+			
+			> ul {
+				margin-top: 4px;
+				list-style: none;
+				padding-left: 20px;
+			}
 		}
 		
 		blockquote {
