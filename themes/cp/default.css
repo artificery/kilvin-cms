@@ -1695,7 +1695,7 @@ table tr td {
 .docs-wrapper p {
   font-size: 13px;
   line-height: 1.9;
-  margin: 10px 0 20px;
+  margin: 10px 0 10px;
   color: #525252;
   font-family: sans-serif;
 }
@@ -1792,7 +1792,7 @@ table tr td {
 }
 
 .docs-wrapper .docs-main ul li {
-  margin: 8px;
+  margin: 4px 0;
   line-height: 1.5;
 }
 
