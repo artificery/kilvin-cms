@@ -2,16 +2,15 @@
 	overflow: hidden;
 	max-width: 1030px;
 	margin: -10px auto;
+	font-size: 14px;
+	font-family: sans-serif;
+	color: rgb(82, 82, 82);
 	
 	p {
-		font-size: 13px;
-		line-height: 1.9;
+		line-height: 1.6;
 		margin: 10px 0 10px;
-		color: rgb(82, 82, 82);
-		font-family: sans-serif;
 	}
-
-
+	
 	.docs-sidebar {
 		border-right: 1px solid #f0f2f1;
 		width: 200px;

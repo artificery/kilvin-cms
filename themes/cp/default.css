@@ -1690,14 +1690,14 @@ table tr td {
   overflow: hidden;
   max-width: 1030px;
   margin: -10px auto;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #525252;
 }
 
 .docs-wrapper p {
-  font-size: 13px;
-  line-height: 1.9;
+  line-height: 1.6;
   margin: 10px 0 10px;
-  color: #525252;
-  font-family: sans-serif;
 }
 
 .docs-wrapper .docs-sidebar {
