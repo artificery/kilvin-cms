@@ -36,7 +36,7 @@ class ControlPanel
     public function __construct()
     {
         $full_path = trim(request()->decodedPath(), '/');
-        $cp_path = config('cms.cp_path');
+        $cp_path = config('kilvin.cp_path');
 
         if (Str::startsWith($full_path, $cp_path.'/')) {
             $this->path = Str::replaceFirst($cp_path.'/', '', $full_path);
@@ -201,7 +201,7 @@ class ControlPanel
      */
     public function jsAndCssHeaderElements()
     {
-        $cp_path = rtrim(config('cms.cp_path'), '/');
+        $cp_path = rtrim(config('kilvin.cp_path'), '/');
         $manifest_path = KILVIN_THEMES.'/mix-manifest.json';
         $js_suffix = 'v'.KILVIN_VERSION;
         $css_suffix = 'v'.KILVIN_VERSION;

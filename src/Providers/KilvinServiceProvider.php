@@ -122,10 +122,10 @@ class KilvinServiceProvider extends ServiceProvider
 
         if (REQUEST == 'INSTALL') {
 
-            $installed_version = config('cms.installed_version');
+            $installed_version = config('kilvin.installed_version');
 
             // Hide installer after installation
-            if (!empty($installed_version) && config('cms.hide_installer') === true) {
+            if (!empty($installed_version) && config('kilvin.hide_installer') === true) {
                 \Log::debug('Kilvin CMS Installer requested but configuration indicates it is already installed.');
                 return;
             }
@@ -141,7 +141,7 @@ class KilvinServiceProvider extends ServiceProvider
         //  Check config file is ready
         // ----------------------------------------------
 
-        if ( config()->get('cms.installed_version') === null) {
+        if ( config()->get('kilvin.installed_version') === null) {
             exit(CMS_NAME." does not appear to be installed.");
         }
 
@@ -315,7 +315,7 @@ class KilvinServiceProvider extends ServiceProvider
 
         if (request()->segment(1) == 'installer') {
             define('REQUEST', 'INSTALL');
-        } elseif (request()->segment(1) == config('cms.cp_path')) {
+        } elseif (request()->segment(1) == config('kilvin.cp_path')) {
             define('REQUEST', 'CP');
         } elseif (app()->runningInConsole()) {
             define('REQUEST', 'CONSOLE');

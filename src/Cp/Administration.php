@@ -1100,8 +1100,8 @@ EOT;
 		// Convert the y/n to true/false
 
 		$allowed = [
-			'CMS_IS_SYSTEM_ON'      => 'is_system_on',
-            'CMS_DISABLE_EVENTS'    => 'disable_events',
+			'KILVIN_IS_SYSTEM_ON'      => 'is_system_on',
+            'KILVIN_DISABLE_EVENTS'    => 'disable_events',
 		];
 
 		$data = [];

@@ -1,7 +1,7 @@
 <?php
 
 
-$cp_path  = trim(config('cms.cp_path'), '/');
+$cp_path  = trim(config('kilvin.cp_path'), '/');
 
 Route::pattern('any', '.*');
 

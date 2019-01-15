@@ -348,7 +348,7 @@ class InstallController extends Controller
             $errors[] = "Your password must be at least 10 characters in length.";
         }
 
-        $installed_version = config('cms.installed_version');
+        $installed_version = config('kilvin.installed_version');
 
         if (!empty($installed_version))
         {
@@ -757,7 +757,7 @@ class InstallController extends Controller
         //  Already Installed?
         // ---------------------------------------
 
-        $installed_version = config('cms.installed_version');
+        $installed_version = config('kilvin.installed_version');
 
         if (!empty($installed_version)) {
             $errors[]  = [

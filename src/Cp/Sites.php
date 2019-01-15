@@ -73,7 +73,7 @@ class Sites
             return redirect(kilvinCpUrl('administration').'/site-preferences');
         }
 
-        return redirect('/'.trim(config('cms.cp_path'), '/'));
+        return redirect('/'.trim(config('kilvin.cp_path'), '/'));
     }
 
    /**

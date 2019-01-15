@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->redirectTo = config('cms.cp_path');
+        $this->redirectTo = config('kilvin.cp_path');
 
         $this->middleware('guest')->except('logout');
     }

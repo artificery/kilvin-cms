@@ -20,7 +20,7 @@ if (! function_exists('kilvinCpUrl')) {
         }
 
         $path = trim($path, '/');
-        $cp_path = config('cms.cp_path');
+        $cp_path = config('kilvin.cp_path');
 
         if ($path != $cp_path && !Str::startsWith($path, $cp_path.'/')) {
             $path = '/'.$cp_path.'/'.$path;
