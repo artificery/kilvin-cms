@@ -23,6 +23,7 @@ It will load up the Weblogs plugin's Entries element and get the most recent one
 
 class PluginsVariable
 {
+
     /**
      * List all plugins
      *
@@ -31,6 +32,16 @@ class PluginsVariable
     public static function pluginsList()
     {
         return Plugins::installedPlugins();
+    }
+
+    /**
+     * Load a Plugin Element Type
+     *
+     * @return array
+     */
+    public function load($element)
+    {
+        return $this->Element($element);
     }
 
    /**
