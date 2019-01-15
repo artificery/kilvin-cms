@@ -5,6 +5,7 @@ namespace Kilvin\Plugins\Weblogs\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Kilvin\Traits\LocalizedModel;
+use Kilvin\Models\Member;
 
 class Entry extends Model
 {
@@ -28,6 +29,14 @@ class Entry extends Model
     public function fieldsData()
     {
         return $this->hasOne(EntryData::class, 'weblog_entry_id', 'id');
+    }
+
+    /**
+     * Get the Author
+     */
+    public function author()
+    {
+        return $this->belongsTo(Member::class, 'author_id', 'id');
     }
 
     /**
