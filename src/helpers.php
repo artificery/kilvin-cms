@@ -342,10 +342,11 @@ EOT;
 
 
 if (! function_exists('parsedown')) {
-    /**
-     * Clears Caching
+   /**
+     * Parse a string in Parsedown/markdown
      *
-     * @return boolean
+     * @param string $str
+     * @return string
      */
     function parsedown($str)
     {

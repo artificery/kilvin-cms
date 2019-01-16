@@ -12,7 +12,7 @@ class Manager extends BaseManager
     protected $name;
     protected $description;
     protected $developer = 'Paul Burdick';
-    protected $developer_url = 'https://arliden.com';
+    protected $developer_url = 'https://kilvincms.com';
     protected $documentation_url = 'http://parsedown.org';
     protected $has_cp = 'n';
 

@@ -371,22 +371,19 @@ This entry contains helpful resources to help you get the most from Kilvin CMS a
 
 ### Community Technical Support
 
-Community technical support is handled through our Slack Channel. Our community is full of knowledgeable and helpful people that will often reply quickly to your technical questions. Please review the [Support](https://arliden.com/docs/support.html) section of our User Guide before posting in Slack.
+Community technical support is handled through our Slack Channel. Our community is full of knowledgeable and helpful people that will often reply quickly to your technical questions. Please review the [Support](https://kilvincms.com/support) section of our site before posting in Slack.
 
 ### Premium Support
 
-With our [support subscriptions](https://arliden.com/premium-support) you can receive premium support for Kilvin CMS from the maintainers of the code.
+With our [support subscriptions](https://kilvincms.com/premium-support) you can receive premium support for Kilvin CMS from the maintainers of the code.
 
 Get help on how to best begin your development process, how to organise your team of developers working on the same project for maximum productivity, and answers to prompt, in-depth answers to your technical questions from the experts.
 
-Please review our [Premium Support](https://arliden.com/premium-support) page for additional information.
+Please review our [Premium Support](https://kilvincms.com/premium-support) page for additional information.
 
 ### Resources
 
-- [Getting Started Guide](https://arliden.com/getting_started.html)
-- [Quick Start Tutorial](https://arliden.com/quick_start.html)
-- [Kilvin CMS - Documentation](https://arliden.com/docs/)
-- [Kilvin CMS - FAQ](https://arliden.com/faq/)
+- [Kilvin CMS - Documentation](https://kilvincms.com/docs/)
 
 Love Kilvin CMS? Please tell your friends and professionals associates.
 

@@ -843,12 +843,12 @@ fill="#000000" stroke="none">
                 $logo.
                 PHP_EOL.
                 $this->anchor(
-                    'https://arliden.com/',
+                    'https://kilvincms.com/',
                     CMS_NAME." ".KILVIN_VERSION
                 ).
                 '<br>'.
                 __('kilvin::cp.copyright').
-                ' &#169; 2019 Arliden, LLC'.
+                ' &#169; 2019 Artificery, LLC'.
             "</div>".
             PHP_EOL;
     }

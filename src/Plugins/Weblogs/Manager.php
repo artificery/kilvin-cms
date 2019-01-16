@@ -9,7 +9,7 @@ class Manager extends BaseManager
     protected $name = 'Weblogs';
     protected $description = 'Output weblog entries and related content';
     protected $developer = 'Paul Burdick';
-    protected $developer_url = 'https://arliden.com';
-    protected $documentation_url = 'https://arliden.com';
+    protected $developer_url = 'https://kilvincms.com';
+    protected $documentation_url = 'https://kilvincms.com/docs';
     protected $has_cp = 'n';
 }
