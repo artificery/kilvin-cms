@@ -55,6 +55,8 @@ class Handler extends ExceptionHandler
         if ($e instanceof \Illuminate\Database\QueryException) {
             if (preg_match('/([A-Z]+) command denied to user/i', $e->getMessage(), $match)) {
 
+                \Log::debug($e->getMessage());
+
                 if (REQUEST === 'CP') {
                     $vars = [
                         'title'     => 'Database Error',
