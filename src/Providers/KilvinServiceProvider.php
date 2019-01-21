@@ -351,11 +351,6 @@ class KilvinServiceProvider extends ServiceProvider
 
         define('KILVIN_DOCS_PACKAGE_PATH', realpath(__DIR__.'/../../../kilvin-docs').DIRECTORY_SEPARATOR);
 
-        // @todo - Exterminate!
-        define('AMP'                     , '&amp;');
-        define('BR'                      , '<br />');
-        define('NBS'                     , '&nbsp;');
-
         // ----------------------------------------------
         //  Determine the request type
         // ----------------------------------------------

@@ -396,7 +396,7 @@ EOT;
 		//  Display Page
 		// -------------------------------------
 
-		$left_menu .= '</div>'.PHP_EOL.BR;
+		$left_menu .= '</div>'.PHP_EOL.'<br>';
 
 		// Add in the Search Form
 		$left_menu .=  Cp::quickDiv('tableHeadingAlt', __('kilvin::admin.search'))
@@ -840,7 +840,7 @@ EOT;
 			$r .= '<tr>'.PHP_EOL;
 
 			$r .= "<td class='tableHeadingAlt' id='".$menu_head."2' colspan='2'>";
-			$r .= NBS.__('kilvin::admin.'.$menu_head).'</td>'.PHP_EOL;
+			$r .= '&nbsp;'.__('kilvin::admin.'.$menu_head).'</td>'.PHP_EOL;
 			$r .= '</tr>'.PHP_EOL;
 
 			foreach ($menu_array as $key => $val)

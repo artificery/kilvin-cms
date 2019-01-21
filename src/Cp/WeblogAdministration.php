@@ -208,7 +208,7 @@ EOT;
 
         // Weblog name field
         $r .= '<tr>'.PHP_EOL.
-              Cp::tableCell('', Cp::required().NBS.Cp::quickSpan('defaultBold', __('kilvin::admin.full_weblog_name'))).
+              Cp::tableCell('', Cp::required().'&nbsp;'.Cp::quickSpan('defaultBold', __('kilvin::admin.full_weblog_name'))).
               Cp::tableCell('', Cp::input_text('weblog_name', '', '20', '100', 'input', '260px')).
               '</tr>'.PHP_EOL;
 
@@ -217,7 +217,7 @@ EOT;
               Cp::tableCell(
               	'',
               	Cp::required().
-              		NBS.
+              		'&nbsp;'.
               		Cp::quickSpan(
               			'defaultBold',
               			__('kilvin::admin.weblog_handle')
@@ -254,13 +254,13 @@ EOT;
         $r .= '<tr>'.PHP_EOL.
               Cp::tableCell('', Cp::quickSpan('defaultBold', __('kilvin::admin.edit_group_prefs')), '40%').
               Cp::tableCell('', Cp::input_radio('edit_group_prefs', 'y').
-                                                NBS.__('kilvin::admin.yes').
-                                                NBS.
+                                                '&nbsp;'.__('kilvin::admin.yes').
+                                                '&nbsp;'.
                                                 Cp::input_radio('edit_group_prefs', 'n', 1).
-                                                NBS.__('kilvin::admin.no'), '60%').
+                                                '&nbsp;'.__('kilvin::admin.no'), '60%').
               '</tr>'.PHP_EOL;
 
-        $r .= '</table>'.PHP_EOL.BR;
+        $r .= '</table>'.PHP_EOL.'<br>';
 
         // GROUP FIELDS
         $g = '';
@@ -356,7 +356,7 @@ EOT;
         $g .= Cp::input_select_footer().
               '</td>'.PHP_EOL.
               '</tr>'.PHP_EOL.
-              '</table>'.PHP_EOL.BR.
+              '</table>'.PHP_EOL.'<br>'.
               '</div>'.PHP_EOL;
 
         $r .= $g;
@@ -398,7 +398,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         // Is the weblog name taken?
@@ -608,7 +608,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $data = (array) DB::table('weblogs')
@@ -845,7 +845,7 @@ EOT;
 
         // Enable Quicksave versioning
         $r .= '<tr>'.PHP_EOL
-             .Cp::tableCell('', Cp::quickSpan('defaultBold', __('kilvin::admin.enable_qucksave_versioning')).BR.__('kilvin::admin.quicksave_note'), '50%')
+             .Cp::tableCell('', Cp::quickSpan('defaultBold', __('kilvin::admin.enable_qucksave_versioning')).'<br>'.__('kilvin::admin.quicksave_note'), '50%')
              .Cp::td('', '50%');
 
               $selected = ($enable_qucksave_versioning == 'y') ? 1 : '';
@@ -864,7 +864,7 @@ EOT;
         $x = Cp::quickDiv('littlePadding', Cp::input_checkbox('clear_versioning_data', 'y', 0).' '.Cp::quickSpan('highlight', __('kilvin::admin.clear_versioning_data')));
 
         $r .= '<tr>'.PHP_EOL.
-              Cp::tableCell('', Cp::quickSpan('defaultBold', __('kilvin::admin.max_revisions')).BR.__('kilvin::admin.max_revisions_note'), '50%').
+              Cp::tableCell('', Cp::quickSpan('defaultBold', __('kilvin::admin.max_revisions')).'<br>'.__('kilvin::admin.max_revisions_note'), '50%').
               Cp::tableCell('', Cp::input_text('max_revisions', $max_revisions, '30', '4', 'input', '100%').$x, '50%').
               '</tr>'.PHP_EOL;
 
@@ -1265,7 +1265,7 @@ EOT;
         $r .= '<tr>'.PHP_EOL;
 
         $r .= "<td class='tableHeadingAlt' colspan='2'>";
-        $r .= NBS.__('kilvin::admin.fields').'</td>'.PHP_EOL;
+        $r .= '&nbsp;'.__('kilvin::admin.fields').'</td>'.PHP_EOL;
         $r .= '</tr>'.PHP_EOL;
 
         // Category group select list
@@ -1359,7 +1359,7 @@ EOT;
         $r .= '<tr>'.PHP_EOL;
 
         $r .= "<td class='tableHeadingAlt' colspan='2'>";
-        $r .= NBS.__('kilvin::admin.default_settings').'</td>'.PHP_EOL;
+        $r .= '&nbsp;'.__('kilvin::admin.default_settings').'</td>'.PHP_EOL;
         $r .= '</tr>'.PHP_EOL;
 
         // Default status menu
@@ -1435,7 +1435,7 @@ EOT;
         $r .= '<tr>'.PHP_EOL;
 
         $r .= "<td class='tableHeadingAlt' colspan='2'>";
-        $r .= NBS.__('kilvin::admin.field_display_options').'</td>'.PHP_EOL;
+        $r .= '&nbsp;'.__('kilvin::admin.field_display_options').'</td>'.PHP_EOL;
         $r .= '</tr>'.PHP_EOL;
 
         // Live Look Template
@@ -1518,7 +1518,7 @@ EOT;
         $r .= Cp::quickDiv(
             'littlePadding',
             Cp::input_submit(__('kilvin::cp.update')).
-                NBS.
+                '&nbsp;'.
                 Cp::input_submit(__('kilvin::cp.update_and_return'),'return')
         );
         $r .= '</div>'.PHP_EOL.'</form>'.PHP_EOL;
@@ -1625,7 +1625,7 @@ EOT;
             return false;
         }
 
-        Cp::log(__('kilvin::admin.weblog_deleted').NBS.$weblog_name);
+        Cp::log(__('kilvin::admin.weblog_deleted').'&nbsp;'.$weblog_name);
 
         $query = DB::table('weblog_entries')
             ->where('weblog_id', $weblog_id)
@@ -1680,7 +1680,7 @@ EOT;
         Stats::update_weblog_stats();
 
         return redirect(kilvinCpUrl('weblogs-administration/weblogs-overview'))
-            ->with('cp-message', __('kilvin::admin.weblog_deleted').NBS.'<b>'.$weblog_name.'</b>');
+            ->with('cp-message', __('kilvin::admin.weblog_deleted').'&nbsp;'.'<b>'.$weblog_name.'</b>');
     }
 
 //=====================================================================
@@ -2060,7 +2060,7 @@ EOT;
             ->where('category_group_id', $category_group_id)
             ->delete();
 
-        $message = Cp::quickDiv('success-message', __('kilvin::admin.category_group_deleted').NBS.'<b>'.$name.'</b>');
+        $message = Cp::quickDiv('success-message', __('kilvin::admin.category_group_deleted').'&nbsp;'.'<b>'.$name.'</b>');
 
         Cp::log(__('kilvin::admin.category_group_deleted').'&nbsp;'.$name);
 
@@ -2146,15 +2146,15 @@ EOT;
                                         '/category_group_id='.$category_group_id.
                                         '/order=up'.$zurl,
                                     $up).
-                                NBS.
+                                '&nbsp;'.
                                 Cp::anchor(
                                     'weblogs-administration/change-category-order'.
                                         '/category_id='.$key.
                                         '/category_group_id='.$category_group_id.
                                         '/order=down'.$zurl,
                                     $down),
-                                Cp::quickDiv('defaultBold', NBS.$val[1]),
-                                Cp::quickDiv('defaultBold', NBS.$val[2]),
+                                Cp::quickDiv('defaultBold', '&nbsp;'.$val[1]),
+                                Cp::quickDiv('defaultBold', '&nbsp;'.$val[2]),
                                 Cp::anchor(
                                     'weblogs-administration/edit-category-form'.
                                         '/category_id='.$key.
@@ -2237,15 +2237,15 @@ EOT;
                                     '/category_group_id='.$category_group_id.
                                     '/order=up'.$zurl,
                                 $up).
-                        NBS.
+                        '&nbsp;'.
                             Cp::anchor(
                                 'weblogs-administration/change-category-order'.
                                     '/category_id='.$key.
                                     '/category_group_id='.$category_group_id.
                                     '/order=down'.$zurl,
                                 $down),
-                            Cp::quickDiv('defaultBold', $pre.$indent.NBS.$val[1]),
-                            Cp::quickDiv('defaultBold', $pre.$indent.NBS.$val[2]),
+                            Cp::quickDiv('defaultBold', $pre.$indent.'&nbsp;'.$val[1]),
+                            Cp::quickDiv('defaultBold', $pre.$indent.'&nbsp;'.$val[2]),
                             Cp::anchor(
                                 'weblogs-administration/edit-category-form'.
                                     '/category_id='.$key.
@@ -2255,7 +2255,7 @@ EOT;
                         ]
                     );
                 } else {
-                    $this->categories[] = Cp::input_select_option($key, $pre.$indent.NBS.$val[1], ($key == $p_id) ? '1' : '');
+                    $this->categories[] = Cp::input_select_option($key, $pre.$indent.'&nbsp;'.$val[1], ($key == $p_id) ? '1' : '');
                 }
 
                 $this->categorySubTree($key, $cat_array, $category_group_id, $depth, $type, $p_id);
@@ -2416,7 +2416,7 @@ EOT;
             $r .= '</tr>'.PHP_EOL;
 
             foreach ($this->categories as $val) {
-                $prefix = (strlen($val[0]) == 1) ? NBS : NBS;
+                $prefix = (strlen($val[0]) == 1) ? '&nbsp;' : '&nbsp;';
                 $r .= $val;
             }
 
@@ -2437,8 +2437,8 @@ EOT;
                 $r .= Cp::div('littlePadding');
                 $r .= '<label>'.
                 	Cp::input_radio('sort_order', 'a', ($sort_order == 'a') ? 1 : '').__('kilvin::admin.alpha').'</label>';
-                $r .= NBS.NBS.'<label>'.Cp::input_radio('sort_order', 'c', ($sort_order != 'a') ? 1 : '').__('kilvin::admin.custom').'</label>';
-                $r .= NBS.NBS.Cp::input_submit(__('kilvin::cp.update'));
+                $r .= '&nbsp;'.'&nbsp;'.'<label>'.Cp::input_radio('sort_order', 'c', ($sort_order != 'a') ? 1 : '').__('kilvin::admin.custom').'</label>';
+                $r .= '&nbsp;'.'&nbsp;'.Cp::input_submit(__('kilvin::cp.update'));
                 $r .= '</div>'.PHP_EOL;
                 $r .= '</div>'.PHP_EOL;
                 $r .= '</form>'.PHP_EOL;
@@ -2477,7 +2477,7 @@ EOT;
 EOT;
 
             $r .= '<form>';
-            $r .= Cp::quickDiv('littlePadding', Cp::quickDiv('defaultCenter', '<input type="submit" id="update_publish_cats" value="'.NBS.__('kilvin::admin.update_publish_cats').NBS.'"/>'  ));
+            $r .= Cp::quickDiv('littlePadding', Cp::quickDiv('defaultCenter', '<input type="submit" id="update_publish_cats" value="'.'&nbsp;'.__('kilvin::admin.update_publish_cats').'&nbsp;'.'"/>'  ));
             $r .= '</form>';
         }
 
@@ -2569,7 +2569,7 @@ EOT;
                     .Cp::quickDiv('tableHeading', __('kilvin::admin.global_sort_order'))
                     .Cp::div('box')
                     .Cp::quickDiv('defaultBold', __('kilvin::admin.category_order_confirm_text'))
-                    .Cp::quickDiv('alert', BR.__('kilvin::admin.category_sort_warning').BR.BR)
+                    .Cp::quickDiv('alert', '<br>'.__('kilvin::admin.category_sort_warning').'<br><br>')
                     .'</div>'.PHP_EOL
                     .Cp::quickDiv('littlePadding', Cp::input_submit(__('kilvin::cp.update')))
                     .'</form>'.PHP_EOL;
@@ -2757,7 +2757,7 @@ EOT;
 
         $r .= Cp::div('box');
         $r .= Cp::div('littlePadding').
-              Cp::quickDiv('littlePadding', Cp::quickDiv('defaultBold', Cp::required().NBS.__('kilvin::admin.category_name'))).
+              Cp::quickDiv('littlePadding', Cp::quickDiv('defaultBold', Cp::required().'&nbsp;'.__('kilvin::admin.category_name'))).
               Cp::input_text(
                     'category_name',
                     $category_name,
@@ -2849,7 +2849,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $data = Request::only([
@@ -3341,7 +3341,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $data = Request::only([
@@ -3639,12 +3639,12 @@ EOT;
 
                     $selected = ( ! isset($group[$row->member_group_id])) ? 1 : '';
 
-                    $r .= Cp::qlabel(__('kilvin::admin.yes')).NBS.
+                    $r .= Cp::qlabel(__('kilvin::admin.yes')).'&nbsp;'.
                           Cp::input_radio('access_'.$row->member_group_id, 'y', $selected).'&nbsp;';
 
                     $selected = (isset($group[$row->member_group_id])) ? 1 : '';
 
-                    $r .= Cp::qlabel(__('kilvin::admin.no')).NBS.
+                    $r .= Cp::qlabel(__('kilvin::admin.no')).'&nbsp;'.
                           Cp::input_radio('access_'.$row->member_group_id, 'n', $selected).'&nbsp;';
 
                     $r .= '</td>'.PHP_EOL
@@ -3693,7 +3693,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $data = Request::only([
@@ -3817,7 +3817,7 @@ EOT;
             $r .= Cp::quickDiv(
                     'littlePadding',
                     Cp::quickSpan('defaultBold', __('kilvin::admin.status_name').':').
-                        NBS.
+                        '&nbsp;'.
                         __('kilvin::admin.'.$status));
         } else {
             $r .= Cp::quickDiv(
@@ -3889,12 +3889,12 @@ EOT;
 
                         $selected = ( ! isset($group[$row->member_group_id])) ? 1 : '';
 
-                        $r .= Cp::qlabel(__('kilvin::admin.yes')).NBS.
+                        $r .= Cp::qlabel(__('kilvin::admin.yes')).'&nbsp;'.
                               Cp::input_radio('access_'.$row->member_group_id, 'y', $selected).'&nbsp;';
 
                         $selected = (isset($group[$row->member_group_id])) ? 1 : '';
 
-                        $r .= Cp::qlabel(__('kilvin::admin.no')).NBS.
+                        $r .= Cp::qlabel(__('kilvin::admin.no')).'&nbsp;'.
                               Cp::input_radio('access_'.$row->member_group_id, 'n', $selected).'&nbsp;';
 
                         $r .= '</td>'.PHP_EOL
@@ -4280,7 +4280,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $group_id = Request::input('weblog_field_group_id');;
@@ -4836,7 +4836,7 @@ EOT;
         //  Submit
         // ------------------------------------
 
-        $r .= BR;
+        $r .= '<br>';
 
         if ($type == 'edit') {
             $r .= Cp::input_submit(__('kilvin::cp.update'));
@@ -4877,7 +4877,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         $data = Request::only(
@@ -4961,7 +4961,7 @@ EOT;
             $validator = Validator::make(request()->all(), $rules);
 
             if ($validator->fails()) {
-                return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+                return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
             }
         }
 
@@ -5411,12 +5411,12 @@ EOT;
                     .Cp::input_radio('allowed_types', 'all', ($allowed_types == 'all') ? 1 : '')
                     .__('kilvin::admin.all_filetypes')
                 .'</label>'
-                .NBS.NBS.
+                .'&nbsp;'.'&nbsp;'.
                 '<label>'
                     .Cp::input_radio('allowed_types', 'images', ($allowed_types == 'images') ? 1 : '')
                     .__('kilvin::admin.images_only')
                 .'</label>'
-                .NBS.NBS
+                .'&nbsp;'.'&nbsp;'
                 .'<label>'
                     .Cp::input_radio('allowed_types', 'list', ($allowed_types == 'list') ? 1 : '')
                     .__('kilvin::admin.list_of_mimes')
@@ -5544,7 +5544,7 @@ EOT;
                     .Cp::input_radio('driver', 'local', ($driver == 'local') ? 1 : '')
                     .__('kilvin::admin.driver_local')
                 .'</label>'
-                .NBS.NBS.
+                .'&nbsp;'.'&nbsp;'.
                 '<label>'
                     .Cp::input_radio('driver', 's3', ($driver == 's3') ? 1 : '')
                     .__('kilvin::admin.driver_amazon_s3')
@@ -5601,12 +5601,12 @@ EOT;
 
                 $selected = (isset($groups[$row->member_group_id])) ? 1 : '';
 
-                $r .= Cp::qlabel(__('kilvin::admin.yes')).NBS.
+                $r .= Cp::qlabel(__('kilvin::admin.yes')).'&nbsp;'.
                       Cp::input_radio('access['.$row->member_group_id.']', '1', $selected).'&nbsp;';
 
                 $selected = (! isset($groups[$row->member_group_id])) ? 1 : '';
 
-                $r .= Cp::qlabel(__('kilvin::admin.no')).NBS.
+                $r .= Cp::qlabel(__('kilvin::admin.no')).'&nbsp;'.
                       Cp::input_radio('access['.$row->member_group_id.']', '0', $selected).'&nbsp;';
 
                 $r .= '</td>'.PHP_EOL.'</tr>'.PHP_EOL;
@@ -5713,7 +5713,7 @@ EOT;
         ]);
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         // Is the name or handle taken?

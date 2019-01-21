@@ -181,7 +181,7 @@ class Date extends FieldType implements FieldTypeContract
         $r .= Cp::div('littlePadding');
         $r .= '<a href="javascript:void(0);" onclick="set_to_now(\''.$field_id.'\')" >'.
         __('kilvin::publish.today').
-        '</a>'.NBS.'|'.NBS;
+        '</a>'.'&nbsp;'.'|'.'&nbsp;';
         $r .= '<a href="javascript:void(0);" onclick="clear_field(\''.$field_id.'\');" >'.__('kilvin::cp.clear').'</a>';
         $r .= '</div>'.PHP_EOL;
 

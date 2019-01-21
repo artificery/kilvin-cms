@@ -392,8 +392,8 @@ class Plugins
 		Cp::$body .= Cp::quickDiv('alertHeading', __('kilvin::plugins.uninstall_plugin'));
 		Cp::$body .= Cp::div('box');
 		Cp::$body .= Cp::quickDiv('defaultBold', __('kilvin::plugins.uninstall_plugin_confirm'));
-		Cp::$body .= Cp::quickDiv('defaultBold', BR.$name);
-		Cp::$body .= Cp::quickDiv('alert', BR.__('kilvin::plugins.data_will_be_lost')).BR;
+		Cp::$body .= Cp::quickDiv('defaultBold', '<br>'.$name);
+		Cp::$body .= Cp::quickDiv('alert', '<br>'.__('kilvin::plugins.data_will_be_lost')).'<br>';
 		Cp::$body .= '</div>'.PHP_EOL;
 
 		Cp::$body .= Cp::quickDiv('paddingTop', Cp::input_submit(__('kilvin::plugins.uninstall_plugin')));

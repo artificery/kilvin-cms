@@ -99,7 +99,7 @@ class ValidateAccount
                 $type = 'new';
 
                 if ($this->enable_log == true) {
-                    $this->log_msg[] = __('kilvin::account.screen_name_changed').NBS.$this->screen_name;
+                    $this->log_msg[] = __('kilvin::account.screen_name_changed').'&nbsp;'.$this->screen_name;
                 }
             }
         }
@@ -217,7 +217,7 @@ class ValidateAccount
             if ($this->current_email != $this->email)
             {
                 if ($this->enable_log == true) {
-                    $this->log_msg = __('kilvin::account.email_changed').NBS.$this->email;
+                    $this->log_msg = __('kilvin::account.email_changed').'&nbsp;'.$this->email;
                 }
 
                 $type = 'new';

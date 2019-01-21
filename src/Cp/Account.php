@@ -168,7 +168,7 @@ class Account
         				'<tr class="no-background">'.
                         Cp::td('', '240px', '', '', 'top');
 
-        Cp::$body  .=  Cp::quickDiv('tableHeading', __('kilvin::account.current_member').NBS.$this->screen_name);
+        Cp::$body  .=  Cp::quickDiv('tableHeading', __('kilvin::account.current_member').'&nbsp;'.$this->screen_name);
 
         Cp::$body .= '<div id="menu_profile_b">';
 
@@ -261,7 +261,7 @@ class Account
         Cp::$body .=   '</div>'.PHP_EOL;
 
         Cp::$body  .=  '</td>'.PHP_EOL.
-                        Cp::td('', '8px', '', '', 'top').NBS.'</td>'.PHP_EOL.
+                        Cp::td('', '8px', '', '', 'top').'&nbsp;'.'</td>'.PHP_EOL.
                         Cp::td('', '', '', '', 'top').
                         $content.
                         '</td>'.PHP_EOL.
@@ -296,7 +296,7 @@ class Account
 
         $r  = Cp::table('tableBorderNoTop', '0', '10', '100%').
               '<tr>'.PHP_EOL.
-              Cp::th('', '', '2').__('kilvin::account.member_stats').NBS.$this->screen_name.'</th>'.PHP_EOL;
+              Cp::th('', '', '2').__('kilvin::account.member_stats').'&nbsp;'.$this->screen_name.'</th>'.PHP_EOL;
               '</tr>'.PHP_EOL;
 
         $fields = [
@@ -627,7 +627,7 @@ class Account
             $key = 'm_field_'.$field->field_handle;
 
             if ($field->is_field_required == 1 && !Request::filled($key)) {
-                $errors[] = __('kilvin::publish.The following field is required').NBS.$field->field_name;
+                $errors[] = __('kilvin::publish.The following field is required').'&nbsp;'.$field->field_name;
             }
 
             if ($field->field_type == 'textarea' && !Request::filled($key)) {
@@ -716,7 +716,7 @@ class Account
         foreach ($checkboxes as $val) {
             $r .= '<tr>'.PHP_EOL;
             $r .= Cp::td('', '100%', '2');
-            $r .= Cp::input_checkbox($val, 'y', ($$val == 'y') ? 1 : '').NBS.__('kilvin::account.'.$val);
+            $r .= Cp::input_checkbox($val, 'y', ($$val == 'y') ? 1 : '').'&nbsp;'.__('kilvin::account.'.$val);
             $r .= '</td>'.PHP_EOL;
             $r .= '</tr>'.PHP_EOL;
         }
@@ -1295,7 +1295,7 @@ class Account
 
         $r .= '<tr>'.PHP_EOL;
         $r .= Cp::td('', '', '2');
-        $r .= Cp::quickDiv('buttonWrapper', Cp::input_submit(__('kilvin::members.upload_photo')).NBS.Cp::input_submit(__('kilvin::members.remove_photo'), 'remove'));
+        $r .= Cp::quickDiv('buttonWrapper', Cp::input_submit(__('kilvin::members.upload_photo')).'&nbsp;'.Cp::input_submit(__('kilvin::members.remove_photo'), 'remove'));
         $r .= '</td>'.PHP_EOL;
         $r .= '</tr>'.PHP_EOL;
 
@@ -1673,7 +1673,7 @@ class Account
 
         $r .= '<tr>'.PHP_EOL;
         $r .= Cp::td('', '100%', '2');
-        $r .= Cp::input_checkbox('in_authorlist', 'y', ($in_authorlist == 'y') ? 1 : '').NBS.Cp::quickSpan('defaultBold', __('kilvin::account.include_in_multiauthor_list'));
+        $r .= Cp::input_checkbox('in_authorlist', 'y', ($in_authorlist == 'y') ? 1 : '').'&nbsp;'.Cp::quickSpan('defaultBold', __('kilvin::account.include_in_multiauthor_list'));
         $r .= '</td>'.PHP_EOL;
         $r .= '</tr>'.PHP_EOL;
 
@@ -1777,7 +1777,7 @@ class Account
 
         $r .= '<tr>'.PHP_EOL
              .Cp::td('', '', 3)
-             .__('kilvin::account.quick_link_description').NBS.__('kilvin::account.quick_link_description_more')
+             .__('kilvin::account.quick_link_description').'&nbsp;'.__('kilvin::account.quick_link_description_more')
              .'</td>'.PHP_EOL
              .'</tr>'.PHP_EOL;
 
@@ -2036,7 +2036,7 @@ class Account
             }
         } else {
             $r .= '</table>'.PHP_EOL;
-            $r .= Cp::quickDiv('defaultSmall', NBS);
+            $r .= Cp::quickDiv('defaultSmall', '&nbsp;');
 
             $i++;
 
@@ -2057,7 +2057,7 @@ class Account
                         'defaultBold',
                         __('kilvin::account.new_tab_url')
                     ).
-                    NBS.
+                    '&nbsp;'.
                     Cp::quickSpan('default', __('kilvin::account.cannot_edit'))
                 ).
               '</tr>'.PHP_EOL;

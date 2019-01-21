@@ -78,8 +78,7 @@ class Content
                 Cp::quickDiv(
                     'defaultBold',
                     Cp::anchor(
-                        'content/entry-form'.
-                            AMP.'weblog_id='.$weblog_id,
+                        'content/entry-form/weblog_id='.$weblog_id,
                         $weblog_name
                     )
                 )
@@ -627,7 +626,7 @@ EOT;
     private function publishFormVersioningBlock($version_id, $entry_id, $versioning_enabled)
     {
         $r  = PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
-        $r .= PHP_EOL.'<td class="publishItemWrapper">'.BR;
+        $r .= PHP_EOL.'<td class="publishItemWrapper">'.'<br>';
 
         $revs_exist = false;
 
@@ -716,7 +715,7 @@ EOT;
     private function publishFormCategoriesBlock($category_group_id, $incoming)
     {
         $r  = PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
-        $r .= PHP_EOL.'<td class="publishItemWrapper">'.BR;
+        $r .= PHP_EOL.'<td class="publishItemWrapper">'.'<br>';
         $r .= Cp::heading(__('kilvin::publish.categories'), 5);
 
         // Normal Category Display
@@ -809,7 +808,7 @@ EOT;
         $r .= Cp::quickDiv(
                 'littlePadding',
                 Cp::quickDiv('itemTitle', Cp::required().
-                    NBS.
+                    '&nbsp;'.
                     __('kilvin::publish.title')).
                     Cp::input_text(
                         'title',
@@ -849,7 +848,7 @@ EOT;
             '<button name="save" type="submit" value="save" class="option">'.
                 'Quick Save <span style="font-size: 0.8em; letter-spacing: 1px;" class="shortcut">⌘S</span>'.
             '</button>'.
-            NBS;
+            '&nbsp;';
 
         $r .= (Request::input('C') == 'publish') ?
             Cp::input_submit(__('kilvin::publish.save_and_finish'), 'submit') :
@@ -1108,32 +1107,32 @@ EOT;
 
         $meta  = PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
 
-        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.BR;
+        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.'<br>';
         $meta .= Cp::div('clusterLineR');
-        $meta .= Cp::heading(NBS.__('kilvin::publish.author'), 5);
+        $meta .= Cp::heading('&nbsp;'.__('kilvin::publish.author'), 5);
         $meta .= $menu_author;
         $meta .= '</div>'.PHP_EOL;
         $meta .= '</td>';
 
         if ($menu_weblog != '')
         {
-            $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.BR;
+            $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.'<br>';
             $meta .= Cp::div('clusterLineR');
-            $meta .= Cp::heading(NBS.__('kilvin::publish.weblog'), 5);
+            $meta .= Cp::heading('&nbsp;'.__('kilvin::publish.weblog'), 5);
             $meta .= $menu_weblog;
             $meta .= '</div>'.PHP_EOL;
             $meta .= '</td>';
         }
 
-        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.BR;
+        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.'<br>';
         $meta .= Cp::div('clusterLineR');
-        $meta .= Cp::heading(NBS.__('kilvin::publish.status'), 5);
+        $meta .= Cp::heading('&nbsp;'.__('kilvin::publish.status'), 5);
         $meta .= $menu_status;
         $meta .= '</div>'.PHP_EOL;
         $meta .= '</td>';
 
-        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.BR;
-        $meta .= Cp::heading(NBS.__('kilvin::publish.sticky'), 5);
+        $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.'<br>';
+        $meta .= Cp::heading('&nbsp;'.__('kilvin::publish.sticky'), 5);
         $meta .= '<label style="display:inline-block;margin-top:3px;">'.
                     Cp::input_checkbox('sticky', 'y', $sticky).' '.__('kilvin::publish.make_entry_sticky').
                 '</label>'.
@@ -1244,7 +1243,7 @@ EOT;
         //  Entry Date Field
         // ------------------------------------
 
-        $meta .= '<td class="publishItemWrapper">'.BR;
+        $meta .= '<td class="publishItemWrapper">'.'<br>';
         $meta .= Cp::div('clusterLineR');
         $meta .= Cp::div('defaultCenter');
 
@@ -1290,7 +1289,7 @@ EOT;
                 '<a href="javascript:void(0);" onclick="set_to_now(\'entry_date\')" >'.
                     __('kilvin::publish.today').
                 '</a>'.
-                NBS.'|'.NBS.
+                '&nbsp;'.'|'.'&nbsp;'.
                 '<a href="javascript:void(0);" onclick="clear_field(\'entry_date\');" >'.
                     __('kilvin::cp.clear').
                 '</a>'.
@@ -1304,7 +1303,7 @@ EOT;
         //  Expiration Date Field
         // ------------------------------------
 
-        $meta .= '<td class="publishItemWrapper">'.BR;
+        $meta .= '<td class="publishItemWrapper">'.'<br>';
         $meta .= Cp::div('clusterLineR');
         $meta .= Cp::div('defaultCenter');
 
@@ -1350,7 +1349,7 @@ EOT;
                 '<a href="javascript:void(0);" onclick="set_to_now(\'expiration_date\')" >'.
                     __('kilvin::publish.today').
                 '</a>'.
-                NBS.'|'.NBS.
+                '&nbsp;'.'|'.'&nbsp;'.
                 '<a href="javascript:void(0);" onclick="clear_field(\'expiration_date\');" >'.
                     __('kilvin::cp.clear').
                 '</a>'.
@@ -1502,7 +1501,7 @@ EOT;
 
         if ( ! $entry_date instanceof Carbon) {
             if ($entry_date !== FALSE) {
-                $error[] = $entry_date.NBS.'('.__('kilvin::publish.entry_date').')';
+                $error[] = $entry_date.'&nbsp;'.'('.__('kilvin::publish.entry_date').')';
             } else {
                 $error[] = __('kilvin::publish.invalid_date_formatting');
             }
@@ -1522,7 +1521,7 @@ EOT;
                 // Localize::humanReadableToUtcCarbon() returns verbose errors
                 if ($expiration_date !== FALSE)
                 {
-                    $error[] = $expiration_date.NBS.'('.__('kilvin::publish.expiration_date').')';
+                    $error[] = $expiration_date.'&nbsp;'.'('.__('kilvin::publish.expiration_date').')';
                 }
                 else
                 {
@@ -1548,7 +1547,7 @@ EOT;
 
         foreach ($fields as $field) {
             if ($field->is_field_required == 1 && empty($incoming['fields'][$field->field_handle])) {
-                $error[] = __('kilvin::publish.The following field is required').NBS.$field->field_name;
+                $error[] = __('kilvin::publish.The following field is required').'&nbsp;'.$field->field_name;
             }
         }
 
@@ -2645,9 +2644,9 @@ EOT;
 
         $exact_match = (Request::input('exact_match') != '') ? Request::input('exact_match') : '';
 
-        $s .= Cp::div('default').__('kilvin::publish.keywords').NBS;
-        $s .= Cp::input_text('keywords', $keywords, '40', '200', 'input', '200px').NBS;
-        $s .= Cp::input_checkbox('exact_match', 'yes', $exact_match).NBS.__('kilvin::publish.exact_match').NBS;
+        $s .= Cp::div('default').__('kilvin::publish.keywords').'&nbsp;';
+        $s .= Cp::input_text('keywords', $keywords, '40', '200', 'input', '200px').'&nbsp;';
+        $s .= Cp::input_checkbox('exact_match', 'yes', $exact_match).'&nbsp;'.__('kilvin::publish.exact_match').'&nbsp;';
 
         $search_in = (Request::input('search_in') != '') ? Request::input('search_in') : 'title';
 
@@ -2811,7 +2810,7 @@ EOT;
         $total_count = $total_query->count();
 
         if ($total_count == 0) {
-            $r .= Cp::quickDiv('highlight', BR.__('kilvin::publish.no_entries_matching_that_criteria'));
+            $r .= Cp::quickDiv('highlight', '<br>'.__('kilvin::publish.no_entries_matching_that_criteria'));
 
             Cp::$title = __('kilvin::cp.content').Cp::breadcrumbItem(__('kilvin::publish.edit_weblog_entries'));
 			Cp::$body  = $r;
@@ -3004,7 +3003,7 @@ EOT;
 
         $r .= Cp::input_submit(__('kilvin::cp.submit'));
 
-        $r .= NBS.Cp::input_select_header('action').
+        $r .= '&nbsp;'.Cp::input_select_header('action').
               Cp::input_select_option('edit', __('kilvin::publish.edit_selected')).
               Cp::input_select_option('delete', __('kilvin::publish.delete_selected')).
               Cp::input_select_option('edit', '------').
@@ -3432,13 +3431,13 @@ function changeFilterMenu()
 
             $r .= PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
 
-            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:45%;">'.BR;
+            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:45%;">'.'<br>';
             $r .= Cp::div('clusterLineR');
 
             $r .= Cp::heading(__('kilvin::publish.title'), 5).
                   Cp::input_text('title['.$row->entry_id.']', $row->title, '20', '100', 'input', '95%');
 
-            $r .= Cp::quickDiv('defaultSmall', NBS);
+            $r .= Cp::quickDiv('defaultSmall', '&nbsp;');
 
             $r .= Cp::heading(__('kilvin::publish.url_title'), 5).
                   Cp::input_text('url_title['.$row->entry_id.']', $row->url_title, '20', '75', 'input', '95%');
@@ -3510,7 +3509,7 @@ function changeFilterMenu()
                 $status_menu = $menu_status;
             }
 
-            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:25%;">'.BR;
+            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:25%;">'.'<br>';
             $r .= Cp::div('clusterLineR');
             $r .= Cp::heading(__('kilvin::publish.entry_status'), 5);
             $r .= Cp::input_select_header('status['.$row->entry_id.']');
@@ -3525,9 +3524,9 @@ function changeFilterMenu()
             $r .= '</div>'.PHP_EOL;
             $r .= '</td>';
 
-            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:30%;">'.BR;
+            $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:30%;">'.'<br>';
 
-            $r .= Cp::heading(NBS.__('kilvin::publish.sticky'), 5);
+            $r .= Cp::heading('&nbsp;'.__('kilvin::publish.sticky'), 5);
             $r .= '<label>'.
                 Cp::input_checkbox('sticky['.$row->entry_id.']', 'y', $row->sticky).
                 ' '.
@@ -3853,7 +3852,7 @@ EOT;
         $r .= Cp::heading(($type == 'add') ? __('kilvin::publish.add_categories') : __('kilvin::publish.remove_categories'), 5);
 
         $r .= PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
-        $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:45%;">'.BR;
+        $r .= PHP_EOL.'<td class="publishItemWrapper" valign="top" style="width:45%;">'.'<br>';
         $r .= $cats;
         $r .= '</td>';
         $r .= "</tr></table>";
@@ -4155,7 +4154,7 @@ EOT;
 
         Cp::$body .= Cp::quickDiv('tableHeading', __('kilvin::publish.file_upload'));
 
-        Cp::$body .= Cp::div('box').BR;
+        Cp::$body .= Cp::div('box').'<br>';
 
 
         if (Session::userdata('member_group_id') == 1) {
@@ -4186,7 +4185,7 @@ EOT;
 
         Cp::$body .= Cp::input_hidden('weblog_field_group_id', Request::input('weblog_field_group_id'));
 
-        Cp::$body .= Cp::quickDiv('', "<input type=\"file\" name=\"userfile\" size=\"20\" />".BR.BR);
+        Cp::$body .= Cp::quickDiv('', "<input type=\"file\" name=\"userfile\" size=\"20\" />".'<br><br>');
 
         Cp::$body .= Cp::quickDiv('littlePadding', __('kilvin::publish.select_destination_dir'));
 
@@ -4199,7 +4198,7 @@ EOT;
         Cp::$body .= Cp::input_select_footer();
 
 
-        Cp::$body .= Cp::quickDiv('', BR.Cp::input_submit(__('kilvin::publish.upload')).'<br><br>');
+        Cp::$body .= Cp::quickDiv('', '<br>'.Cp::input_submit(__('kilvin::publish.upload')).'<br><br>');
 
         Cp::$body .= '</form>'.PHP_EOL;
 
@@ -4209,7 +4208,7 @@ EOT;
         //  File Browser
         // ------------------------------------
 
-        Cp::$body .= Cp::quickDiv('', BR.BR);
+        Cp::$body .= Cp::quickDiv('', '<br><br>');
 
         Cp::$body .= Cp::quickDiv('tableHeading', __('kilvin::filebrowser.file_browser'));
         Cp::$body .= Cp::div('box');
@@ -4230,12 +4229,12 @@ EOT;
         Cp::$body .= Cp::input_select_footer();
 
 
-        Cp::$body .= Cp::quickDiv('', BR.Cp::input_submit(__('kilvin::publish.view')));
+        Cp::$body .= Cp::quickDiv('', '<br>'.Cp::input_submit(__('kilvin::publish.view')));
 
         Cp::$body .= '</form>'.PHP_EOL;
-        Cp::$body .= BR.BR.'</div>'.PHP_EOL;
+        Cp::$body .= '<br><br></div>'.PHP_EOL;
 
-        Cp::$body .= Cp::quickDiv('littlePadding', BR.'<div align="center"><a href="JavaScript:window.close();">'.__('kilvin::cp.close_window').'</a></div>');
+        Cp::$body .= Cp::quickDiv('littlePadding', '<br><div align="center"><a href="JavaScript:window.close();">'.__('kilvin::cp.close_window').'</a></div>');
     }
 
    /**

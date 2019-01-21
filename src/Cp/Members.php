@@ -181,7 +181,7 @@ class Members
 
         $r .= '</td>'.PHP_EOL.
               Cp::td('defaultRight', '', 2).
-              Cp::heading(__('kilvin::members.total_members').NBS.$total_members.NBS, 5).
+              Cp::heading(__('kilvin::members.total_members').'&nbsp;'.$total_members.'&nbsp;', 5).
               '</td>'.PHP_EOL.
               '</tr>'.PHP_EOL.
               '</table>'.PHP_EOL;
@@ -359,7 +359,7 @@ class Members
               Cp::td('defaultRight');
 
         $r .= Cp::input_submit(__('kilvin::cp.submit'));
-        $r .= NBS.Cp::input_select_header('action');
+        $r .= '&nbsp;'.Cp::input_select_header('action');
 
         $r .= Cp::input_select_option('delete', __('kilvin::cp.delete_selected')).
               Cp::input_select_footer().
@@ -591,7 +591,7 @@ class Members
 
         $r .= Cp::quickDiv('',
                         Cp::input_radio('return_destination', 'other', '').'&nbsp;'.
-                        __('kilvin::members.other').NBS.':'.NBS.Cp::input_text('other_url', Site::config('site_url'), '30', '80', 'input', '500px')
+                        __('kilvin::members.other').'&nbsp;'.':'.'&nbsp;'.Cp::input_text('other_url', Site::config('site_url'), '30', '80', 'input', '500px')
                         );
 
         $r .= '</td>'.PHP_EOL.
@@ -866,7 +866,7 @@ class Members
             Cp::$body .= Cp::tableCell(
                 '',
                 '('.$total_count.')'.
-                NBS.
+                '&nbsp;'.
                 Cp::anchor(
                     'members/list-members'.
                         '/member_group_id='.$row->member_group_id,
@@ -895,7 +895,7 @@ class Members
         Cp::$body .= Cp::formOpen(['action' => 'members/edit-member-group']);
 
         Cp::$body .= Cp::div('box');
-        Cp::$body .= NBS.__('kilvin::members.create_group_based_on_existing');
+        Cp::$body .= '&nbsp;'.__('kilvin::members.create_group_based_on_existing');
         Cp::$body .= Cp::input_select_header('clone_id');
 
         foreach($query as $row)
@@ -987,7 +987,7 @@ class Members
               Cp::table('tableBorder', '0', '', '100%').
               '<tr>'.PHP_EOL.
               "<td class='tableHeadingAlt' colspan='2'>".
-              NBS.__('kilvin::members.group_name').
+              '&nbsp;'.__('kilvin::members.group_name').
               '</tr>'.PHP_EOL.
               '<tr>'.PHP_EOL.
               Cp::td('', '40%').
@@ -1044,12 +1044,12 @@ class Members
 
         $selected = ($group_data['is_locked'] == 'y') ? true : false;
 
-        $r .= __('kilvin::members.locked').NBS.
+        $r .= __('kilvin::members.locked').'&nbsp;'.
               Cp::input_radio('is_locked', 'y', $selected).'&nbsp;';
 
         $selected = ($group_data['is_locked'] == 'n') ? true : false;
 
-        $r .= __('kilvin::members.unlocked').NBS.
+        $r .= __('kilvin::members.unlocked').'&nbsp;'.
               Cp::input_radio('is_locked', 'n', $selected).'&nbsp;';
 
         $r .= '</td>'.PHP_EOL.
@@ -1188,7 +1188,7 @@ class Members
             $r .= '<tr>'.PHP_EOL;
 
             $r .= "<td class='tableHeadingAlt' id='".$g_key."2' colspan='2'>";
-            $r .= NBS.__('kilvin::members.'.$g_key);
+            $r .= '&nbsp;'.__('kilvin::members.'.$g_key);
             $r .= '</tr>'.PHP_EOL;
 
             $i = 0;
@@ -1239,10 +1239,10 @@ class Members
                 }
                 else
                 {
-                    $r .= __('kilvin::cp.yes').NBS.
+                    $r .= __('kilvin::cp.yes').'&nbsp;'.
                           Cp::input_radio($key, 'y', ($group_data[$key] == 'y') ? 1 : '').'&nbsp;';
 
-                    $r .= __('kilvin::cp.no').NBS.
+                    $r .= __('kilvin::cp.no').'&nbsp;'.
                           Cp::input_radio($key, 'n', ($group_data[$key] == 'n') ? 1 : '').'&nbsp;';
                 }
 
@@ -1263,7 +1263,7 @@ class Members
             $r .= Cp::quickDiv(
                 'paddingTop',
                 Cp::input_submit(__('kilvin::cp.submit'))
-                .NBS.
+                .'&nbsp;'.
                 Cp::input_submit(__('kilvin::cp.submit_and_return'),'return')
             );
         }
@@ -1272,7 +1272,7 @@ class Members
             $r .= Cp::quickDiv(
                 'paddingTop',
                 Cp::input_submit(__('kilvin::cp.update')).
-                NBS.
+                '&nbsp;'.
                 Cp::input_submit(__('kilvin::cp.update_and_return'), 'return')
             );
         }
@@ -1514,7 +1514,7 @@ class Members
                      .Cp::div('box')
                      .Cp::quickDiv('littlePadding', '<b>'.__('kilvin::members.delete_member_group_confirm').'</b>')
                      .Cp::quickDiv('littlePadding', '<i>'.$group_name.'</i>')
-                     .Cp::quickDiv('alert', BR.__('kilvin::cp.action_can_not_be_undone').BR.BR);
+                     .Cp::quickDiv('alert', '<br>'.__('kilvin::cp.action_can_not_be_undone').'<br><br>');
 
         if ($members_exist === true) {
             Cp::$body .= Cp::quickDiv('defaultBold', str_replace('%x', $count, __('kilvin::members.member_assignment_warning')));
@@ -1601,22 +1601,22 @@ class Members
         $r .= Cp::quickDiv('tableHeading', $title);
         $r .= Cp::div('box');
         $r .= Cp::itemgroup(
-            Cp::required().NBS.__('kilvin::account.email'),
+            Cp::required().'&nbsp;'.__('kilvin::account.email'),
             Cp::input_text('email', '', '35', '32', 'input', '300px')
         );
 
         $r .= Cp::itemgroup(
-            Cp::required().NBS.__('kilvin::account.password'),
+            Cp::required().'&nbsp;'.__('kilvin::account.password'),
             Cp::input_pass('password', '', '35', '32', 'input', '300px')
         );
 
         $r .= Cp::itemgroup(
-            Cp::required().NBS.__('kilvin::account.password_confirm'),
+            Cp::required().'&nbsp;'.__('kilvin::account.password_confirm'),
             Cp::input_pass('password_confirm', '', '35', '32', 'input', '300px')
         );
 
         $r .= Cp::itemgroup(
-            Cp::required().NBS.__('kilvin::account.screen_name'),
+            Cp::required().'&nbsp;'.__('kilvin::account.screen_name'),
             Cp::input_text('screen_name', '', '40', '50', 'input', '300px')
         );
 
@@ -1820,24 +1820,24 @@ class Members
                 Cp::heading(__('kilvin::members.ip_address_banning'), 5).
                 Cp::quickDiv('littlePadding', Cp::quickSpan('highlight', __('kilvin::members.ip_banning_instructions'))).
                 Cp::quickDiv('littlePadding', __('kilvin::members.ip_banning_instructions_cont')).
-                Cp::input_textarea('banned_ips', stripslashes($ips), '22', 'textarea', '100%').BR.BR;
+                Cp::input_textarea('banned_ips', stripslashes($ips), '22', 'textarea', '100%').'<br><br>';
 
-        $r .=   Cp::heading(BR.__('kilvin::members.ban_options'), 5);
+        $r .=   Cp::heading('<br>'.__('kilvin::members.ban_options'), 5);
 
         $selected = (Site::config('ban_action') == 'restrict') ? 1 : '';
 
         $r .=   Cp::div('littlePadding').
                 '<label>'.
-                	Cp::input_radio('ban_action', 'restrict', $selected).NBS. __('kilvin::members.restrict_to_viewing').
+                	Cp::input_radio('ban_action', 'restrict', $selected).'&nbsp;'. __('kilvin::members.restrict_to_viewing').
                 '</label>'.
-                BR.
+                '<br>'.
                 '</div>'.PHP_EOL;
 
         $selected    = (Site::config('ban_action') == 'message') ? 1 : '';
 
         $r .=   Cp::div('littlePadding').
         		'<label>'.
-					Cp::input_radio('ban_action', 'message', $selected).NBS.__('kilvin::members.show_this_message').BR.
+					Cp::input_radio('ban_action', 'message', $selected).'&nbsp;'.__('kilvin::members.show_this_message').'<br>'.
 				'</label>'.
                 Cp::input_text('ban_message', Site::config('ban_message'), '50', '100', 'input', '100%').
                 '</div>'.PHP_EOL;
@@ -1847,18 +1847,18 @@ class Members
 
         $r .=   Cp::div('littlePadding').
         		'<label>'.
-					Cp::input_radio('ban_action', 'bounce', $selected).NBS.__('kilvin::members.send_to_site').BR.
+					Cp::input_radio('ban_action', 'bounce', $selected).'&nbsp;'.__('kilvin::members.send_to_site').'<br>'.
 				'</label>'.
                 Cp::input_text('ban_destination', $destination, '50', '70', 'input', '100%').
                 '</div>'.PHP_EOL;
 
-        $r .=   Cp::div().BR.
-                Cp::input_submit(__('kilvin::cp.update')).BR.BR.BR.
+        $r .=   Cp::div().'<br>'.
+                Cp::input_submit(__('kilvin::cp.update')).'<br><br><br>'.
                 '</div>'.PHP_EOL.
                 '</div>'.PHP_EOL;
 
         $r .=   '</td>'.PHP_EOL.
-                Cp::td('', '4%', '', '', 'top').NBS.
+                Cp::td('', '4%', '', '', 'top').'&nbsp;'.
                 '</td>'.PHP_EOL.
                 Cp::td('', '48%', '', '', 'top');
 
@@ -1869,7 +1869,7 @@ class Members
                 Cp::input_textarea('banned_emails', stripslashes($email), '9', 'textarea', '100%').
                 '</div>'.PHP_EOL;
 
-        $r .= Cp::quickDiv('defaultSmall', NBS);
+        $r .= Cp::quickDiv('defaultSmall', '&nbsp;');
 
         $r .=   Cp::div('box').
                 Cp::heading(__('kilvin::members.screen_name_banning'), 5).
@@ -2102,7 +2102,7 @@ EOT;
         // ------------------------------------
 
         $r .= '<tr>'.PHP_EOL;
-        $r .= Cp::tableCell('', Cp::quickSpan('defaultBold', Cp::required().NBS.__('kilvin::members.fieldlabel')).Cp::quickDiv('littlePadding', __('kilvin::members.for_profile_page')), '40%');
+        $r .= Cp::tableCell('', Cp::quickSpan('defaultBold', Cp::required().'&nbsp;'.__('kilvin::members.fieldlabel')).Cp::quickDiv('littlePadding', __('kilvin::members.for_profile_page')), '40%');
         $r .= Cp::tableCell('', Cp::input_text('field_name', $field_name, '50', '60', 'input', '300px'), '60%');
         $r .= '</tr>'.PHP_EOL;
 
@@ -2111,7 +2111,7 @@ EOT;
         // ------------------------------------
 
         $r .= '<tr>'.PHP_EOL;
-        $r .= Cp::tableCell('', Cp::quickSpan('defaultBold', Cp::required().NBS.__('kilvin::members.field_handle')).Cp::quickDiv('littlePadding', __('kilvin::members.fieldname_cont')), '40%');
+        $r .= Cp::tableCell('', Cp::quickSpan('defaultBold', Cp::required().'&nbsp;'.__('kilvin::members.field_handle')).Cp::quickDiv('littlePadding', __('kilvin::members.fieldname_cont')), '40%');
         $r .= Cp::tableCell('', Cp::input_text('field_handle', $field_handle, '50', '60', 'input', '300px'), '60%');
         $r .= '</tr>'.PHP_EOL;
 
@@ -2249,7 +2249,7 @@ EOT;
         $r .= '</table>'.PHP_EOL;
 
         $r .= Cp::div('littlePadding');
-        $r .= Cp::required(1).BR.BR;
+        $r .= Cp::required(1).'<br><br>';
 
         if ($type == 'edit')
             $r .= Cp::input_submit(__('kilvin::cp.update'));
@@ -2462,8 +2462,8 @@ EOT;
                 Cp::div('box').
                     Cp::quickDiv('littlePadding', '<b>'.__('kilvin::admin.delete_field_confirmation').'</b>').
                     Cp::quickDiv('littlePadding', '<i>'.$query->field_name.'</i>').
-                    Cp::quickDiv('alert', BR.__('kilvin::cp.action_can_not_be_undone')).
-                    Cp::quickDiv('littlePadding', BR.Cp::input_submit(__('kilvin::cp.delete'))).
+                    Cp::quickDiv('alert', '<br>'.__('kilvin::cp.action_can_not_be_undone')).
+                    Cp::quickDiv('littlePadding', '<br>'.Cp::input_submit(__('kilvin::cp.delete'))).
                 '</div>'.PHP_EOL
             .'</form>'.PHP_EOL;
     }

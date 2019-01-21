@@ -441,7 +441,7 @@ class Home
 
         $r .= Cp::input_select_footer();
 
-        $r .= NBS.__('kilvin::home.exact_match').NBS.Cp::input_checkbox('exact_match', 'y').NBS;
+        $r .= '&nbsp;'.__('kilvin::home.exact_match').'&nbsp;'.Cp::input_checkbox('exact_match', 'y').'&nbsp;';
 
         $r.= Cp::input_submit(__('kilvin::cp.submit'));
 

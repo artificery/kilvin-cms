@@ -65,14 +65,14 @@ class SitesAdministration
                 ->select('site_name')
                 ->first();
 
-            $message = __('kilvin::sites.site_created').':'.NBS.'<b>'.$query->site_name.'</b>';
+            $message = __('kilvin::sites.site_created').':'.'&nbsp;'.'<b>'.$query->site_name.'</b>';
         } elseif(Cp::pathVar('updated_id')) {
             $query = DB::table('sites')
                 ->where('sites.id', Cp::pathVar('updated_id'))
                 ->select('site_name')
                 ->first();
 
-            $message = __('kilvin::sites.site_updated').':'.NBS.'<b>'.$query->site_name.'</b>';
+            $message = __('kilvin::sites.site_updated').':'.'&nbsp;'.'<b>'.$query->site_name.'</b>';
         }
 
         // ------------------------------------
@@ -289,7 +289,7 @@ class SitesAdministration
                     Cp::td('tableHeading', '', '2').__('kilvin::sites.move_data').'</td>'.PHP_EOL.
                 '</tr>'.PHP_EOL.
                 '<tr>'.PHP_EOL.
-                    Cp::td('', '', '2').BR.Cp::quickDiv('bigPad alert', __('kilvin::sites.timeout_warning')).BR.'</td>'.PHP_EOL.
+                    Cp::td('', '', '2').'<br>'.Cp::quickDiv('bigPad alert', __('kilvin::sites.timeout_warning')).'<br></td>'.PHP_EOL.
                 '</tr>'.PHP_EOL.
                 '<tr>'.PHP_EOL.
                     Cp::td('tableHeadingAlt', '', '1').__('kilvin::publish.weblogs').'</td>'.PHP_EOL.
@@ -405,7 +405,7 @@ class SitesAdministration
                 $row = (array) $row;
 
                 $r .=  '<tr>'.PHP_EOL.
-                    Cp::tableCell('', $row['site_name'].NBS.'-'.NBS.__('kilvin::sites.template_variables')).
+                    Cp::tableCell('', $row['site_name'].'&nbsp;'.'-'.'&nbsp;'.__('kilvin::sites.template_variables')).
                     Cp::tableCell(
                         '',
                         Cp::input_select_header('template_variables_'.$row['site_id']).
@@ -417,14 +417,14 @@ class SitesAdministration
                     '</tr>'.PHP_EOL;
             }
 
-            $r .= '</table>'.PHP_EOL.BR;
+            $r .= '</table>'.PHP_EOL.'<br>';
         }
 
         // ------------------------------------
         //  Submit + Form Close
         // ------------------------------------
 
-        $r .= BR.Cp::quickDiv('', Cp::input_submit(__('kilvin::cp.submit')));
+        $r .= '<br>'.Cp::quickDiv('', Cp::input_submit(__('kilvin::cp.submit')));
 
         $r .= '</form>'.PHP_EOL;
 
@@ -492,7 +492,7 @@ class SitesAdministration
         ], __('kilvin::validation.custom'));
 
         if ($validator->fails()) {
-            return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+            return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
         }
 
         // Short Name Taken Already?
@@ -517,7 +517,7 @@ class SitesAdministration
             ], array_flatten(__('kilvin::validation.custom')));
 
             if ($validator->fails()) {
-                return Cp::errorMessage(implode(BR, $validator->errors()->all()));
+                return Cp::errorMessage(implode('<br>', $validator->errors()->all()));
             }
         }
 

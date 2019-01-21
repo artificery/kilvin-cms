@@ -373,8 +373,8 @@ EOT;
                 )
             );
         } else {
-			$r .= Cp::quickDiv('littlePadding', __('kilvin::admin.total_records').NBS.$total_rows);
-			$r .= Cp::quickDiv('itemWrapper', __('kilvin::admin.items_remaining').NBS.($total_rows - $total_done));
+			$r .= Cp::quickDiv('littlePadding', __('kilvin::admin.total_records').'&nbsp;'.$total_rows);
+			$r .= Cp::quickDiv('itemWrapper', __('kilvin::admin.items_remaining').'&nbsp;'.($total_rows - $total_done));
 
             $line = __('kilvin::admin.click_to_recount');
 
@@ -390,12 +390,12 @@ EOT;
                 "'  onclick='standby();'><b>".$line."</b></a>";
 
 			$r .= '<div id="batchlink" style="display: block; padding:0; margin:0;">';
-            $r .= Cp::quickDiv('littlePadding', BR.$link);
+            $r .= Cp::quickDiv('littlePadding', '<br>'.$link);
 			$r .= '</div>'.PHP_EOL;
 
 
 			$r .= '<div id="wait" style="display: none; padding:0; margin:0;">';
-			$r .= BR.__('kilvin::admin.standby_recount');
+			$r .= '<br>'.__('kilvin::admin.standby_recount');
 			$r .= '</div>'.PHP_EOL;
 
         }

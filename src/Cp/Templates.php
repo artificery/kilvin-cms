@@ -487,7 +487,7 @@ class Templates
         }
 
         if (Request::input('keywords') !== null && trim(Request::input('keywords')) != '') {
-            $r .= Cp::quickDiv('success-message', __('kilvin::templates.search_terms').NBS. Request::input('keywords'));
+            $r .= Cp::quickDiv('success-message', __('kilvin::templates.search_terms').'&nbsp;'. Request::input('keywords'));
         }
 
         // ------------------------------------
@@ -834,7 +834,7 @@ $(function() {
              .'</table>'.PHP_EOL;
 
         $t .= '</td>'.PHP_EOL
-             .Cp::td('defaultSmall', '1%').NBS;
+             .Cp::td('defaultSmall', '1%').'&nbsp;';
 
         $t .= '</td>'.PHP_EOL
              .Cp::td('templateAreaBox', '79%', '', '', 'top');
@@ -1220,7 +1220,7 @@ $(function() {
                     __('kilvin::templates.blank_template').
                 '</label>'
              ).
-             Cp::tableCell('', NBS).
+             Cp::tableCell('', '&nbsp;').
              '</tr>'.PHP_EOL;
 
         $query = DB::table('templates')
@@ -1726,7 +1726,7 @@ $(function() {
         $r .= '</td>'.PHP_EOL
              .Cp::td('', '25%', '', '', 'top')
              .Cp::input_text('columns', Session::userdata('template_size'), '4', '3', 'input', '3em').
-                NBS.
+                '&nbsp;'.
                 __('kilvin::templates.template_size')
              .
              '</td>'.PHP_EOL.
@@ -1736,7 +1736,7 @@ $(function() {
                 Cp::quickDiv(
                     'littlePadding',
                     Cp::input_submit(__('kilvin::cp.update')).
-                        NBS.
+                        '&nbsp;'.
                         Cp::input_submit(__('kilvin::cp.update_and_return'),
                     'return')
                 ).
@@ -1911,7 +1911,7 @@ $(function() {
         Cp::$body = Cp::input_textarea('template_data', $query->item_data, 26, 'textarea', '100%');
         Cp::$body .= Cp::quickDiv(
             'littlePadding',
-            BR.
+            '<br>'.
                 '<div align="center"><a href="javascript:window.close();"><b>'.
                 __('kilvin::cp.close_window').
                 '</b></a></div>'
@@ -1943,9 +1943,9 @@ $(function() {
             ->where('item_field', 'template_data')
             ->delete();
 
-        Cp::$body = Cp::quickDiv('defaultCenter', BR.BR.'<b>'.__('kilvin::templates.history_cleared').'</b>'.BR.BR.BR);
+        Cp::$body = Cp::quickDiv('defaultCenter', '<br><br><b>'.__('kilvin::templates.history_cleared').'</b><br><br><br>');
 
-        Cp::$body .= Cp::quickDiv('defaultCenter', "<a href='javascript:window.close();'>".__('kilvin::cp.close_window')."</a>".BR.BR.BR);
+        Cp::$body .= Cp::quickDiv('defaultCenter', "<a href='javascript:window.close();'>".__('kilvin::cp.close_window')."</a><br><br><br>");
 
     }
 
@@ -2099,7 +2099,7 @@ $(function() {
                 Cp::heading(__('kilvin::templates.variable_name'), 5).
                 Cp::quickDiv('littlePadding',  __('kilvin::templates.variable_instructions')).
                 Cp::quickDiv('littlePadding', Cp::input_text('variable_name', $variable_name, '20', '50', 'input', '240px')).
-                Cp::heading(BR.__('kilvin::templates.variable_data'), 5).
+                Cp::heading('<br>'.__('kilvin::templates.variable_data'), 5).
                 Cp::input_textarea('variable_data', $variable_data, '15', 'textarea', '100%').
             '</div>'.PHP_EOL;
 

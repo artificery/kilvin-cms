@@ -650,7 +650,7 @@ EOT;
             return '';
         }
 
-        $str = str_replace(' ', NBS, $str);
+        $str = str_replace(' ', '&nbsp;', $str);
         $str = str_replace('"', '&quot;', $str);
         $str = str_replace("'", "&#39;", $str);
 
@@ -715,16 +715,12 @@ EOT;
             }
 
             if ($C == 'account') {
-                if ($id = request()->input('id'))
-                {
-                    if ($id != Session::userdata('member_id'))
-                    {
+                if ($id = request()->input('id')) {
+                    if ($id != Session::userdata('member_id')) {
                         $name = __('kilvin::cp.user_account');
 
-                        $special = AMP.'id='.$id;
-                    }
-                    else
-                    {
+                        $special = '/id='.$id;
+                    } else {
                         $name = __('kilvin::cp.my_account');
                     }
                 }
@@ -866,7 +862,7 @@ fill="#000000" stroke="none">
         $this->crumb = __('kilvin::core.error');
 
         if (is_array($message)) {
-            $message = implode(BR, $message);
+            $message = implode('<br>', $message);
         }
 
         $this->body = $this->quickDiv('alert-heading defaultCenter', __('kilvin::core.error'))
@@ -876,7 +872,6 @@ fill="#000000" stroke="none">
 
        if ($n != 0) {
             $this->body .=
-                BR.
                 PHP_EOL.
                 "<a href='javascript:history.go(-".$n.")' style='text-transform:uppercase;'>&#171; ".
                 "<b>".
@@ -884,7 +879,7 @@ fill="#000000" stroke="none">
                 "</b></a>";
        }
 
-        $this->body .= BR.BR.'</div>'.PHP_EOL.'</div>'.PHP_EOL;
+        $this->body .= '<br><br></div>'.PHP_EOL.'</div>'.PHP_EOL;
     }
 
     /**
@@ -899,7 +894,7 @@ fill="#000000" stroke="none">
 
         $msg = ($message == '') ? __('kilvin::cp.unauthorized_access') : $message;
 
-        $this->body = $this->quickDiv('highlight', BR.$msg);
+        $this->body = $this->quickDiv('highlight', '<br><br>'.$msg);
     }
 
     /**
@@ -1430,22 +1425,19 @@ fill="#000000" stroke="none">
         return $str;
     }
 
-    /*  EXAMPLE:
+    /*  EX:
 
         The first parameter is an array containing the "action" and any other items that
         are desired in the form opening.  The second optional parameter is an array of hidden fields
 
-        $r = Cp::formOpen(
-				array(
-						'action'    => 'plugins/Groot',
-						'method'    => 'post',
-						'name'      => 'entryform',
-						'id'        => 'entryform'
-					 ),
-				array(
-						'page_id' => 23
-					)
-			 );
+        $r = Cp::formOpen([
+			'action'    => 'plugins/Groot',
+			'method'    => 'post',
+			'name'      => 'entryform',
+			'id'        => 'entryform'
+		], [
+			'page_id' => 23
+		]);
 
         The above code will produce:
 
