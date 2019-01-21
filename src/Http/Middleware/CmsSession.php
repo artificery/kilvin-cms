@@ -2,11 +2,13 @@
 
 namespace Kilvin\Http\Middleware;
 
+use Kilvin\Facades\Cp;
 use Kilvin\Facades\Site;
 use Request;
 use Closure;
 use Carbon\Carbon;
 use Kilvin\Core\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Response;
 use Illuminate\Container\Container;
@@ -63,14 +65,29 @@ class CmsSession
 
         // ----------------------------------------------
         //  Is the system turned on?
-        //  - Note: super-admins can always view the system
+        //  - If system off, only CP is viewable and only by superadmins
+        // ----------------------------------------------
+
+        if (config('kilvin.is_system_on') != true) {
+            if (REQUEST != 'CP' || (Auth::check() && Session::userdata('member_group_id') != 1)) {
+                if (REQUEST == 'CP') {
+                    abort(403);
+                } else {
+                    exit(view('offline'));
+                }
+            }
+        }
+
+        // ----------------------------------------------
+        //  Is the site turned on?
+        //  - Note: super-admins can always view a site
         // ----------------------------------------------
 
         if (Session::userdata('member_group_id') != 1 and REQUEST == 'SITE') {
             if (Site::config('is_site_on') != 'y') {
                 $viewable_sites = Session::userdata('offline_sites');
                 if (!in_array(Site::config('site_id'), $viewable_sites)) {
-                    exit(view('offline'));;
+                    exit(view('offline'));
                 }
             }
         }
