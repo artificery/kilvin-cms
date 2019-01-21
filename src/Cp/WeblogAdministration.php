@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Kilvin\Core\Regex;
 use Kilvin\Core\Session;
 use Kilvin\Plugins\Weblogs\Models\Category;
+use Illuminate\Support\Facades\Cache;
 
 class WeblogAdministration
 {
@@ -3485,6 +3486,8 @@ EOT;
 
         $message = __('kilvin::admin.status_group_deleted').'&nbsp;'.'<b>'.$group_name.'</b>';
 
+        Cache::tags(['statuses'])->flush();
+
         return redirect(kilvinCpUrl('weblogs-administration/status-overview'))
             ->with('cp-message', $message);
     }
@@ -3759,7 +3762,6 @@ EOT;
             }
         }
 
-
         // Set access privs
         foreach (Request::all() as $key => $val) {
             if (substr($key, 0, 7) == 'access_' AND $val == 'y') {
@@ -3777,6 +3779,8 @@ EOT;
         } else {
            $message = __('kilvin::admin.status_updated');
         }
+
+        Cache::tags(['statuses'])->flush();
 
         return redirect(kilvinCpUrl('weblogs-administration/status-manager/status_group_id='.$data['status_group_id']))
             ->with('cp-message', $message);
@@ -3991,6 +3995,8 @@ EOT;
                 ->where('status_group_id', $status_group_id)
                 ->delete();
         }
+
+        Cache::tags(['statuses'])->flush();
 
         return redirect(kilvinCpUrl('weblogs-administration/status-manager/status_group_id='.$status_group_id))
             ->with('cp-message', __('kilvin::admin.status_deleted'));

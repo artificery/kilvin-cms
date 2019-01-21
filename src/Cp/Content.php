@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Kilvin\Facades\Site;
 use Kilvin\Facades\Stats;
 use Kilvin\Facades\Plugins;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
@@ -3377,27 +3378,6 @@ function changeFilterMenu()
             ->get();
 
         // ------------------------------------
-        //  Fetch Statuses
-        // ------------------------------------
-
-        $no_status_access = [];
-
-        if (Session::userdata('member_group_id') == 1) {
-            $status_query = DB::table('statuses')
-                ->where('status_group_id', $weblog_row->status_group_id)
-                ->orderBy('status_order')
-                ->get();
-        } else {
-            $status_query = DB::table('status_access')
-                ->join('statuses', 'statuses.id', '=', 'status_access.status_id')
-                ->where('statuses.status_group_id', $weblog_row->status_group_id)
-                ->where('status_access.member_group_id', Session::userdata('member_group_id'))
-                ->select('statuses.id as status_id', 'statuses.status')
-                ->orderBy('statuses.status_order')
-                ->get();
-        }
-
-        // ------------------------------------
         //  Build the output
         // ------------------------------------
 
@@ -3433,13 +3413,39 @@ function changeFilterMenu()
             $status_queries = [];
             $status_menu = '';
 
-            foreach ($weblog_query as $weblog_row)
-            {
+            foreach ($weblog_query as $weblog_row) {
                 if ($weblog_row->weblog_id != $row->weblog_id) {
                     continue;
                 }
 
                 $menu_status = '';
+
+                // ------------------------------------
+                //  Fetch Statuses
+                // ------------------------------------
+
+                $sgid = $weblog_row->status_group_id;
+                $mgid = Session::userdata('member_group_id');
+                $ckey = 'cms.statuses.'.$sgid.'.for-mgid.'.$mgid;
+
+                if (Session::userdata('member_group_id') == 1) {
+                    $status_query = Cache::tags('statuses')->get($ckey, function () use ($sgid) {
+                        return DB::table('statuses')
+                            ->where('status_group_id', $sgid)
+                            ->orderBy('status_order')
+                            ->get();
+                    });
+                } else {
+                    $status_query = Cache::tags('statuses')->get($ckey, function () use ($sgid, $mgid) {
+                        return DB::table('status_access')
+                            ->join('statuses', 'statuses.id', '=', 'status_access.status_id')
+                            ->where('statuses.status_group_id', $sgid)
+                            ->where('status_access.member_group_id', $mgid)
+                            ->select('statuses.id as status_id', 'statuses.status')
+                            ->orderBy('statuses.status_order')
+                            ->get();
+                    });
+                }
 
                 // No Status Group assigned or no statuses
                 // Only Admins can create 'open' entries, everyone else has access to closed only
