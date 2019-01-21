@@ -3549,7 +3549,7 @@ EOT;
                     :
                     '--';
 
-                $status_name = ($row->status == 'open' OR $row->status == 'closed') ? __('kilvin::admin.'.$row->status) : $row->status;
+                $status_name = $row->status;
 
                 $r .= '<tr>'.PHP_EOL.
                       Cp::tableCell('', Cp::quickSpan('defaultBold', $status_name)).
@@ -3742,17 +3742,15 @@ EOT;
                 ->where('status_group_id', Request::input('status_group_id'))
                 ->update($update);
 
-            DB::table('status_no_access')->where('status_id', $data['status_id'])->delete();
+            DB::table('status_access')->where('status_id', $data['status_id'])->delete();
 
             // If the status name has changed, we need to update weblog entries with the new status.
-            if (Request::filled('old_status') && Request::input('old_status') != $data['status'])
-            {
+            if (Request::filled('old_status') && Request::input('old_status') != $data['status']) {
                 $query = DB::table('weblogs')
                     ->where('status_group_id', $data['status_group_id'])
                     ->get();
 
-                foreach ($query as $row)
-                {
+                foreach ($query as $row) {
                     DB::table('weblog_entries')
                         ->where('status', $data['old_status'])
                         ->where('weblog_id', $row->weblog_id)
@@ -3764,8 +3762,8 @@ EOT;
 
         // Set access privs
         foreach (Request::all() as $key => $val) {
-            if (substr($key, 0, 7) == 'access_' AND $val == 'n') {
-                DB::table('status_no_access')
+            if (substr($key, 0, 7) == 'access_' AND $val == 'y') {
+                DB::table('status_access')
                     ->insert([
 						'status_id' => $status_id,
 						'member_group_id' => substr($key, 7)
@@ -3817,8 +3815,7 @@ EOT;
             $r .= Cp::quickDiv(
                     'littlePadding',
                     Cp::quickSpan('defaultBold', __('kilvin::admin.status_name').':').
-                        '&nbsp;'.
-                        __('kilvin::admin.'.$status));
+                        '&nbsp;'.$status);
         } else {
             $r .= Cp::quickDiv(
                 '',
@@ -3869,16 +3866,14 @@ EOT;
 
                 $group = [];
 
-                $result = DB::table('status_no_access')
+                $result = DB::table('status_access')
                     ->select('member_group_id')
                     ->where('status_id', $status_id)
                     ->get();
 
-                if ($result->count() != 0) {
-                    foreach($result as $row) {
-                        $group[$row->member_group_id] = true;
-                    }
-                }
+				foreach($result as $row) {
+					$group[$row->member_group_id] = true;
+				}
 
                 foreach ($query as $row) {
                         $r .= '<tr>'.PHP_EOL.
@@ -3887,12 +3882,12 @@ EOT;
                               '</td>'.PHP_EOL.
                               Cp::td('', '50%');
 
-                        $selected = ( ! isset($group[$row->member_group_id])) ? 1 : '';
+                        $selected = (isset($group[$row->member_group_id])) ? 1 : '';
 
                         $r .= Cp::qlabel(__('kilvin::admin.yes')).'&nbsp;'.
                               Cp::input_radio('access_'.$row->member_group_id, 'y', $selected).'&nbsp;';
 
-                        $selected = (isset($group[$row->member_group_id])) ? 1 : '';
+                        $selected = (!isset($group[$row->member_group_id])) ? 1 : '';
 
                         $r .= Cp::qlabel(__('kilvin::admin.no')).'&nbsp;'.
                               Cp::input_radio('access_'.$row->member_group_id, 'n', $selected).'&nbsp;';

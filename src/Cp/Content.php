@@ -1040,63 +1040,38 @@ EOT;
         $menu_status .= Cp::input_select_header('status');
 
         // ------------------------------------
-        //  Fetch disallowed statuses
+        //  Fetch Statuses
         // ------------------------------------
 
-        $no_status_access = [];
-
-        if (Session::userdata('member_group_id') != 1) {
-            $query = DB::table('status_no_access')
-                ->select('status_id')
-                ->where('member_group_id', Session::userdata('member_group_id'))
+        if (Session::userdata('member_group_id') == 1) {
+            $status_query = DB::table('statuses')
+                ->where('status_group_id', $status_group_id)
+                ->orderBy('status_order')
                 ->get();
-
-            foreach ($query as $row) {
-                $no_status_access[] = $row->status_id;
-            }
+        } else {
+            $status_query = DB::table('status_access')
+                ->join('statuses', 'statuses.id', '=', 'status_access.status_id')
+                ->where('statuses.status_group_id', $status_group_id)
+                ->where('status_access.member_group_id', Session::userdata('member_group_id'))
+                ->select('statuses.id as status_id', 'statuses.status')
+                ->orderBy('statuses.status_order')
+                ->get();
         }
 
         // ------------------------------------
         //  Create status menu
-        //  - if no status group assigned, only Admins can create 'open' entries
         // ------------------------------------
 
-        $query = DB::table('statuses')
-            ->where('status_group_id', $status_group_id)
-            ->orderBy('status_order')
-            ->get();
+        if ($status_query->count() == 0) {
+            throw new \Kilvin\Exceptions\CmsFailureException('There are no statuses for weblog or member has no access to statuses.');
+        }
 
-        if ($query->count() == 0) {
-            if (Session::userdata('member_group_id') == 1) {
-                $menu_status .= Cp::input_select_option('open', __('kilvin::publish.open'), ($status == 'open') ? 1 : '');
-            }
-
-            $menu_status .= Cp::input_select_option('closed', __('kilvin::publish.closed'), ($status == 'closed') ? 1 : '');
-        }  else {
-            $no_status_flag = true;
-
-            foreach ($query as $row) {
-                $selected = ($status == $row->status) ? 1 : '';
-
-                if (in_array($row->id, $no_status_access)) {
-                    continue;
-                }
-
-                $no_status_flag = false;
-                $status_name = ($row->status == 'open' OR $row->status == 'closed') ? __('kilvin::publish.'.$row->status) : $row->status;
-                $menu_status .= Cp::input_select_option(escapeAttribute($row->status), escapeAttribute($status_name), $selected);
-            }
-
-            // ------------------------------------
-            //  No statuses?
-            // ------------------------------------
-
-            // If the current user is not allowed to submit any statuses
-            // we'll set the default to closed
-
-            if ($no_status_flag == true) {
-                $menu_status .= Cp::input_select_option('closed', __('kilvin::publish.closed'));
-            }
+        foreach ($status_query as $srow) {
+            $menu_status .= Cp::input_select_option(
+                escapeAttribute($srow->status),
+                $srow->status,
+                ($status == $srow->status) ? 1 : ''
+            );
         }
 
         $menu_status .= Cp::input_select_footer();
@@ -1106,7 +1081,6 @@ EOT;
         // ------------------------------------
 
         $meta  = PHP_EOL."<table class='clusterBox' border='0' cellpadding='0' cellspacing='0' style='width:99%'><tr>";
-
         $meta .= PHP_EOL.'<td class="publishItemWrapper" valign="top">'.'<br>';
         $meta .= Cp::div('clusterLineR');
         $meta .= Cp::heading('&nbsp;'.__('kilvin::publish.author'), 5);
@@ -2405,7 +2379,7 @@ EOT;
 
         // If the user is restricted to specific blogs, add that to the query
         if (Session::userdata('member_group_id') != 1) {
-            $query->whereIn('weblog_id', $allowed_blogs);
+            $query->whereIn('weblogs.id', $allowed_blogs);
         }
 
         $query = $query->orderBy('weblog_name')->get();
@@ -3403,17 +3377,24 @@ function changeFilterMenu()
             ->get();
 
         // ------------------------------------
-        //  Fetch disallowed statuses
+        //  Fetch Statuses
         // ------------------------------------
 
         $no_status_access = [];
 
-        if (Session::userdata('member_group_id') != 1) {
-            $no_status_access = DB::table('status_no_access')
-                ->select('status_id')
-                ->where('member_group_id', Session::userdata('member_group_id'))
-                ->pluck('status_id')
-                ->all();
+        if (Session::userdata('member_group_id') == 1) {
+            $status_query = DB::table('statuses')
+                ->where('status_group_id', $weblog_row->status_group_id)
+                ->orderBy('status_order')
+                ->get();
+        } else {
+            $status_query = DB::table('status_access')
+                ->join('statuses', 'statuses.id', '=', 'status_access.status_id')
+                ->where('statuses.status_group_id', $weblog_row->status_group_id)
+                ->where('status_access.member_group_id', Session::userdata('member_group_id'))
+                ->select('statuses.id as status_id', 'statuses.status')
+                ->orderBy('statuses.status_order')
+                ->get();
         }
 
         // ------------------------------------
@@ -3458,52 +3439,20 @@ function changeFilterMenu()
                     continue;
                 }
 
-                $status_query = DB::table('statuses')
-                    ->where('status_group_id', $weblog_row->status_group_id)
-                    ->orderBy('status_order')
-                    ->get();
-
                 $menu_status = '';
 
-                if ($status_query->count() == 0)
-                {
-                    // No status group assigned, only Admins can create 'open' entries
-                    if (Session::userdata('member_group_id') == 1) {
-                        $menu_status .= Cp::input_select_option('open', __('kilvin::cp.open'), ($row->status == 'open') ? 1 : '');
-                    }
-
-                    $menu_status .= Cp::input_select_option('closed', __('kilvin::cp.closed'), ($row->status == 'closed') ? 1 : '');
+                // No Status Group assigned or no statuses
+                // Only Admins can create 'open' entries, everyone else has access to closed only
+                if ($status_query->count() == 0) {
+                    throw new \Kilvin\Exceptions\CmsFailureException('There are no statuses for weblog or member has no access to statuses.');
                 }
-                else
-                {
-                    $no_status_flag = true;
 
-                    foreach ($status_query as $status_row)
-                    {
-                        $selected = ($row->status == $status_row->status) ? 1 : '';
-
-                        if (in_array($status_row->id, $no_status_access))
-                        {
-                            continue;
-                        }
-
-                        $no_status_flag = false;
-
-                        $status_name =
-                            ($status_row->status == 'open' OR $status_row->status == 'closed') ?
-                            __('kilvin::publish.'.$status_row->status) :
-                            escapeAttribute($status_row->status);
-
-                        $menu_status .= Cp::input_select_option(escapeAttribute($status_row->status), $status_name, $selected);
-                    }
-
-                    // ------------------------------------
-                    //  No Statuses? Default is Closed
-                    // ------------------------------------
-
-                    if ($no_status_flag == TRUE) {
-                        $menu_status .= Cp::input_select_option('closed', __('kilvin::cp.closed'));
-                    }
+                foreach ($status_query as $status_row) {
+                    $menu_status .= Cp::input_select_option(
+                        escapeAttribute($status_row->status),
+                        $status_row->status,
+                        ($row->status == $status_row->status) ? 1 : ''
+                    );
                 }
 
                 $status_menu = $menu_status;

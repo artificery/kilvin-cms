@@ -339,10 +339,9 @@ class CreateCmsTables extends Migration
             $table->unsignedTinyInteger('status_order')->default(1);
         });
 
-        // Status "no access"
-        // Stores groups that cannot access certain statuses
-        // @todo - Make this a positive choice, i.e. status_access
-        Schema::create('status_no_access', function($table)
+        // Status Access
+        // Stores groups that can access certain statuses
+        Schema::create('status_access', function($table)
         {
             $table->increments('id');
             $table->unsignedInteger('status_id')->index();

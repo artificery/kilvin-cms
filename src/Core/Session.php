@@ -237,7 +237,7 @@ class Session
                 ->select('id AS weblog_id', 'weblog_name')
                 ->orderBy('weblog_name')
                 ->get();
-        } elseif (!empty($special['assigned_blogs'])) {
+        } elseif (!empty($special['assigned_weblogs'])) {
             $result = DB::table('weblogs')
                 ->select('id AS weblog_id', 'weblog_name')
                 ->whereIn('id', $special['assigned_weblogs'])
