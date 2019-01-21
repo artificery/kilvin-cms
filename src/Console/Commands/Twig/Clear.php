@@ -9,22 +9,22 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Artisan command to clear the Twig cache.
  */
-class Clean extends Command
+class Clear extends Command
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'twig:clean';
+    protected $name = 'twig:clear';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Clean the Twig Cache';
+    protected $description = 'Clear the Twig Cache';
 
     /**
      * {@inheritdoc}
      */
-    public function fire()
+    public function handle()
     {
         $twig     = $this->laravel['cms.twig'];
         $files    = $this->laravel['files'];
@@ -33,9 +33,9 @@ class Clean extends Command
         $files->deleteDirectory($cacheDir);
 
         if ($files->exists($cacheDir)) {
-            $this->error('Twig cache failed to be cleaned');
+            $this->error('Twig cache failed to be cleared');
         } else {
-            $this->info('Twig cache cleaned');
+            $this->info('Twig cache cleared');
         }
     }
 }

@@ -78,11 +78,11 @@ class TwigServiceProvider extends ViewServiceProvider
      */
     protected function registerCommands()
     {
-        $this->app->bindIf('command.twig.clean', function () {
-            return new \Kilvin\Console\Commands\Twig\Clean;
+        $this->app->bindIf('command.twig.clear', function () {
+            return new \Kilvin\Console\Commands\Twig\Clear;
         });
 
-        $this->commands('command.twig.clean');
+        $this->commands('command.twig.clear');
     }
 
     /**
