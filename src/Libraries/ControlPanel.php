@@ -505,34 +505,25 @@ EOT;
                 $tab_total);
         }
 
-        /*
-        Does a custom tab need to be highlighted?
-        Since users can have custom tabs we need to highlight them when the page is
-        accessed.  However, when we do, we need to prevent any of the default tabs
-        from being highlighted.  Say, for example, that someone creates a tab pointing
-        to the Pages module.  When that tab is accessed it needs to be highlighted (obviously)
-        but we don't want the MODULES tab to also be highlighted or it'll look funny.
-        Since the Pages module is within the MODULES tab it'll hightlight itself automatically.
-        So... we'll use a variable called:  $highlight_override
-        When set to TRUE, this variable turns off all default tabs.
-        The following code blasts thorough the GET variables to see if we have
-        a custom tab to show.  If we do, we'll highlight it, and turn off
-        all the other tabs.
-        */
 
+        // Custom Tabs
         $highlight_override = false;
 
         $tabs = '';
         $tabct = 1;
         if (count($quicktabs) > 0) {
             foreach ($quicktabs as $val) {
-                // @todo - Add code for highlighting
-                $tab_nav_on = false;
+                $tab_active = false;
+
+                if ($this->path == $val[1]) {
+                    $tab_active = true;
+                    $highlight_override = true;
+                }
 
                 $linktext = ( ! isset($text[$val[0]])) ? $val[0] : $text[$val[0]];
                 $linktext = $this->cleanTabText($linktext);
 
-                $class = ($tab_nav_on == true) ? 'tabActive' : 'tabInactive';
+                $class = ($tab_active == true) ? 'tabActive' : 'tabInactive';
                 $tabid = 'tab'.$tabct;
                 $tabct ++;
 
