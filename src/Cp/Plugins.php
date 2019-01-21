@@ -212,7 +212,7 @@ class Plugins
         //  Fetch all plugins registered with CMS
         // ------------------------------------
 
-        $plugins = PluginsFacade::registeredPlugins();
+        $plugins = PluginsFacade::installedPlugins();
 
         if (!isset($plugins[$plugin])) {
             abort(404);
