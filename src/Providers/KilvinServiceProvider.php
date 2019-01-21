@@ -156,18 +156,12 @@ class KilvinServiceProvider extends ServiceProvider
     }
 
    /**
-     * Base Localization Settings for CMS
+     * Default Localization Settings for CMS
      *
      * @return void
      */
     protected function setLocalizationSettings()
     {
-        // --------------------------------------------------
-        //  Locale for Carbon - Localizes translation and dates
-        //  - @todo: Use cookie value OR use config/app.php's locale value?
-        //  - @todo: Set via middleware
-        // --------------------------------------------------
-
         App::setLocale('en_US');
         Carbon::setLocale('en');
 
