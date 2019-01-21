@@ -243,8 +243,7 @@ class Home
 					Cp::quickSpan(
 						'defaultBold',
 						Cp::anchor(
-							BASE.'?C=account'.
-								AMP.'id='.$row->member_id,
+							'account/id='.$row->member_id,
 							$row->screen_name
 						)
 					),

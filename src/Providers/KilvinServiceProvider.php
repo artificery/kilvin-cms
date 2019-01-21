@@ -163,11 +163,11 @@ class KilvinServiceProvider extends ServiceProvider
     protected function setLocalizationSettings()
     {
         // --------------------------------------------------
-        //  Locale for Carbon - Localizes strings
+        //  Locale for Carbon - Localizes translation and dates
         //  - @todo: Use cookie value OR use config/app.php's locale value?
+        //  - @todo: Set via middleware
         // --------------------------------------------------
 
-        // @todo: Another thing that we might set via middleware
         App::setLocale('en_US');
         Carbon::setLocale('en');
 
@@ -310,9 +310,6 @@ class KilvinServiceProvider extends ServiceProvider
      */
     protected function registerCmsConstants()
     {
-        // @todo - exterminate
-        define('SELF', 'index.php');
-
         if (request()->segment(1) == 'installer') {
             define('REQUEST', 'INSTALL');
         } elseif (request()->segment(1) == config('kilvin.cp_path')) {
@@ -373,10 +370,6 @@ class KilvinServiceProvider extends ServiceProvider
             if (Request::filled('ACT')) {
                 define('ACTION', Request::input('ACT'));
             }
-        }
-
-        if (REQUEST === 'CP') {
-            define('BASE', SELF);
         }
     }
 }
