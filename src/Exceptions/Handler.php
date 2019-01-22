@@ -8,6 +8,7 @@ use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Kilvin\Exceptions\CmsTemplateException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,9 +55,6 @@ class Handler extends ExceptionHandler
         // Demo server, unwritable check
         if ($e instanceof \Illuminate\Database\QueryException) {
             if (preg_match('/([A-Z]+) command denied to user/i', $e->getMessage(), $match)) {
-
-                \Log::debug($e->getMessage());
-
                 if (REQUEST === 'CP') {
                     $vars = [
                         'title'     => 'Database Error',
@@ -97,6 +95,13 @@ class Handler extends ExceptionHandler
             ];
 
             return response()->view('kilvin::cp.errors.error', $vars, 404);
+        }
+
+        // Something went wrong when rendering the template
+        if ($e instanceof CmsTemplateException ) {
+            if (config('app.debug') == false) {
+                return response()->view('_errors.500', [], 500);
+            }
         }
 
         if ($e instanceof NotFoundHttpException) {

@@ -177,8 +177,6 @@ class Plugins
             return $this->registered_plugins[$plugin];
         }
 
-        // @todo - When this is thrown, we get a "An exception has been thrown during the compilation of a template"
-        // Probably can make that a bit prettier
         throw new CmsFailureException(sprintf(__('kilvin::plugins.plugin_cannot_be_found'), $plugin));
     }
 

@@ -9,6 +9,7 @@ use Kilvin\Libraries\Twig\Loader;
 use Illuminate\View\Engines\CompilerEngine;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Kilvin\Exceptions\CmsTemplateException;
 
 /**
  * View engine for Twig files.
@@ -144,7 +145,7 @@ class Engine extends CompilerEngine
         }
 
         if (isset($file)) {
-            $ex = new ErrorException($ex->getMessage(), 0, 1, $file, $templateLine, $ex);
+            $ex = new CmsTemplateException($ex->getMessage(), 0, 1, $file, $templateLine, $ex);
         }
 
         throw $ex;
