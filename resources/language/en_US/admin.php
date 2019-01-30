@@ -199,7 +199,7 @@ return [
 "Is system on?",
 
 "is_system_on_explanation" =>
-"CMS-wide setting! If system is off, all of your sites are turned off and only SuperAdmins can view your site(s).",
+"CMS-wide setting! If system is off, all of your sites are turned off and only Admins can view your sites.",
 
 "system_off_msg" =>
 "System Off Message",
@@ -249,14 +249,8 @@ return [
 "image_path" =>
 "Path to Images Directory",
 
-"cp_url" =>
-"URL to your Control Panel index page",
-
 "with_trailing_slash" =>
 "With trailing slash",
-
-"site_index" =>
-"Name of your site's index page",
 
 "system_path" =>
 "Absolute path to your %x folder",

@@ -76,7 +76,7 @@ class NewEntryAdminNotify extends Notification implements ShouldQueue
         $vars['greeting']        = 'Hello!';
         $vars['introLines'][]    = 'A new entry has been posted on '.Site::config('site_name');
         $vars['actionText']      = $entry->title;
-        $vars['actionUrl']       = Site::config('cp_url').'/edit/edit-entry/entry_id='.$entry->entry_id;
+        $vars['actionUrl']       = kilvinCpUrl('/edit/edit-entry/entry_id='.$entry->entry_id);
 
         return (new MailMessage)
             ->from($vars['notification_sender_email'], $vars['site_name'])

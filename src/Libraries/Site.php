@@ -302,8 +302,6 @@ class Site
         return [
             'site_debug',
             'is_site_on',
-            'cp_url',
-            'site_index',
             'notification_sender_email',
             'show_queries',
             'template_debugging',

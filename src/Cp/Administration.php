@@ -416,7 +416,6 @@ EOT;
 			'general-preferences' =>	[
 				'is_system_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'is_site_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'site_index'				=> '',
 				'notification_sender_email'	=> '',
 				'password_min_length'		=> '',
 			],

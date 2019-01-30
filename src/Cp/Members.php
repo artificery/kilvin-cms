@@ -510,7 +510,7 @@ class Members
     }
 
    /**
-    * Login as Member [page] - SuperAdmins only
+    * Login as Member [page] - Admins only
     *
     * @return string
     */
@@ -608,7 +608,7 @@ class Members
     }
 
    /**
-    * Login as Member [action] - SuperAdmins only
+    * Login as Member [action] - Admins only
     *
     * @return string|\Illuminate\Http\RedirectResponse
     */
@@ -631,9 +631,8 @@ class Members
 
         if (Request::input('return_destination'))
         {
-            if (Request::input('return_destination') == 'cp')
-            {
-                $return_path = Site::config('cp_url', FALSE);
+            if (Request::input('return_destination') == 'cp') {
+                $return_path = kilvinCpUrl();
             }
 
             if (Request::input('return_destination') == 'other')
@@ -1646,7 +1645,7 @@ class Members
                 {
                     $selected = ($row->member_group_id == 5) ? 1 : '';
 
-                    // Only SuperAdmins can assigned SuperAdmins
+                    // Only Admins can assigned Admins
                     if ($row->member_group_id == 1 AND Session::userdata('member_group_id') != 1) {
                         continue;
                     }

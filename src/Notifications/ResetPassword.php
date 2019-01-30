@@ -35,7 +35,7 @@ class ResetPassword extends IlluminateResetPassword implements ShouldQueue
         $vars['introLines'][]    = 'You are receiving this email because we received a password reset request for your account.';
         $vars['outroLines'][]    = 'If you did not request a password reset, no further action is required.';
         $vars['actionText']      = 'Reset Password';
-        $vars['actionUrl']       = Site::config('cp_url')."?C=reset_password_form&token=".$this->token;
+        $vars['actionUrl']       = kilvinCpUrl('reset_password_form/token='.$this->token);
 
         return (new MailMessage)
             ->from($vars['notification_sender_email'], $vars['site_name'])

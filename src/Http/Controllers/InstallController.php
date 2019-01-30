@@ -30,7 +30,6 @@ class InstallController extends Controller
         'db_database'                    => '',
         'site_name'                  => '',
         'site_url'                   => '',
-        'site_index'                 => '',
         'cp_url'                     => '',
         'password'                   => '',
         'screen_name'                => '',
@@ -145,7 +144,6 @@ class InstallController extends Controller
 
         $cp_url     = ($this->data['cp_url'] == '') ? $url.'admin' : $this->data['cp_url'];
         $site_url   = ($this->data['site_url'] == '' OR $this->data['site_url'] == '/') ? $url : $this->data['site_url'];
-        $site_index = ''; // For now we assume no index.php in URL
 
         $db_host            = ($this->data['db_host'] == '')              ? '127.0.0.1'   : $this->data['db_host'];
         $db_username        = ($this->data['db_username'] == '')          ? ''            : $this->data['db_username'];
@@ -167,7 +165,6 @@ class InstallController extends Controller
         $this->variables['errors']     = $errors;
         $this->variables['cp_url']     = (!empty($this->data['cp_url'])) ? $this->data['cp_url'] : $cp_url;
         $this->variables['site_url']   = (!empty($this->data['site_url'])) ? $this->data['site_url'] : $site_url;
-        $this->variables['site_index'] = (!empty($this->data['site_index'])) ? $this->data['site_index'] : $site_index;
 
         // Show Settings Form!
         return view('kilvin::installer.form', array_merge($this->data, $this->variables));
@@ -451,7 +448,6 @@ class InstallController extends Controller
             'installed_version'             =>  KILVIN_VERSION, // What version is installed in DB/config, opposed to version of files
             'site_debug'                    =>  1,
             'cp_url'                        =>  $this->data['cp_url'],
-            'site_index'                    =>  $this->data['site_index'],
             'site_name'                     =>  $this->data['site_name'],
             'notification_sender_email'     =>  $this->data['email'],
             'show_queries'                  =>  'n',

@@ -65,7 +65,7 @@ class CmsSession
 
         // ----------------------------------------------
         //  Is the system turned on?
-        //  - If system off, only CP is viewable and only by superadmins
+        //  - If system off, only CP is viewable and only by admins
         // ----------------------------------------------
 
         if (config('kilvin.is_system_on') != true) {
