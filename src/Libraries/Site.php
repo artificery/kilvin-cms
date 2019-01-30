@@ -246,8 +246,6 @@ class Site
         }
     }
 
-    // ------------------------------------------------
-
     /**
      * List all plugins
      *
@@ -257,8 +255,6 @@ class Site
     {
         return Plugins::installedPlugins();
     }
-
-    // ------------------------------------------------
 
     /**
      * List all sites
@@ -337,8 +333,6 @@ class Site
         ];
     }
 
-    // ------------------------------------------------
-
     /**
      * All the Data for All Sites
      *
@@ -364,8 +358,6 @@ class Site
 
         return Cache::remember('cms.libraries.site.sitesData', $storeTime, $query);
     }
-
-    // ------------------------------------------------
 
     /**
      * Flush all Site Caches
