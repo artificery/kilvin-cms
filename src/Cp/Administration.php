@@ -116,16 +116,6 @@ class Administration
 					'cookie cookies prefix domain site'
 				],
 
-				'space_1'				=> '-',
-
-				'cp-preferences'				=> [
-					'config-manager/cp-preferences',
-					'control panel display language encoding character publish tab'
-				],
-				'security-preferences'	 		=> [
-					'config-manager/security-preferences',
-					'security session sessions cookie deny duplicate require agent ip password length'
-				],
 				'debugging-preferences'			=> [
 					'config-manager/debugging-preferences',
 					'output debugging error message force query string HTTP headers redirect redirection'
@@ -427,8 +417,8 @@ EOT;
 				'is_system_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'is_site_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'site_index'				=> '',
-				'cp_url'					=> '',
 				'notification_sender_email'	=> '',
+				'password_min_length'		=> '',
 			],
 
 			'localization-preferences'	=>	[
@@ -441,10 +431,6 @@ EOT;
 			'cookie-preferences' => [
 				'cookie_domain'				=> '',
 				'cookie_path'				=> '',
-			],
-
-			'cp-preferences' =>	[
-				'cp_theme'					=> array('f', 'theme_menu'),
 			],
 
 			'debugging-preferences'	=>	[
@@ -464,11 +450,6 @@ EOT;
 				'image_library_path'		=> '',
 				'thumbnail_prefix'			=> '',
 			],
-
-			'security-preferences' =>	[
-				'password_min_length'		=> '',
-			],
-
 
 			'template-preferences' => [
 				'save_tmpl_revisions' 		=> array('r', array('y' => 'yes', 'n' => 'no')),
@@ -535,11 +516,9 @@ EOT;
 			'general-preferences',
 			'localization-preferences',
 			'cookie-preferences',
-			'cp-preferences',
 			'weblog-preferences',
 			'member-preferences',
 			'debugging-preferences',
-			'security-preferences',
 			'image-resizing',
 			'template-preferences',
 			'censoring-preferences',
@@ -719,8 +698,6 @@ EOT;
 					switch ($val[1])
 					{
 						case 'language_menu'		: 	Cp::$body .= $this->availableLanguages(Site::config($key));
-							break;
-						case 'theme_menu'			: 	Cp::$body .= $this->buildCpThemesPulldown(Site::config($key));
 							break;
 						case 'timezone'				: 	Cp::$body .= Localize::timezoneMenu(Site::config($key));
 							break;
@@ -1144,42 +1121,6 @@ EOT;
     {
         return "/^".$key."\=.*$/m";
     }
-
-   /**
-    * Build CP Themes pulldown
-    *
-    * @return string
-    */
-	function buildCpThemesPulldown($default = '')
-	{
-		$themes = [];
-
-		foreach(File::directories(KILVIN_CP_THEMES.'cp') as $dir) {
-            $x = explode(DIRECTORY_SEPARATOR, $dir);
-            $last = last($x);
-
-            if (!preg_match("/[^A-Za-z0-9\_]/", $last)) {
-                $themes[] = $last;
-            }
-        }
-
-		$r = Cp::input_select_header('cp_theme');
-
-		foreach ($themes as $theme)
-		{
-			$selected = ($theme == $default) ? 1 : '';
-
-			$r .= Cp::input_select_option(
-				$theme,
-				ucwords(str_replace("_", " ", $theme)),
-				($theme == $default) ? 1 : ''
-			);
-		}
-
-		$r .= Cp::input_select_footer();
-
-		return $r;
-	}
 
    /**
     * Build Available Languages Pulldown
