@@ -46,6 +46,10 @@ class TwigServiceProvider extends ViewServiceProvider
         $this->registerEngine();
         $this->registerViewExtension();
 
+        if (defined('REQUEST') && REQUEST === 'SITE') {
+            $this->app['view']->getFinder()->prependLocation(base_path('templates/_global'));
+        }
+
         $this->app->singleton('cms.twig.plugins', function () {
             return new TwigPlugins;
         });
