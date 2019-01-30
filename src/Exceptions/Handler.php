@@ -112,10 +112,15 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof HttpException) {
-            if (REQUEST === 'SITE') {
-                $http_code = $e->getStatusCode();
+
+            $http_code = $e->getStatusCode();
+
+            // Kilvin HTTP Errors for Sites, uses _global directory
+            if (REQUEST === 'SITE' && view()->exists("_errors.".$http_code)) {
                 return response()->view('_errors.'.$http_code, [], $http_code);
             }
+
+            return $this->renderHttpException($e);
         }
 
         return parent::render($request, $e);
