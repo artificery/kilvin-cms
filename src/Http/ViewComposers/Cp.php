@@ -38,10 +38,14 @@ class Cp
         }
 
         $view->with('cms', [
-                'name' => CMS_NAME,
-                'version' => KILVIN_VERSION,
-            ]
-        );
+            'name' => CMS_NAME,
+            'version' => KILVIN_VERSION,
+        ]);
+
+        // Laravel Errors
+        if (starts_with($view->name(), 'errors::')) {
+            return;
+        }
 
         // Not logged in? No more work to be done.
         if (!Auth::check() || Auth::user()->is_banned == true) {
