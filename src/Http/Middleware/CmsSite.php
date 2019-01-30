@@ -74,9 +74,8 @@ class CmsSite
             // @todo - Refine this to see if we are even installed?
             exit('Unable to load the CMS. Please check your database settings and ensure you ran the <a href="/installer">installer</a>.');
         }
-
+        
         if (REQUEST === 'SITE') {
-            $this->app['view']->getFinder()->prependLocation(base_path('templates/_global'));
             $this->app['view']->getFinder()->prependLocation(base_path('templates/'.Site::config('site_handle')));
         }
 
