@@ -74,11 +74,6 @@ class Cp
             ]
         );
 
-        if (Session::userdata('member_group_id') == 1 && Site::config('show_queries') == 'y' && !empty($query_log)) {
-            $query_log = $this->prettifyQueries(DB::getQueryLog());
-            $view->with('query_log', $query_log);
-        }
-
         $user = ['screen_name' => Session::userdata('screen_name')];
         $view->with('user', $user);
     }

@@ -450,8 +450,6 @@ class InstallController extends Controller
             'cp_url'                        =>  $this->data['cp_url'],
             'site_name'                     =>  $this->data['site_name'],
             'notification_sender_email'     =>  $this->data['email'],
-            'show_queries'                  =>  'n',
-            'template_debugging'            =>  'n',
             'include_seconds'               =>  'n',
             'cookie_domain'                 =>  '',
             'cookie_path'                   =>  '',

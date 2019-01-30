@@ -433,8 +433,6 @@ EOT;
 			],
 
 			'debugging-preferences'	=>	[
-				'show_queries'				=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'template_debugging'		=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'site_debug'				=> ['s', ['0' => 'debug_zero', '1' => 'debug_one', '2' => 'debug_two']],
 			],
 
@@ -476,8 +474,6 @@ EOT;
 			'is_site_on'		    	=> array('is_site_on_explanation'),
 			'is_system_on'		    	=> array('is_system_on_explanation'),
 			'site_debug'				=> array('site_debug_explanation'),
-			'show_queries'				=> array('show_queries_explanation'),
-			'template_debugging'		=> array('template_debugging_explanation'),
 			'default_member_group' 		=> array('group_assignment_defaults_to_two'),
 			'notification_sender_email' => array('notification_sender_email_explanation'),
 			'cookie_domain'				=> array('cookie_domain_explanation'),

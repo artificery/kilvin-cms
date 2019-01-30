@@ -264,12 +264,6 @@ return [
 "site_debug_explanation" =>
 "Enables the display of error for THIS site ONLY. The Laravel debugging setting can override this and make errors display for ALL sites.",
 
-"show_queries" =>
-"Display SQL Queries?",
-
-"show_queries_explanation" =>
-"If enabled, Admins will see all SQL queries displayed at the bottom of the browser window.  Useful for debugging.",
-
 "debug_zero" =>
 "0: No PHP/SQL error messages generated",
 
@@ -542,12 +536,6 @@ return [
 
 "file_saved" =>
 "The file has been saved",
-
-'template_debugging' =>
-"Display Template Debugging?",
-
-"template_debugging_explanation" =>
-"If enabled, Admins will see a list of details concerning the processing of the page.  Useful for debugging.",
 
 'hits' =>
 "Hits",

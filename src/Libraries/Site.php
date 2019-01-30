@@ -244,11 +244,6 @@ class Site
             $value = str_replace('{PUBLIC_PATH}', $this->config['PUBLIC_PATH'], $value);
             $value = str_replace('{STORAGE_PATH}', $this->config['STORAGE_PATH'], $value);
         }
-
-        // If we just reloaded, then we reset a few things automatically
-        if ($this->config('show_queries') == 'y' or REQUEST == 'CP') {
-            DB::enableQueryLog();
-        }
     }
 
     // ------------------------------------------------
@@ -303,8 +298,6 @@ class Site
             'site_debug',
             'is_site_on',
             'notification_sender_email',
-            'show_queries',
-            'template_debugging',
             'include_seconds',
             'cookie_domain',
             'cookie_path',
