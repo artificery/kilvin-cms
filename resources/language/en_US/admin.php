@@ -84,68 +84,11 @@ return [
 "screen_name" =>
 "Screen Name",
 
-"throttling_cfg" =>
-"Throttling Configuration",
-
-"banish_masked_ips" =>
-"Deny Access if No IP Address is Present",
-
-"max_page_loads" =>
-"Maximum Number of Page Loads",
-
-"max_page_loads_exp" =>
-"The total number of times a user is allowed to load any of your web pages (within the time interval below) before being locked out.",
-
-"time_interval" =>
-"Time Interval (in seconds)",
-
-"time_interval_exp" =>
-"The number of seconds during which the above number of page loads are allowed.",
-
-"lockout_time" =>
-"Lockout Time (in seconds)",
-
-"lockout_time_exp" =>
-"The length of time a user should be locked out of your site if they exceed the limits.",
-
-"banishment_type" =>
-"Action to Take",
-
-"banishment_type_exp" =>
-"The action that should take place if a user has exceeded the limits.",
-
-"url_redirect" =>
-"URL Redirect",
-
-"404_page" =>
-"Send 404 headers",
-
-"show_message" =>
-"Show custom message",
-
-"banishment_url" =>
-"URL for Redirect",
-
-"banishment_url_exp" =>
-"If you chose the URL Redirect option.",
-
-"banishment_message" =>
-"Custom Message",
-
-"banishment_message_exp" =>
-"If you chose the Custom Message option.",
-
 "click" =>
 "Click",
 
 "hover" =>
 "Hover",
-
-"enable_throttling" =>
-"Enable Throttling",
-
-"enable_throttling_explanation" =>
-"This feature generates a 404 header and message if a request to your site is made in which the template group does not exist in the URL. It is intended primarily to keep search engine crawlers from repeatedly requesting nonexistent pages.",
 
 "standby_recount" =>
 "Recounting... please stand by...",
@@ -611,15 +554,6 @@ return [
 
 "template_debugging_explanation" =>
 "If enabled, Admins will see a list of details concerning the processing of the page.  Useful for debugging.",
-
-"view-throttle-log" =>
-"View Throttle Log",
-
-"no_throttle_logs" =>
-"No IPs are currently being throttled by the system.",
-
-'throttling_disabled' =>
-"Throttling Disabled. You can enable it %s.",
 
 'hits' =>
 "Hits",

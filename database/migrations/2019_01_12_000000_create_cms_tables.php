@@ -39,17 +39,6 @@ class CreateCmsTables extends Migration
             $table->string('public_path', 150)->nullable();
         });
 
-        // Throttle
-        Schema::create('throttle', function($table)
-        {
-            $table->increments('id');
-            $table->string('ip_address', 50)->index();
-            $table->timestamp('last_activity')->index();
-            $table->unsignedInteger('hits')->default(0);
-            $table->char('locked_out')->default('n');
-        });
-
-
         // Cache
         // - file is default, database is an option, Redis would be Grrrrrreat!
         // - MySQL 5.7 will allow a full string index length but anything
@@ -486,7 +475,6 @@ class CreateCmsTables extends Migration
         $D[] = "sites";
         $D[] = "site_preferences";
         $D[] = "site_urls";
-        $D[] = 'throttle';
         $D[] = 'cache';
         $D[] = 'stats';
         $D[] = 'plugins';

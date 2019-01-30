@@ -49,12 +49,6 @@ class Cleanup
                 ->whereNull('weblog_id')
                 ->update(['last_cache_clear' => $expire]);
 
-            if (Site::config('enable_throttling') == 'y') {
-                $expire = time() - 180;
-
-                DB::table('throttle')->where('last_activity', '<', $expire)->delete();
-            }
-
             cmsClearCaching('all');
         }
 

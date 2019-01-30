@@ -60,8 +60,6 @@ class Administration
 						break;
 					case 'clear-cplogs'		 	 : return (new Logging)->clearCpLogs();
 						break;
-					case 'view-throttling-log'   : return (new Logging)->viewThrottleLog();
-						break;
 					case 'clear-cache-form'		 : return $utilities->clearCacheForm();
 						break;
 					case 'clear-caching'		 : return $utilities->clearCaching();
@@ -221,11 +219,6 @@ class Administration
 				'view-log-files'		=>	[
 					'utilities/view-logs',
 					'view CP control panel logs '
-				],
-
-				'view-throttle-log'		=>	[
-					'utilities/view-throttling-log',
-					'throttle throttling log'
 				],
 
 				'space_1'				=> '-',
@@ -474,14 +467,6 @@ EOT;
 
 			'security-preferences' =>	[
 				'password_min_length'		=> '',
-				'enable_throttling'			=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'banish_masked_ips'			=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'max_page_loads'			=> '',
-				'time_interval'				=> '',
-				'lockout_time'				=> '',
-				'banishment_type'			=> array('s', array('404' => '404', 'redirect' => 'url_redirect', 'message' => 'show_message')),
-				'banishment_url'			=> '',
-				'banishment_message'		=> ''
 			],
 
 
@@ -525,12 +510,6 @@ EOT;
 			'thumbnail_prefix'			=> array('thumbnail_prefix_exp'),
 			'save_tmpl_revisions'		=> array('template_rev_msg'),
 			'max_tmpl_revisions'		=> array('max_revisions_exp'),
-			'max_page_loads'			=> array('max_page_loads_exp'),
-			'time_interval'				=> array('time_interval_exp'),
-			'lockout_time'				=> array('lockout_time_exp'),
-			'banishment_type'			=> array('banishment_type_exp'),
-			'banishment_url'			=> array('banishment_url_exp'),
-			'banishment_message'		=> array('banishment_message_exp'),
 		];
 	}
 
