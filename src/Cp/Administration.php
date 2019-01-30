@@ -98,11 +98,7 @@ class Administration
 			'site-preferences'	=>	[
 				'general-preferences'			=> [
 					'config-manager/general-preferences',
-					'system offline name index site new version auto check rename weblog section urls'
-				],
-				'localization-preferences' 		=> [
-					'config-manager/localization-preferences',
-					'localize localization time zone'
+					'system offline site url password timezone localize localization time zone date format language domain path cookie cookies'
 				],
 
 				// These are in the .env file....which maybe we write on save?
@@ -111,18 +107,6 @@ class Administration
 				// 	'email SMTP sendmail PHP Mail batch webmaster tell-a-friend contact form'
 				// ],
 
-				'cookie-preferences'			=> [
-					'config-manager/cookie-preferences',
-					'cookie cookies prefix domain site'
-				],
-
-				'debugging-preferences'			=> [
-					'config-manager/debugging-preferences',
-					'output debugging error message force query string HTTP headers redirect redirection'
-				],
-
-
-				'space_2'				=> '-',
 
 				'censoring-preferences'			=> [
 					'config-manager/censoring-preferences',
@@ -416,24 +400,15 @@ EOT;
 			'general-preferences' =>	[
 				'is_system_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'is_site_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
+				'site_debug'				=> ['s', ['0' => 'debug_zero', '1' => 'debug_one', '2' => 'debug_two']],
 				'notification_sender_email'	=> '',
 				'password_min_length'		=> '',
-			],
-
-			'localization-preferences'	=>	[
+				'cookie_domain'				=> '',
+				'cookie_path'				=> '',
 				'site_timezone'			=> ['f', 'timezone'],
 				'date_format'			=> ['s', ['Y-m-d' => Localize::format('Y-m-d', 'now')]],
 				'time_format'			=> ['s', ['H:i'   => __('kilvin::admin.24_hour_time'), 'g:i A' => __('kilvin::admin.12_hour_time')]],
 				'default_language'		=> ['f', 'language_menu'],
-			],
-
-			'cookie-preferences' => [
-				'cookie_domain'				=> '',
-				'cookie_path'				=> '',
-			],
-
-			'debugging-preferences'	=>	[
-				'site_debug'				=> ['s', ['0' => 'debug_zero', '1' => 'debug_one', '2' => 'debug_two']],
 			],
 
 			'weblog-preferences' =>	[
@@ -509,11 +484,8 @@ EOT;
 		// No funny business with the URL
 		$allowed = [
 			'general-preferences',
-			'localization-preferences',
-			'cookie-preferences',
 			'weblog-preferences',
 			'member-preferences',
-			'debugging-preferences',
 			'image-resizing',
 			'template-preferences',
 			'censoring-preferences',

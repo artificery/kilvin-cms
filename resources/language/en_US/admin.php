@@ -259,7 +259,7 @@ return [
 "Debug Preference",
 
 "site_debug" =>
-"CMS Debugging level",
+"Debugging Level",
 
 "site_debug_explanation" =>
 "Enables the display of error for THIS site ONLY. The Laravel debugging setting can override this and make errors display for ALL sites.",
