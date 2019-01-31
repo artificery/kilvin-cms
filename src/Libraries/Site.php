@@ -217,6 +217,9 @@ class Site
         $this->config['PUBLIC_PATH'] = rtrim($public_path, '/').'/';
         $this->config['STORAGE_PATH'] = storage_path('app').'/';
 
+        $this->config['is_system_on'] = env('KILVIN_IS_SYSTEM_ON');
+        $this->config['disable_events'] = env('KILVIN_DISABLE_EVENTS');
+
         // ------------------------------------
         //  Few More Variables
         // ------------------------------------
