@@ -209,7 +209,6 @@ class Plugins
    /**
     * FieldTypes
     * - Returns array of all installed and available field types for CMS
-    * - @todo - Consider giving plugins/Kilvin the ability to disable field types?
     *
     * @return array
     */
