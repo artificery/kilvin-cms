@@ -680,13 +680,12 @@ EOT;
 		if ($val[0] == 'r') {
 			$output = '';
 			foreach ($val[1] as $k => $v) {
-
 				if($k == 'y') {
-					$selected = (Site::config($key) === true or Site::config($key) === 'y');
+					$selected = (Site::originalConfig($key) === true or Site::originalConfig($key) === 'y');
 				} elseif($k == 'n') {
-					$selected = (Site::config($key) === false or Site::config($key) === 'n');
+					$selected = (Site::originalConfig($key) === false or Site::originalConfig($key) === 'n');
 				} else {
-					$selected = ($k == Site::config($key)) ? 1 : '';
+					$selected = ($k == Site::originalConfig($key)) ? 1 : '';
 				}
 
 				$output .= __('kilvin::admin.'.$v).'&nbsp;'.Cp::input_radio($key, $k, $selected).'&nbsp;';
