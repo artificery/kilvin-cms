@@ -397,18 +397,30 @@ EOT;
 	{
 		return [
 
-			'general-preferences' =>	[
-				'is_system_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'is_site_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
-				'site_debug'				=> ['s', ['0' => 'debug_zero', '1' => 'debug_one', '2' => 'debug_two']],
-				'notification_sender_email'	=> '',
-				'password_min_length'		=> '',
-				'cookie_domain'				=> '',
-				'cookie_path'				=> '',
-				'site_timezone'			=> ['f', 'timezone'],
-				'date_format'			=> ['s', ['Y-m-d' => Localize::format('Y-m-d', 'now')]],
-				'time_format'			=> ['s', ['H:i'   => __('kilvin::admin.24_hour_time'), 'g:i A' => __('kilvin::admin.12_hour_time')]],
-				'default_language'		=> ['f', 'language_menu'],
+			'general-preferences' => [
+				'sections' => [
+					'general-preferences' => [
+						'is_system_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
+						'is_site_on'				=> array('r', array('y' => 'yes', 'n' => 'no')),
+						'site_debug'				=> ['s', ['0' => 'debug_zero', '1' => 'debug_one', '2' => 'debug_two']],
+						'notification_sender_email'	=> '', // @todo - Move this to weblog preferencs?
+						'password_min_length'		=> '',
+						'cookie_domain'				=> '',
+						'cookie_path'				=> '',
+					],
+					'localization' => [
+						'site_timezone'			    => ['f', 'timezone'],
+						'date_format'			    => ['s', ['Y-m-d' => Localize::format('Y-m-d', 'now')]],
+						'time_format'			    => [
+							's',
+							[
+								'H:i'   => __('kilvin::admin.24_hour_time'),
+								'g:i A' => __('kilvin::admin.12_hour_time')
+							]
+						],
+						'default_language'		    => ['f', 'language_menu'],
+					],
+				],
 			],
 
 			'weblog-preferences' =>	[
@@ -431,7 +443,7 @@ EOT;
 			'censoring-preferences' => [
 				'enable_censoring' 			=> array('r', array('y' => 'yes', 'n' => 'no')),
 				'censor_replacement'		=> '',
-				'censored_words'			=> array('t', array('rows' => '20', 'kill_pipes' => TRUE)),
+				'censored_words'			=> array('t', array('rows' => '20', 'kill_pipes' => true)),
 			],
 		];
 	}
@@ -495,8 +507,6 @@ EOT;
 			abort(404);
 		}
 
-		$f_data = $this->configDataStructure();
-
 		$subtext = $this->subtext();
 
 		// ------------------------------------
@@ -515,178 +525,36 @@ EOT;
 			$return_loc = 'templates_manager';
 		}
 
-		Cp::$body .= Cp::formOpen(
-			[
+		Cp::$body .= Cp::formOpen( [
 				'action' => 'administration/update-config-preferences'
-			],
-			[
+			], [
 				'return_location' => $return_loc
 			]
 		);
 
-		Cp::$body .=	Cp::table('tableBorder', '0', '', '100%');
-		Cp::$body .=	'<tr>'.PHP_EOL;
-		Cp::$body .=	Cp::td('tableHeading', '', '2');
-		Cp::$body .=	__('kilvin::admin.'.$type);
-		Cp::$body .=	'</td>'.PHP_EOL;
-		Cp::$body .=	'</tr>'.PHP_EOL;
+		$config_data = $this->configDataStructure()[$type];
 
-		$i = 0;
+		if (isset($config_data['sections'])) {
+			$sections = $config_data['sections'];
+		} else {
+			$sections = [$type => $config_data];
+		}
 
-		// ------------------------------------
-		//  Blast through the array
-		// ------------------------------------
+		foreach ($sections as $name => $fields) {
 
-		foreach ($f_data[$type] as $key => $val) {
-			Cp::$body	.=	'<tr>'.PHP_EOL;
+			Cp::$body .= Cp::table('tableBorder', '0', '', '100%');
+			Cp::$body .= '<tr>'.PHP_EOL;
+			Cp::$body .= Cp::td('tableHeading', '', '2');
+			Cp::$body .= __('kilvin::admin.'.$name);
 
-			// If the form type is a textarea, we'll align the text at the top, otherwise, we'll center it
-
-			if (is_array($val) AND $val[0] == 't')
-			{
-				Cp::$body .= Cp::td('', '50%', '', '', 'top');
-			}
-			else
-			{
-				Cp::$body .= Cp::td('', '50%', '');
-			}
-
-			// ------------------------------------
-			//  Preference heading
-			// ------------------------------------
-
-			Cp::$body .= Cp::div('defaultBold');
-
-			$label = ( ! is_array($val)) ? $key : '';
-
-			Cp::$body .= __('kilvin::admin.'.$key);
-
-			Cp::$body .= '</div>'.PHP_EOL;
-
-			// ------------------------------------
-			//  Preference sub-heading
-			// ------------------------------------
-
-			if (isset($subtext[$key]))
-			{
-				foreach ($subtext[$key] as $sub)
-				{
-					Cp::$body .= Cp::quickDiv('subtext', __('kilvin::admin.'.$sub));
-				}
-			}
-
-			Cp::$body .= '</td>'.PHP_EOL;
-
-			// ------------------------------------
-			//  Preference value
-			// ------------------------------------
-
-			Cp::$body .= Cp::td('', '50%', '');
-
-			if (is_array($val))
-			{
-				// ------------------------------------
-				//  Drop-down menus
-				// ------------------------------------
-
-				if ($val[0] == 's')
-				{
-					Cp::$body .= Cp::input_select_header($key);
-
-					foreach ($val[1] as $k => $v)
-					{
-						$selected = ($k == Site::config($key)) ? 1 : '';
-
-						$value = ($key == 'date_format' or $key == 'time_format') ? $v : __('kilvin::admin.'.$v);
-
-						Cp::$body .= Cp::input_select_option($k, $value, $selected);
-					}
-
-					Cp::$body .= Cp::input_select_footer();
-
-				}
-				elseif ($val[0] == 'r')
-				{
-					// ------------------------------------
-					//  Radio buttons
-					// ------------------------------------
-
-					foreach ($val[1] as $k => $v)
-					{
-
-						if($k == 'y') {
-							$selected = (Site::config($key) === true or Site::config($key) === 'y');
-						} elseif($k == 'n') {
-							$selected = (Site::config($key) === false or Site::config($key) === 'n');
-						} else {
-							$selected = ($k == Site::config($key)) ? 1 : '';
-						}
-
-						Cp::$body .= __('kilvin::admin.'.$v).'&nbsp;';
-						Cp::$body .= Cp::input_radio($key, $k, $selected).'&nbsp;';
-					}
-				}
-				elseif ($val[0] == 't')
-				{
-					// ------------------------------------
-					//  Textarea fields
-					// ------------------------------------
-
-					// The "kill_pipes" index instructs us to
-					// turn pipes into newlines
-
-					if (isset($val[1]['kill_pipes']) AND $val[1]['kill_pipes'] === TRUE)
-					{
-						$text	= '';
-
-						foreach (explode('|', Site::originalConfig($key)) as $exp)
-						{
-							$text .= $exp.PHP_EOL;
-						}
-					}
-					else
-					{
-						$text = stripslashes(Site::originalConfig($key));
-					}
-
-					$rows = (isset($val[1]['rows'])) ? $val[1]['rows'] : '20';
-
-					$text = str_replace("\\'", "'", $text);
-
-					Cp::$body .= Cp::input_textarea($key, $text, $rows);
-
-				}
-				elseif ($val[0] == 'f')
-				{
-					// ------------------------------------
-					//  Function calls
-					// ------------------------------------
-
-					switch ($val[1])
-					{
-						case 'language_menu'		: 	Cp::$body .= $this->availableLanguages(Site::config($key));
-							break;
-						case 'timezone'				: 	Cp::$body .= Localize::timezoneMenu(Site::config($key));
-							break;
-					}
-				}
-			}
-			else
-			{
-				// ------------------------------------
-				//  Text input fields
-				// ------------------------------------
-
-				$item = str_replace("\\'", "'", Site::originalConfig($key));
-
-				Cp::$body .= Cp::input_text($key, $item, '20', '120', 'input', '100%');
+			foreach ($fields as $key => $val) {
+				Cp::$body .= $this->buildConfigFieldRow($key, $val);
 			}
 
 			Cp::$body .= '</td>'.PHP_EOL;
 			Cp::$body .= '</tr>'.PHP_EOL;
+			Cp::$body .= '</table>'.PHP_EOL;
 		}
-
-		Cp::$body .= '</table>'.PHP_EOL;
 
 		Cp::$body .= Cp::quickDiv('littlePadding', Cp::input_submit(__('kilvin::cp.update')));
 
@@ -708,6 +576,165 @@ EOT;
 		}
 	}
 
+	/**
+     * Build a field's row in table of config preferences
+     *
+     * @param string $key Configuration key/name
+     * @param string|array $val The configuration setup array
+     * @return string
+     *
+     */
+    public function buildConfigFieldRow($key, $val)
+    {
+    	$o = '<tr>'.PHP_EOL;
+
+		// If the form type is a textarea, we'll align the text at the top, otherwise, we'll center it
+		if (is_array($val) AND $val[0] == 't') {
+			$o .= Cp::td('', '50%', '', '', 'top');
+		} else {
+			$o .= Cp::td('', '50%', '');
+		}
+
+		// ------------------------------------
+		//  Preference heading
+		// ------------------------------------
+
+		$o .= Cp::div('defaultBold');
+
+		$label = ( ! is_array($val)) ? $key : '';
+
+		$o .= __('kilvin::admin.'.$key);
+
+		$o .= '</div>'.PHP_EOL;
+
+		// ------------------------------------
+		//  Preference sub-heading
+		// ------------------------------------
+
+		if (isset($subtext[$key])) {
+			foreach ($subtext[$key] as $sub) {
+				$o .= Cp::quickDiv('subtext', __('kilvin::admin.'.$sub));
+			}
+		}
+
+		$o .= '</td>'.PHP_EOL;
+
+		// ------------------------------------
+		//  Add in the Field Itself
+		// ------------------------------------
+
+		$o .= Cp::td('', '50%', '');
+		$o .= $this->buildConfigField($key, $val);
+		$o .= '</td>'.PHP_EOL;
+		$o .= '</tr>'.PHP_EOL;
+
+		return $o;
+    }
+
+   /**
+    * Build a Config Manager Field
+    *
+    * @param string $key Configuration key/name
+    * @param string|array $val The configuration setup array
+    * @return  string
+    */
+	public function buildConfigField($key, $val)
+	{
+		// ------------------------------------
+		//  Text input fields
+		// ------------------------------------
+
+		if (!is_array($val)) {
+			$item = str_replace("\\'", "'", Site::originalConfig($key));
+			return Cp::input_text($key, $item, '20', '120', 'input', '100%');
+		}
+
+		if (is_array($val) && !isset($val[0])) {
+			return '';
+		}
+
+		// ------------------------------------
+		//  Drop-down menus
+		// ------------------------------------
+
+		if ($val[0] == 's') {
+			$output = Cp::input_select_header($key);
+
+			foreach ($val[1] as $k => $v) {
+				$selected = ($k == Site::config($key)) ? 1 : '';
+
+				$value = ($key == 'date_format' or $key == 'time_format') ? $v : __('kilvin::admin.'.$v);
+
+				$output .= Cp::input_select_option($k, $value, $selected);
+			}
+
+			$output .= Cp::input_select_footer();
+
+			return $output;
+		}
+
+		// ------------------------------------
+		//  Radio buttons
+		// ------------------------------------
+
+		if ($val[0] == 'r') {
+			$output = '';
+			foreach ($val[1] as $k => $v) {
+
+				if($k == 'y') {
+					$selected = (Site::config($key) === true or Site::config($key) === 'y');
+				} elseif($k == 'n') {
+					$selected = (Site::config($key) === false or Site::config($key) === 'n');
+				} else {
+					$selected = ($k == Site::config($key)) ? 1 : '';
+				}
+
+				$output .= __('kilvin::admin.'.$v).'&nbsp;'.Cp::input_radio($key, $k, $selected).'&nbsp;';
+			}
+
+			return $output;
+		}
+
+		// ------------------------------------
+		//  Textarea fields
+		// ------------------------------------
+
+		if ($val[0] == 't') {
+
+			// The "kill_pipes" index instructs us to
+			// turn pipes into newlines
+			if (isset($val[1]['kill_pipes']) AND $val[1]['kill_pipes'] === true) {
+				$text	= '';
+
+				foreach (explode('|', Site::originalConfig($key)) as $exp) {
+					$text .= $exp.PHP_EOL;
+				}
+			} else {
+				$text = stripslashes(Site::originalConfig($key));
+			}
+
+			$rows = (isset($val[1]['rows'])) ? $val[1]['rows'] : '20';
+
+			$text = str_replace("\\'", "'", $text);
+
+			return Cp::input_textarea($key, $text, $rows);
+		}
+
+		// ------------------------------------
+		//  Function calls
+		// ------------------------------------
+		if ($val[0] == 'f') {
+			switch ($val[1]) {
+				case 'language_menu'		: 	return $this->availableLanguages(Site::config($key));
+					break;
+				case 'timezone'				: 	return Localize::timezoneMenu(Site::config($key));
+					break;
+			}
+		}
+
+		return '';
+	}
+
    /**
     * Members/Accounts General Config Manager
     *
@@ -719,7 +746,7 @@ EOT;
 			return Cp::unauthorizedAccess();
 		}
 
-		$f_data = [
+		$config_data = [
 			'general-preferences'		=>
 			[
 				'default_member_group'	=> ['f', 'member_groups'],
@@ -753,11 +780,10 @@ EOT;
 		$r .= Cp::quickDiv('default', '', 'menu_contents');
 
 		// ------------------------------------
-		//  Blast through the array
+		//  Output Config Data Structure
 		// ------------------------------------
 
-		foreach ($f_data as $menu_head => $menu_array)
-		{
+		foreach ($config_data as $menu_head => $menu_array) {
 			$r .= '<div id="'.$menu_head.'" style="display: block; padding:0; margin: 0;">';
 			$r .= Cp::table('tableBorder', '0', '', '100%');
 			$r .= '<tr>'.PHP_EOL;

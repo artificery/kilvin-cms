@@ -225,6 +225,9 @@ return [
 "general-preferences" =>
 "General Preferences",
 
+"localization" =>
+"Localization",
+
 "member-preferences" =>
 "Member Preferences",
 
