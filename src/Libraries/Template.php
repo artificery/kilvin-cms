@@ -2,6 +2,7 @@
 
 namespace Kilvin\Libraries;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Kilvin\Facades\Site;
@@ -127,8 +128,6 @@ class Template
     /**
      * Load Global Variables into Twig Engine
      *
-     * @todo - Finish this
-     *
      * @return void
      */
     private function loadGlobals()
@@ -156,9 +155,14 @@ class Template
 
         $core_globals = [
             'now' => Localize::createHumanReadableDateTime(),
-            'cms' => [
+            'kilvin' => [
                 'version' => KILVIN_VERSION
-            ]
+            ],
+            'currentSite' => [
+                'name' => Site::config('site_name'),
+                'handle' => Site::config('site_handle')
+            ],
+            'currentUser' => $this->currentUser()
         ];
 
         // Template Variables
@@ -169,6 +173,38 @@ class Template
         }
 
         return self::$globals_cache[Site::config('site_handle')] = $core_globals;
+    }
+
+    /**
+     * Get currentUser data
+     *
+     * @return array
+     */
+    public function currentUser()
+    {
+        if (!Auth::check()) {
+            return null;
+        }
+
+        $data = [
+            'member_id' => null,
+            'email' => null,
+            'screen_name' => null,
+            'url' => null,
+            'photo_filename' => null,
+            'language' => 'en_US',
+            'timezone' => null,
+            'date_format' => null,
+            'time_format' => null,
+        ];
+
+        $user = Auth::user();
+
+        foreach ($data as $key => &$val) {
+            $val = $user->{$key} ?? $val;
+        }
+
+        return $data;
     }
 
     /**
@@ -357,7 +393,6 @@ class Template
         $registered = Plugins::twig()['variable'];
 
         foreach(array_keys(Plugins::installedPlugins()) as $plugin) {
-
             if (isset($registered[$plugin])) {
                 foreach ($registered[$plugin] as $class) {
                     $obj = app($class);
