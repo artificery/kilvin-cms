@@ -1,6 +1,6 @@
 <?php
 
-namespace Kilvin\FieldTypes;
+namespace Kilvin\Fieldtypes;
 
 use Carbon\Carbon;
 use Kilvin\Facades\Site;

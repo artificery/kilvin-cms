@@ -1,6 +1,6 @@
 <?php
 
-namespace Kilvin\Facade;
+namespace Kilvin\Facades;
 
 use Illuminate\Support\Facades\Facade\Twig;
 

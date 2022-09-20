@@ -1,6 +1,6 @@
 <?php
 
-namespace Kilvin\FieldTypes;
+namespace Kilvin\Fieldtypes;
 
 use Kilvin\Facades\Cp;
 use Kilvin\Plugins\Weblogs\Models\Entry;
