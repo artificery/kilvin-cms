@@ -120,13 +120,14 @@ class KilvinServiceProvider extends ServiceProvider
         //  - Stop here, no need to check if system is on
         // ----------------------------------------------
 
-        if (KILVIN_REQUEST == 'INSTALL') {
+        if (KILVIN_REQUEST === 'INSTALL') {
 
             $installed_version = config('kilvin.installed_version');
 
             // Hide installer after installation
             if (!empty($installed_version) && config('kilvin.hide_installer') === true) {
-                \Log::debug('Kilvin CMS Installer requested but configuration indicates it is already installed.');
+                // \Log::debug('Kilvin CMS Installer requested but configuration indicates it is already installed.');
+                exit('Kilvin CMS Installer requested but ENV and configuration indicates it is already installed.');
                 return;
             }
 
