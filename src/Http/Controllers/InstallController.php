@@ -410,7 +410,7 @@ class InstallController extends Controller
      */
     private function runMigration()
     {
-        require_once KILVIN_PACKAGE_PATH.'database/migrations/2017_06_12_000000_create_cms_tables.php';
+        require_once KILVIN_PACKAGE_PATH.'database/migrations/2019_01_12_000000_create_cms_tables.php';
 
         $class = new \CreateCmsTables;
 
