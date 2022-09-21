@@ -166,7 +166,7 @@ class Template
         ];
 
         // Template Variables
-        if (REQUEST === 'SITE') {
+        if (KILVIN_REQUEST === 'SITE') {
             $core_globals['tv'] = DB::table('template_variables')
                 ->pluck('variable_data', 'variable_name')
                 ->toArray();

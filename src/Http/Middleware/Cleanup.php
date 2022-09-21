@@ -20,7 +20,7 @@ class Cleanup
     {
         $response = $next($request);
 
-        if (REQUEST != 'SITE' or defined('ACTION')) {
+        if (KILVIN_REQUEST != 'SITE' or defined('ACTION')) {
             return $response;
         }
 

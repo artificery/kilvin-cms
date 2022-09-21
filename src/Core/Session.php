@@ -25,7 +25,7 @@ class Session
         $ban_status = false;
 
         // Ban checks only happen on non-CP requests
-        if (REQUEST != 'CP') {
+        if (KILVIN_REQUEST != 'CP') {
             if (self::banCheck('ip')) {
                 $ban_status = true;
             }
@@ -64,7 +64,7 @@ class Session
         //  Form Redirect Tracker
         // ------------------------------------
 
-        if (REQUEST != 'CP') {
+        if (KILVIN_REQUEST != 'CP') {
             self::tracker();
 		}
     }
@@ -288,7 +288,7 @@ class Session
         //  - Only non-Admins and only when viewing a SITE request
         // -----------------------------------
 
-        if (REQUEST === 'SITE') {
+        if (KILVIN_REQUEST === 'SITE') {
             $offline_sites = [];
 
             if ($group_id != 1 && !empty($special['offline_sites'])) {
@@ -449,7 +449,7 @@ class Session
 
 		}
 
-	    if (REQUEST == 'SITE') {
+	    if (KILVIN_REQUEST == 'SITE') {
             session('tracker', $tracker);
 		}
 

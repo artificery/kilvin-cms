@@ -29,7 +29,7 @@ class Functions extends Loader
      */
     public function getPluginFunctions()
     {
-        if (REQUEST === 'INSTALL') {
+        if (KILVIN_REQUEST === 'INSTALL') {
             return [];
         }
 

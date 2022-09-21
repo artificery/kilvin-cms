@@ -31,14 +31,14 @@ class CmsSession
         //  Instantiate Kilvin Session Data
         // ----------------------------------------------
 
-        if (defined('REQUEST') && in_array(REQUEST, ['INSTALL','CONSOLE'])) {
+        if (defined('KILVIN_REQUEST') && in_array(KILVIN_REQUEST, ['INSTALL','CONSOLE'])) {
             return $next($request);
         }
 
         Session::boot();
 
         if (Session::userdata('is_banned') == true) {
-            if (REQUEST == 'CP') {
+            if (KILVIN_REQUEST == 'CP') {
                 throw new CmsFailureException(__('kilvin::admin.Your account has been banned.'));
             }
 
@@ -69,8 +69,8 @@ class CmsSession
         // ----------------------------------------------
 
         if (config('kilvin.is_system_on') != true) {
-            if (REQUEST != 'CP' || (Auth::check() && Session::userdata('member_group_id') != 1)) {
-                if (REQUEST == 'CP') {
+            if (KILVIN_REQUEST != 'CP' || (Auth::check() && Session::userdata('member_group_id') != 1)) {
+                if (KILVIN_REQUEST == 'CP') {
                     abort(403);
                 } else {
                     exit(view('offline'));
@@ -83,7 +83,7 @@ class CmsSession
         //  - Note: super-admins can always view a site
         // ----------------------------------------------
 
-        if (Session::userdata('member_group_id') != 1 and REQUEST == 'SITE') {
+        if (Session::userdata('member_group_id') != 1 and KILVIN_REQUEST == 'SITE') {
             if (Site::config('is_site_on') != 'y') {
                 $viewable_sites = Session::userdata('offline_sites');
                 if (!in_array(Site::config('site_id'), $viewable_sites)) {

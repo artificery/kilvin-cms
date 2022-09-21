@@ -41,7 +41,7 @@ class CmsSite
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        if (defined('REQUEST') && in_array(REQUEST, ['INSTALL','CONSOLE'])) {
+        if (defined('KILVIN_REQUEST') && in_array(KILVIN_REQUEST, ['INSTALL','CONSOLE'])) {
             return $next($request);
         }
 
@@ -53,7 +53,7 @@ class CmsSite
         try {
             if (defined('SITE_URL_ID')) {
                 Site::loadSiteUrlPrefs(SITE_URL_ID);
-            } elseif (REQUEST == 'CP' && request()->hasCookie('cp_last_site_id')) {
+            } elseif (KILVIN_REQUEST == 'CP' && request()->hasCookie('cp_last_site_id')) {
                 $site_id = null;
 
                 try {
@@ -75,7 +75,7 @@ class CmsSite
             exit('Unable to load the CMS. Please check your database settings and ensure you ran the <a href="/installer">installer</a>.');
         }
         
-        if (REQUEST === 'SITE') {
+        if (KILVIN_REQUEST === 'SITE') {
             $this->app['view']->getFinder()->prependLocation(base_path('templates/'.Site::config('site_handle')));
         }
 
@@ -90,7 +90,7 @@ class CmsSite
             error_reporting(E_ALL);
         }
 
-        if (REQUEST === 'CP') {
+        if (KILVIN_REQUEST === 'CP') {
             define('KILVIN_CP_THEMES', KILVIN_THEMES.'cp/');
         }
 

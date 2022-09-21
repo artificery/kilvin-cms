@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         // Demo server, unwritable check
         if ($e instanceof \Illuminate\Database\QueryException) {
             if (preg_match('/([A-Z]+) command denied to user/i', $e->getMessage(), $match)) {
-                if (REQUEST === 'CP') {
+                if (KILVIN_REQUEST === 'CP') {
                     $vars = [
                         'title'     => 'Database Error',
                         'errors'    => (array) sprintf('Your DB user does not have %s permissions.', $match[1])
@@ -78,7 +78,7 @@ class Handler extends ExceptionHandler
 
         // The CMS tried to do something it could not do
         if ($e instanceof CmsFailureException){
-            if (REQUEST === 'CP') {
+            if (KILVIN_REQUEST === 'CP') {
                 $vars = [
                     'title'     => 'Fatal Error',
                     'errors'    => (array) $e->getMessage()
@@ -108,7 +108,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof NotFoundHttpException) {
-            if (REQUEST === 'SITE') {
+            if (KILVIN_REQUEST === 'SITE') {
                 // Should be in the ./templates directory
                 return response()->view('_errors.404', [], 404);
             }
@@ -119,7 +119,7 @@ class Handler extends ExceptionHandler
             $http_code = $e->getStatusCode();
 
             // Kilvin HTTP Errors for Sites, uses _global directory
-            if (REQUEST === 'SITE' && view()->exists("_errors.".$http_code)) {
+            if (KILVIN_REQUEST === 'SITE' && view()->exists("_errors.".$http_code)) {
                 return response()->view('_errors.'.$http_code, [], $http_code);
             }
 
@@ -151,7 +151,7 @@ class Handler extends ExceptionHandler
      */
     protected function sendCsrfErrorPage()
     {
-        if (REQUEST === 'CP') {
+        if (KILVIN_REQUEST === 'CP') {
             $vars = [
                 'title'  => 'Invalid CSRF Token',
                 'errors' => ['Oops! Your form submission failed because of a missing or invalid CSRF token.'],

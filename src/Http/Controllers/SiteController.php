@@ -38,7 +38,7 @@ class SiteController extends Controller
         //  Parse Page Request and Set Variables Used in Plugins
         // ----------------------------------------------
 
-        if (REQUEST === 'SITE') {
+        if (KILVIN_REQUEST === 'SITE') {
             Url::parseUri(request()->path());
             Url::parseQueryString(); // Part beyond template_group/template
         }
@@ -58,7 +58,7 @@ class SiteController extends Controller
         //  Update system statistics
         // ----------------------------------------------
 
-        if (REQUEST == 'SITE' && ! defined('ACTION')) {
+        if (KILVIN_REQUEST == 'SITE' && ! defined('ACTION')) {
             $stats = Stats::fetchSiteStats();
         }
 

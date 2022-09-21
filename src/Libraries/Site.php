@@ -228,7 +228,7 @@ class Site
         $this->config['site_name']       = (string) $query->first()->site_name;
         $this->config['site_short_name'] = $this->config['site_handle'] = (string) $query->first()->site_handle;
 
-        $this->config['site_url']        = (REQUEST != 'CP') ? (string) $query->first()->site_url : '';
+        $this->config['site_url']        = (KILVIN_REQUEST != 'CP') ? (string) $query->first()->site_url : '';
 
         $this->original_config           = $this->config;
 

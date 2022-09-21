@@ -78,7 +78,7 @@ class Filters extends Loader
     public function getFilters()
     {
         // Our config filters go last as they take priority.
-        if (REQUEST === 'INSTALL') {
+        if (KILVIN_REQUEST === 'INSTALL') {
             $load = config('twig.filters', []);
         } else {
             $load = array_merge($this->getPluginFilters(), config('twig.filters', []));

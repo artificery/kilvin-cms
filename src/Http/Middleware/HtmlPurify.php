@@ -67,9 +67,9 @@ class HtmlPurify extends TransformsRequest
 	        }
     	}
 
-        if (defined('REQUEST')) {
-    		if (!empty(config('htmlpurifier.'.REQUEST)) and is_array(config('htmlpurifier.'.REQUEST))) {
-    			$this->settings->loadArray(config('htmlpurifier.'.REQUEST));
+        if (defined('KILVIN_REQUEST')) {
+    		if (!empty(config('htmlpurifier.'.KILVIN_REQUEST)) and is_array(config('htmlpurifier.'.KILVIN_REQUEST))) {
+    			$this->settings->loadArray(config('htmlpurifier.'.KILVIN_REQUEST));
     		}
     	}
     }
@@ -86,11 +86,11 @@ class HtmlPurify extends TransformsRequest
             return false;
         }
 
-    	if (defined('REQUEST') && REQUEST == 'CP' && config('htmlpurifier.CP') === false) {
+    	if (defined('KILVIN_REQUEST') && KILVIN_REQUEST == 'CP' && config('htmlpurifier.CP') === false) {
     		return false;
     	}
 
-    	if (defined('REQUEST') && REQUEST == 'SITE' && config('htmlpurifier.SITE') === false) {
+    	if (defined('KILVIN_REQUEST') && KILVIN_REQUEST == 'SITE' && config('htmlpurifier.SITE') === false) {
     		return false;
     	}
 

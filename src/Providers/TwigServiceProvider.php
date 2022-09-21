@@ -46,7 +46,7 @@ class TwigServiceProvider extends ViewServiceProvider
         $this->registerEngine();
         $this->registerViewExtension();
 
-        if (defined('REQUEST') && REQUEST === 'SITE') {
+        if (defined('KILVIN_REQUEST') && KILVIN_REQUEST === 'SITE') {
             $this->app['view']->getFinder()->prependLocation(base_path('templates/_global'));
         }
 

@@ -120,7 +120,7 @@ class KilvinServiceProvider extends ServiceProvider
         //  - Stop here, no need to check if system is on
         // ----------------------------------------------
 
-        if (REQUEST == 'INSTALL') {
+        if (KILVIN_REQUEST == 'INSTALL') {
 
             $installed_version = config('kilvin.installed_version');
 
@@ -150,7 +150,7 @@ class KilvinServiceProvider extends ServiceProvider
         $this->defineResources();
 
         // Nothing to do for these requests?
-        if (in_array(REQUEST, ['INSTALL','CONSOLE'])) {
+        if (in_array(KILVIN_REQUEST, ['INSTALL', 'CONSOLE'])) {
             return;
         }
     }
@@ -228,7 +228,7 @@ class KilvinServiceProvider extends ServiceProvider
     protected function defineResources()
     {
         // SITE requests cannot view Kilvin resources, s'il vous plait
-        if (defined('REQUEST') && in_array(REQUEST, ['SITE', 'CP', 'CONSOLE'])) {
+        if (defined('KILVIN_REQUEST') && in_array(KILVIN_REQUEST, ['SITE', 'CP', 'CONSOLE'])) {
             $this->loadViewsFrom(__DIR__.'/../../resources/views', 'kilvin');
             $this->loadTranslationsFrom(__DIR__.'/../../resources/language', 'kilvin');
         }
@@ -305,22 +305,22 @@ class KilvinServiceProvider extends ServiceProvider
     protected function registerCmsConstants()
     {
         if (request()->segment(1) == 'installer') {
-            define('REQUEST', 'INSTALL');
+            define('KILVIN_REQUEST', 'INSTALL');
         } elseif (request()->segment(1) == config('kilvin.cp_path')) {
-            define('REQUEST', 'CP');
+            define('KILVIN_REQUEST', 'CP');
         } elseif (app()->runningInConsole()) {
-            define('REQUEST', 'CONSOLE');
+            define('KILVIN_REQUEST', 'CONSOLE');
         } else {
-            define('REQUEST', 'SITE');
+            define('KILVIN_REQUEST', 'SITE');
         }
 
         define('KILVIN_THEMES', realpath(__DIR__.'/../../themes').'/');
 
-        if (REQUEST === 'CP') {
+        if (KILVIN_REQUEST === 'CP') {
             view()->composer('*', 'Kilvin\Http\ViewComposers\Cp');
         }
 
-        if (REQUEST === 'INSTALL') {
+        if (KILVIN_REQUEST === 'INSTALL') {
             view()->composer('*', 'Kilvin\Http\ViewComposers\Installer');
         }
 
@@ -355,7 +355,7 @@ class KilvinServiceProvider extends ServiceProvider
         // 3. CONSOLE
         // 4. SITE (i.e. template or action) request
 
-        if (REQUEST === 'SITE') {
+        if (KILVIN_REQUEST === 'SITE') {
             if (Request::filled('ACT')) {
                 define('ACTION', Request::input('ACT'));
             }
