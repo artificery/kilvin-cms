@@ -16,7 +16,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "twig/twig": "^2.0",
-        "league/mime-type-detection": "*"
+        "league/mime-type-detection": "*",
+        "laravel/ui": "5.x-dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
