@@ -305,6 +305,11 @@ class KilvinServiceProvider extends ServiceProvider
      */
     protected function registerCmsConstants()
     {
+        // Optimize command can call the register method multiple times.
+        if (defined('KILVIN_REQUEST')) {
+            return;
+        }
+
         if (request()->segment(1) == 'installer') {
             define('KILVIN_REQUEST', 'INSTALL');
         } elseif (request()->segment(1) == config('kilvin.cp_path')) {
