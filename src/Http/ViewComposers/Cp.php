@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Kilvin\Facades\Site;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Kilvin\Core\Session;
 use Illuminate\View\View;
 
@@ -43,7 +44,7 @@ class Cp
         ]);
 
         // Laravel Errors
-        if (starts_with($view->name(), 'errors::')) {
+        if (Str::startsWith($view->name(), 'errors::')) {
             return;
         }
 

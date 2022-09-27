@@ -1045,7 +1045,7 @@ fill="#000000" stroke="none">
         }
 
         foreach (['heading', 'message', 'extra'] as $key) {
-            if (!empty($data[$key]) && !starts_with($data[$key], 'kilvin::')) {
+            if (!empty($data[$key]) && !Str::startsWith($data[$key], 'kilvin::')) {
                 $data[$key] = 'kilvin::'.$data[$key];
             }
         }

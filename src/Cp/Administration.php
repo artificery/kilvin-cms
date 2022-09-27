@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Kilvin\Facades\Site;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Kilvin\Cp\Logging;
 use Kilvin\Core\Localize;
@@ -306,7 +307,7 @@ EOT;
 
 				if ($key == 'members-and-groups' && $v[0] != 'member-config-manager') {
 					$url = $v[0];
-				} elseif (starts_with($v[0], 'weblogs-administration') && $v[0] != 'weblog-preferences') {
+				} elseif (Str::startsWith($v[0], 'weblogs-administration') && $v[0] != 'weblog-preferences') {
 					$url = $v[0];
 				} else {
 					$url = 'administration/'.$v[0];

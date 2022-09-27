@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Kilvin\Core\Regex;
 use Kilvin\Core\Session;
@@ -232,7 +233,7 @@ class Content
 
             $field_query = collect($field_query)
                 ->filter(function ($value, $key) {
-                    return starts_with($key, 'field_');
+                    return Str::startsWith($key, 'field_');
                 })
                 ->keyBy(function ($item, $key) {
                     return substr($key, strlen('field_'));

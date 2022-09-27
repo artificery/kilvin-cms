@@ -6,6 +6,7 @@ use Kilvin\Facades\Cp;
 use Illuminate\Support\Facades\DB;
 use Kilvin\Facades\Site;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Kilvin\Facades\Stats;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
@@ -2673,7 +2674,7 @@ EOT;
                 return redirect(kilvinCpUrl(''));
             }
 
-            if (starts_with(Request::input('criteria'), 'm_field_')) {
+            if (Str::startsWith(Request::input('criteria'), 'm_field_')) {
                 $custom = [Request::input('criteria'), Request::input('keywords')];
             } else {
                 $search[Request::input('criteria')] = Request::input('keywords');
