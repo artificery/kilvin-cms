@@ -14,7 +14,7 @@ use Kilvin\Core\Url;
 use Kilvin\Core\Session;
 use Kilvin\Core\Localize;
 use Illuminate\Http\Response;
-use League\Flysystem\Util\MimeType;
+use League\MimeTypeDetection\ExtensionMimeTypeDetector;
 
 /**
  * Templates Functionality
@@ -82,11 +82,9 @@ class Template
 
         $path = removeDoubleSlashes($this->find($template));
 
-        if(empty($path)) {
+        if (empty($path)) {
             return response()->view('_errors.404', [], 404);
         }
-
-        $extension = pathinfo($path, PATHINFO_EXTENSION);
 
         // ------------------------------------
         //  Site Globals, ex: Template Variables
@@ -98,7 +96,7 @@ class Template
         //  Set the Headers
         // ------------------------------------
 
-        $headers = $this->getHeaders($extension);
+        $headers = $this->getHeaders($path);
 
         // ------------------------------------
         //  Output
@@ -110,12 +108,12 @@ class Template
     /**
      * Sets the Headers for Template Output
      *
-     * @param string $type The type of template being outputted (css,html,js,xml,atom)
+     * @param string $path The path of template being outputted (css,html,js,xml,atom)
      * @return void
      */
-    private function getHeaders($type, $variables = [])
+    private function getHeaders($path, $variables = [])
     {
-        $mime = MimeType::detectByFileExtension($type);
+        $mime = (new ExtensionMimeTypeDetector)->detectMimeTypeFromFile($path);
 
         $headers = [
             'X-Powered-By'  => CMS_NAME,
